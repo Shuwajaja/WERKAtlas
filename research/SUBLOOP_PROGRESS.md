@@ -1,18 +1,18 @@
 # Deep Research Loop Progress
 
 **Snapshot:** 2026-07-07
-**Letztes Update:** 2026-07-07T19:00:15.673621+00:00
+**Letztes Update:** 2026-07-07T19:35:36.178208+00:00
 
 ## Loop-Ergebnisse
 
 | Loop | Strategie | Neue Kandidaten |
 |---|---|---|
 | 1 | DEEP DIVE | 0 |
-| **Total** | | **1469** |
+| **Total** | | **1468** |
 
 ## Katalog-Status
 
-- Eintraege gesamt: 1469
+- Eintraege gesamt: 1468
 - Naechster Schritt: Klassifizieren & Scoren
 
 ## Naechste Schritte

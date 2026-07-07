@@ -1,43 +1,14 @@
 # Contributing
 
-**Snapshot date:** 2026-07-07
+## How to Add a Project
 
-## How to Contribute
+1. Open an issue using the **Suggest Project** template
+2. Include the GitHub repository URL
+3. Provide a brief description (12-30 words, neutral)
+4. Suggest a primary category from the taxonomy
 
-### Suggest a Project
-Open an issue with:
-- Canonical project name
-- Repository URL
-- Category (from taxonomy)
-- Project type
-- Neutral description (12-30 words)
-- Evidence of maintenance (last commit, release)
-- License information
-- Official/community status
-- Reason for inclusion
-- Disclosure of affiliation
-- Security considerations (for sensitive MCP servers)
+## How to Correct Metadata
 
-### Correct Metadata
-Open an issue describing the correction needed.
-
-### Report Archived/Security Issues
-Use the appropriate issue template.
-
-## Development
-
-```bash
-# Install dependencies
-make setup
-
-# Run the full pipeline
-make all
-
-# Validate only
-make validate
-
-# Run tests
-make test
-```
+Use the **Correct Metadata** template for any errors.
 
 *Snapshot: 2026-07-07*

@@ -11,6 +11,7 @@ import json
 import os
 import sys
 from datetime import datetime
+from collections import Counter
 
 
 def load_catalog(path: str) -> dict:
@@ -23,7 +24,7 @@ def load_taxonomy(path: str) -> dict:
         return json.load(f)
 
 
-def get_category_path(taxonomy: dict, cat_id: str) -> str | None:
+def get_category_path(taxonomy: dict, cat_id: str):
     """Get the full category name path from taxonomy."""
     for group_id, group in taxonomy.get("categories", {}).items():
         if cat_id in group.get("subcategories", {}):
@@ -41,6 +42,8 @@ def get_category_name(taxonomy: dict, cat_id: str) -> str:
 
 def format_stars(n: int) -> str:
     """Format star count with k/m suffixes."""
+    if n >= 1000000:
+        return f"{n/1000000:.1f}M"
     if n >= 1000:
         return f"{n/1000:.1f}k" if n < 100000 else f"{n/1000:.0f}k"
     return str(n)
@@ -48,626 +51,555 @@ def format_stars(n: int) -> str:
 
 def score_label(score: float) -> str:
     if score >= 85:
-        return "🟢 Essential"
-    elif score >= 75:
-        return "🔵 Strong"
-    elif score >= 65:
-        return "🟡 Emerging"
-    elif score >= 50:
-        return "🟠 Watchlist"
-    else:
-        return "⚪ Excluded"
+        return "ESSENTIAL"
+    if score >= 75:
+        return "STRONG"
+    if score >= 65:
+        return "EMERGING"
+    if score >= 50:
+        return "WATCHLIST"
+    return "EXCLUDED"
 
 
-def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
-    entries = catalog.get("entries", [])
-    accepted = [e for e in entries if e.get("score", 0) >= 50]
-    
-    lines = []
-    lines.append(f"# Agentic Engineering Compendium")
-    lines.append("")
-    lines.append("> Build, evaluate, connect, secure, and operate AI agents—from first principles to production.")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append(f"**Candidates evaluated:** {len(entries)}")
-    lines.append(f"**Accepted projects:** {len(accepted)}")
-    lines.append("")
-    lines.append("A comprehensive, evidence-backed, reproducible knowledge base mapping the entire modern AI-agent ecosystem. ")
-    lines.append("Inspired by the clarity of [build-your-own-x](https://github.com/codecrafters-io/build-your-own-x), ")
-    lines.append("but covering the full agent stack—from frameworks to deployment, from MCP to memory systems.")
-    lines.append("")
-    lines.append("## Contents")
-    lines.append("")
-    lines.append("- [Full Catalog](CATALOG.md) — Complete categorized listing")
-    lines.append("- [Build Your Own](BUILD-YOUR-OWN.md) — Implementation tutorials")
-    lines.append("- [Ecosystem Landscape](LANDSCAPE.md) — How layers fit together")
-    lines.append("- [Top Picks](TOP-PICKS.md) — Curated selections by category")
-    lines.append("- [Trending](TRENDING.md) — Momentum and growth")
-    lines.append("- [Watchlist](WATCHLIST.md) — Promising but unverified")
-    lines.append("- [Archived](ARCHIVED.md) — Historical and educational")
-    lines.append("- [Methodology](METHODOLOGY.md) — Scoring, evidence, and selection")
-    lines.append("- [Contribute](CONTRIBUTING.md) — How to add projects")
-    lines.append("")
-    lines.append("## Quick Navigation")
-    lines.append("")
-    lines.append("| Category | Projects |")
-    lines.append("|---|---|")
-    
-    # Count by category group
-    from collections import Counter
+def score_badge(score: float) -> str:
+    if score >= 75: return "STRONG"
+    if score >= 65: return "Emerging"
+    if score >= 50: return "Watchlist"
+    return "Excluded"
+
+
+def official_badge(status: str) -> str:
+    if status == "official": return "Official"
+    return "Community"
+
+
+def _render_toc(taxonomy: dict, accepted: list) -> list:
+    """Render table of contents."""
     cat_counts = Counter()
     for e in accepted:
         pc = e.get("primary_category", "")
-        for group_id, group in taxonomy.get("categories", {}).items():
+        for group in taxonomy.get("categories", {}).values():
             if pc in group.get("subcategories", {}):
                 cat_counts[group["name"]] += 1
                 break
-    
+
+    lines = ["## Inhalt", ""]
     for name, count in sorted(cat_counts.items()):
-        lines.append(f"| {name} | {count} |")
-    
+        anchor = name.lower().replace(" ", "-").replace(",", "").replace("&", "and").replace(".", "").replace("(", "").replace(")", "")
+        lines.append(f"- [{name}](#{anchor}) — {count} Projekte")
     lines.append("")
-    lines.append("## Top Projects by Category")
+    lines.append("---")
     lines.append("")
-    
+    return lines
+
+
+def _render_category_section(group_name: str, projects: list, taxonomy: dict) -> list:
+    """Render a full category section with all projects."""
+    lines = []
+    lines.append(f"## {group_name}")
+    lines.append("")
+
+    # Subcategory breakdown
+    subcat_counts = Counter()
+    cat_map = {}
+    for e in projects:
+        pc = e.get("primary_category", "")
+        for group in taxonomy.get("categories", {}).values():
+            if pc in group.get("subcategories", {}):
+                name = group["subcategories"][pc]["name"]
+                subcat_counts[name] += 1
+                cat_map[e["id"]] = name
+                break
+
+    if subcat_counts:
+        lines.append("| Subkategorie | Projekte |")
+        lines.append("|---|---|")
+        for name, count in sorted(subcat_counts.items()):
+            lines.append(f"| {name} | {count} |")
+        lines.append("")
+
+    # Each project as a details/summary card
+    for p in sorted(projects, key=lambda x: x.get("score", 0), reverse=True):
+        repo = p.get("repository", "?")
+        name = p.get("name", repo.split("/")[-1])
+        desc = (p.get("description") or "")[:120]
+        score = p.get("score", 0)
+        stars = p.get("stars", 0)
+        lang = p.get("primary_language") or p.get("language") or ""
+        official = p.get("official_status", "community")
+        sec_notes = p.get("security_notes", [])
+
+        # Summary line with badges
+        star_str = format_stars(stars)
+        badge = score_badge(score)
+        official_str = "Official" if official == "official" else "Community"
+        
+        summary = f"[{repo}](https://github.com/{repo})  Star:{star_str}  Score:{score}  Status:{badge}"
+        if official == "official":
+            summary += "  Official"
+        if lang:
+            summary += f"  ({lang})"
+        if sec_notes:
+            summary += "  [Security]"
+
+        lines.append(f"<details>")
+        lines.append(f"<summary><strong>{summary}</strong></summary>")
+        lines.append("")
+        lines.append(f"> {desc}")
+        lines.append("")
+        lines.append(f"| Kategorie | Sprache | Status | Score | Stars |")
+        lines.append(f"|---|---|---|---|---|")
+        subcat = cat_map.get(p["id"], p.get("primary_category", "?"))
+        lines.append(f"| {subcat} | {lang or '?'} | {official_str} | {score}/100 | {star_str} |")
+        lines.append("")
+
+        if p.get("topics"):
+            tags = " ".join(f"`{t}`" for t in p["topics"][:8])
+            lines.append(f"Tags: {tags}")
+            lines.append("")
+
+        if sec_notes:
+            notes = "; ".join(sec_notes[:3])
+            lines.append(f"Security: {notes}")
+            lines.append("")
+
+        lines.append(f"[GitHub](https://github.com/{repo})")
+        lines.append("")
+        lines.append("</details>")
+        lines.append("")
+
+    return lines
+
+
+def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Render README.md as a comprehensive scrollable catalog."""
+    entries = catalog.get("entries", [])
+    accepted = [e for e in entries if e.get("score", 0) >= 50]
+    excluded = [e for e in entries if e.get("score", 0) < 50]
+
+    lines = []
+    strong = sum(1 for e in accepted if e.get("score", 0) >= 75)
+    emerging = sum(1 for e in accepted if 65 <= e.get("score", 0) < 75)
+    watchlist = sum(1 for e in accepted if 50 <= e.get("score", 0) < 65)
+
+    # ── HEADER ──
+    lines.append("# Agentic Engineering Compendium")
+    lines.append("")
+    lines.append("> Das vollstaendige AI-Agent-Oekosystem in einer durchsuchbaren Liste.")
+    lines.append("")
+    lines.append(f"**Snapshot:** {snapshot_date}")
+    lines.append(f"**Katalog:** {len(entries)} Projekte (Score >=50: {len(accepted)}, Excluded: {len(excluded)})")
+    lines.append(f"**Kategorien:** 10 Hauptkategorien, 81 Subkategorien")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # ── NAVIGATION ──
+    lines.extend(_render_toc(taxonomy, accepted))
+
+    # ── SCORE DISTRIBUTION ──
+    lines.append("## Score-Verteilung")
+    lines.append("")
+    lines.append(f"| Kategorie | Bereich | Anzahl |")
+    lines.append(f"|---|---|---|")
+    lines.append(f"| Strong | 75-84 | {strong} |")
+    lines.append(f"| Emerging | 65-74 | {emerging} |")
+    lines.append(f"| Watchlist | 50-64 | {watchlist} |")
+    lines.append(f"| Excluded | <50 | {len(excluded)} |")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # ── TOP 10 ──
+    lines.append("## Top 10 Projekte")
+    lines.append("")
+    sorted_all = sorted(accepted, key=lambda x: x.get("score", 0), reverse=True)
+    lines.append("| # | Projekt | Stars | Score |")
+    lines.append("|---|---|---|---|")
+    for i, p in enumerate(sorted_all[:10], 1):
+        repo = p.get("repository", "?")
+        stars = format_stars(p.get("stars", 0))
+        score = p.get("score", 0)
+        desc = (p.get("description") or "")[:60]
+        lines.append(f"| {i} | [{repo}](https://github.com/{repo}) | {stars} | {score} |")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # ── ALL PROJECTS BY CATEGORY ──
+    lines.append("# Vollstaendiger Katalog")
+    lines.append(f"")
+    lines.append(f"**{len(accepted)} Projekte** in allen Kategorien. Aufklappen fuer Details.")
+    lines.append("")
+
     # Group by top-level category
     grouped = {}
     for e in accepted:
         pc = e.get("primary_category", "")
-        for group_id, group in taxonomy.get("categories", {}).items():
+        for group in taxonomy.get("categories", {}).values():
             if pc in group.get("subcategories", {}):
                 grouped.setdefault(group["name"], []).append(e)
                 break
-    
+
     for group_name in sorted(grouped.keys()):
-        projects = sorted(grouped[group_name], key=lambda x: x.get("score", 0), reverse=True)
-        top = projects[:3]
-        lines.append(f"### {group_name}")
-        for p in top:
-            name = p.get("name", "?")
-            repo = p.get("repository", "?")
-            desc = p.get("description", "") or ""
-            score = p.get("score", 0)
-            stars = format_stars(p.get("stars", 0))
-            lines.append(f"- [{name}](https://github.com/{repo}) — {desc} (★{stars}, Score {score})")
+        projects = grouped[group_name]
+        lines.extend(_render_category_section(group_name, projects, taxonomy))
+
+    # ── EXCLUDED ──
+    if excluded:
+        lines.append("## Excluded Projects")
         lines.append("")
-    
-    lines.append("## Methodology")
+        lines.append(f"**{len(excluded)} Projekte** mit Score < 50 (zu wenig Daten oder unbestätigt).")
+        lines.append("")
+        lines.append("<details>")
+        lines.append("<summary>Excluded Liste anzeigen</summary>")
+        lines.append("")
+        for e in sorted(excluded, key=lambda x: x.get("stars", 0), reverse=True)[:50]:
+            repo = e.get("repository", "?")
+            stars = format_stars(e.get("stars", 0))
+            lines.append(f"- [{repo}](https://github.com/{repo}) — Stars:{stars}")
+        if len(excluded) > 50:
+            lines.append(f"- ... und {len(excluded) - 50} weitere")
+        lines.append("")
+        lines.append("</details>")
+        lines.append("")
+
+    # ── FOOTER ──
+    lines.append("---")
     lines.append("")
-    lines.append("Projects are scored on 10 dimensions (0-100 total): relevance, maintenance, adoption, momentum,")
-    lines.append("documentation, production readiness, security, interoperability, community, and uniqueness.")
-    lines.append("Stars use logarithmic weighting. Full details in [METHODOLOGY.md](METHODOLOGY.md).")
+    lines.append("## Ueber das Compendium")
     lines.append("")
-    lines.append("## License and Disclaimer")
+    lines.append("Generiert durch 5-Loop Research Orchestrator mit Meta-Loop Controller.")
     lines.append("")
-    lines.append("This is a research compilation. Project logos, names, and trademarks belong to their respective owners.")
-    lines.append("Scores are editorial classifications, not objective truth. No endorsement implied.")
+    lines.append(f"| Ressource | Beschreibung |")
+    lines.append(f"|---|---|")
+    lines.append(f"| [CATALOG.md](CATALOG.md) | Volle kategorisierte Liste |")
+    lines.append(f"| [LANDSCAPE.md](LANDSCAPE.md) | Architektur-Uebersicht |")
+    lines.append(f"| [TOP-PICKS.md](TOP-PICKS.md) | Kuratierte Auswahl |")
+    lines.append(f"| [TRENDING.md](TRENDING.md) | Momentum-Analyse |")
+    lines.append(f"| [METHODOLOGY.md](METHODOLOGY.md) | Scoring |")
+    lines.append(f"| [AGENTS.md](AGENTS.md) | Agent-Instructions |")
+    lines.append(f"| [data/](data/) | Maschinenlesbare Daten |")
+    lines.append(f"| [scripts/](scripts/) | Automatisierung |")
+    lines.append("")
+    lines.append("```bash")
+    lines.append("# Alles regenerieren (braucht GitHub Token fuer API)")
+    lines.append("make all")
+    lines.append("# Meta-Loop starten")
+    lines.append("python scripts/meta_loop.py --continuous")
+    lines.append("```")
     lines.append("")
     lines.append("---")
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    
+    lines.append(f"*Snapshot: {snapshot_date} | {len(entries)} Projekte | Meta-Loop Controller*")
+
     return "\n".join(lines)
 
 
 def render_catalog(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
-    entries = sorted(catalog.get("entries", []), key=lambda e: e.get("score", 0), reverse=True)
+    """Render CATALOG.md — full categorized listing."""
+    entries = catalog.get("entries", [])
     accepted = [e for e in entries if e.get("score", 0) >= 50]
-    
+
     lines = []
-    lines.append(f"# Full Catalog")
+    lines.append("# Full Catalog")
     lines.append("")
-    lines.append(f"{len(accepted)} accepted projects (★ = stars, S = score, C = confidence)")
+    lines.append(f"> {len(accepted)} accepted projects across the AI-agent ecosystem.")
     lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
+    lines.append(f"**Snapshot:** {snapshot_date}")
     lines.append("")
-    lines.append("| Legend | |")
-    lines.append("|---|---|")
-    lines.append("| 🟢 Essential (85-100) | 🔵 Strong (75-84) |")
-    lines.append("| 🟡 Emerging (65-74) | 🟠 Watchlist (50-64) |")
-    lines.append("")
-    
+
     # Group by top-level category
-    from collections import defaultdict
-    grouped = defaultdict(list)
+    grouped = {}
     for e in accepted:
         pc = e.get("primary_category", "")
-        for group_id, group in taxonomy.get("categories", {}).items():
+        for group in taxonomy.get("categories", {}).values():
             if pc in group.get("subcategories", {}):
-                grouped[group_id].append(e)
+                grouped.setdefault(group["name"], []).append(e)
                 break
-        else:
-            grouped["ZZ"].append(e)
-    
-    for group_id in sorted(grouped.keys()):
-        if group_id == "ZZ":
-            continue
-        group = taxonomy.get("categories", {}).get(group_id, {})
-        group_name = group.get("name", group_id)
+
+    for group_name in sorted(grouped.keys()):
+        projects = sorted(grouped[group_name], key=lambda x: x.get("score", 0), reverse=True)
         lines.append(f"## {group_name}")
         lines.append("")
-        
-        # Group by subcategory
-        sub_groups = defaultdict(list)
-        for e in grouped[group_id]:
-            sub_groups[e.get("primary_category", "unknown")].append(e)
-        
-        for sub_id in sorted(sub_groups.keys()):
-            sub_name = get_category_name(taxonomy, sub_id)
-            lines.append(f"### {sub_name}")
+
+        for p in projects:
+            repo = p.get("repository", "?")
+            desc = (p.get("description") or "")[:150]
+            score = p.get("score", 0)
+            stars = format_stars(p.get("stars", 0))
+            lang = p.get("primary_language") or p.get("language") or ""
+            lines.append(f"### [{repo}](https://github.com/{repo})")
             lines.append("")
-            
-            for e in sub_groups[sub_id]:
-                name = e.get("name", "?")
-                repo = e.get("repository", "?")
-                desc = (e.get("description") or "")[:120]
-                ptype = e.get("project_type") or "?"
-                lang = e.get("primary_language") or "?"
-                deploy = ", ".join(e.get("deployment_modes", [])) or "?"
-                stars = format_stars(e.get("stars", 0))
-                score = e.get("score", 0)
-                conf = e.get("confidence", "low")
-                license_spdx = e.get("license") or "?"
-                updated = (e.get("updated_at") or "?")[:10]
-                label = score_label(score)
-                
-                lines.append(f"- [{name}](https://github.com/{repo}) — {desc}.")
-                lines.append(f"  `{ptype}` `{lang}` `{deploy}`")
-                lines.append(f"  ★ {stars} · Updated {updated} · {license_spdx} · {label} S={score} C={conf}")
+            lines.append(f"**Stars:** {stars} | **Score:** {score} | **Language:** {lang or '?'} | "
+                         f"**Status:** {official_badge(p.get('official_status', 'community'))}")
+            lines.append("")
+            if desc:
+                lines.append(f">{desc}")
                 lines.append("")
-        
-        lines.append("---")
-        lines.append("")
-    
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    return "\n".join(lines)
-
-
-def render_landscape(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
-    lines = []
-    lines.append("# Agentic Ecosystem Landscape")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append("")
-    lines.append("## Layer Architecture")
-    lines.append("")
-    lines.append("```")
-    lines.append("┌──────────────────────────────────────┐")
-    lines.append("│      User Interfaces & Workspaces     │  J. Applications")
-    lines.append("├──────────────────────────────────────┤")
-    lines.append("│        Agent Applications             │  Knowledge work, research, DevOps")
-    lines.append("├──────────────────────────────────────┤")
-    lines.append("│     Frameworks & Runtimes             │  B. Agent construction & execution")
-    lines.append("├──────────────────────────────────────┤")
-    lines.append("│  Planning / Memory / Workflow         │  F. Context, reasoning, state")
-    lines.append("├──────────────────────────────────────┤")
-    lines.append("│    Tools / Skills / MCP / Protocols   │  D+E. Integration & interoperability")
-    lines.append("├──────────────────────────────────────┤")
-    lines.append("│   Sandbox / Browser / Execution       │  G. Safe execution environments")
-    lines.append("├──────────────────────────────────────┤")
-    lines.append("│     Model Gateway / Inference         │  I. Model infrastructure")
-    lines.append("├──────────────────────────────────────┤")
-    lines.append("│   Tracing / Evaluation / Security     │  H. Reliability & operations")
-    lines.append("└──────────────────────────────────────┘")
-    lines.append("```")
-    lines.append("")
-    lines.append("## Layer Descriptions")
-    lines.append("")
-    lines.append("### User Layer (J)")
-    lines.append("Chat interfaces, dashboards, workspaces, no-code builders, and vertical agent applications.")
-    lines.append("")
-    lines.append("### Application Layer (J, C)")
-    lines.append("Coding agents, research agents, DevOps agents, and knowledge-work agents that users interact with directly.")
-    lines.append("")
-    lines.append("### Framework Layer (B)")
-    lines.append("Agent frameworks, runtimes, graph orchestrators, multi-agent systems, and durable execution engines.")
-    lines.append("These provide the programming model for building agents.")
-    lines.append("")
-    lines.append("### Intelligence Layer (B.12, F)")
-    lines.append("Planning, reasoning, task decomposition, memory systems, RAG, knowledge graphs, and context engineering.")
-    lines.append("")
-    lines.append("### Integration Layer (D, E)")
-    lines.append("MCP servers/clients/SDKs, tool-calling libraries, agent protocols, skills, and connectors.")
-    lines.append("This is where agents connect to external tools and data sources.")
-    lines.append("")
-    lines.append("### Execution Layer (G)")
-    lines.append("Browser agents, computer-use agents, sandboxes, code execution, and containers.")
-    lines.append("Safe environments for agents to take actions.")
-    lines.append("")
-    lines.append("### Infrastructure Layer (I)")
-    lines.append("Model gateways, inference servers, local stacks, cloud platforms, agent scheduling, and control planes.")
-    lines.append("")
-    lines.append("### Operations Layer (H)")
-    lines.append("Observability, tracing, evaluation, benchmarks, guardrails, security, and cost management.")
-    lines.append("")
-    lines.append("## Mermaid Diagram")
-    lines.append("")
-    lines.append("```mermaid")
-    lines.append("graph TD")
-    lines.append("    UI[User Interfaces] --> Apps[Agent Applications]")
-    lines.append("    Apps --> Frameworks[Frameworks & Runtimes]")
-    lines.append("    Frameworks --> Intel[Planning/Memory/Context]")
-    lines.append("    Intel --> Tools[Tools/MCP/Protocols]")
-    lines.append("    Tools --> Sandbox[Sandbox/Browser/Execution]")
-    lines.append("    Sandbox --> Model[Model Gateway/Inference]")
-    lines.append("    Model --> Ops[Tracing/Eval/Security]")
-    lines.append("    Ops -.->|Feedback| UI")
-    lines.append("```")
-    lines.append("")
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    
-    return "\n".join(lines)
-
-
-def render_top_picks(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
-    entries = sorted(catalog.get("entries", []), key=lambda e: e.get("score", 0), reverse=True)
-    accepted = [e for e in entries if e.get("score", 0) >= 50]
-    
-    lines = []
-    lines.append("# Top Picks")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append("")
-    lines.append("Carefully scoped selections. These are editorial recommendations, not objective rankings.")
-    lines.append("")
-    
-    sections = [
-        ("Best Starting Points for Learning", lambda e: e.get("primary_category", "").startswith("A.")),
-        ("Strongest General-Purpose Frameworks", lambda e: e.get("primary_category") == "B.6"),
-        ("Strongest MCP Infrastructure", lambda e: e.get("primary_category", "").startswith("D.")),
-        ("Strongest Coding Agents", lambda e: e.get("primary_category", "").startswith("C.")),
-        ("Strongest Local-First Options", lambda e: "local-first" in e.get("deployment_modes", []) or e.get("primary_category") == "I.66"),
-        ("Strongest Evaluation Systems", lambda e: e.get("primary_category") in ("H.55", "H.56")),
-        ("Strongest Sandbox Systems", lambda e: e.get("primary_category") in ("G.49", "G.48")),
-        ("Strongest Observability Systems", lambda e: e.get("primary_category") in ("H.53", "H.54")),
-        ("Strongest Memory & RAG Systems", lambda e: e.get("primary_category") in ("F.37", "F.38")),
-    ]
-    
-    for title, filter_fn in sections:
-        picks = [e for e in accepted if filter_fn(e)][:5]
-        if picks:
-            lines.append(f"## {title}")
+            if p.get("topics"):
+                lines.append(" ".join(f"`{t}`" for t in p["topics"][:5]))
+                lines.append("")
+            lines.append("---")
             lines.append("")
-            for p in picks:
-                name = p.get("name", "?")
-                repo = p.get("repository", "?")
-                desc = (p.get("description") or "")[:100]
-                score = p.get("score", 0)
-                stars = format_stars(p.get("stars", 0))
-                lines.append(f"- [{name}](https://github.com/{repo}) — {desc} (★{stars}, Score {score})")
-            lines.append("")
-    
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    return "\n".join(lines)
 
-
-def render_trending(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
-    entries = sorted(catalog.get("entries", []), key=lambda e: e.get("score", 0), reverse=True)
-    
-    lines = []
-    lines.append("# Trending Projects")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append("")
-    lines.append("Trend data uses momentum proxy (recent pushes, releases, activity) when exact star growth is unavailable.")
-    lines.append("")
-    
-    # Sort by momentum score (highest first)
-    by_momentum = sorted(entries, key=lambda e: e.get("score_components", {}).get("momentum", 0), reverse=True)
-    
-    lines.append("## High Momentum (Established)")
-    lines.append("")
-    for e in by_momentum[:10]:
-        name = e.get("name", "?")
-        repo = e.get("repository", "?")
-        score = e.get("score", 0)
-        momentum = e.get("score_components", {}).get("momentum", 0)
-        pushed = (e.get("pushed_at") or "?")[:10]
-        lines.append(f"- [{name}](https://github.com/{repo}) — Momentum {momentum}/10, Total Score {score}, Pushed {pushed}")
-    lines.append("")
-    
-    lines.append("## Recently Created (Emerging)")
-    lines.append("")
-    by_created = sorted(
-        [e for e in entries if e.get("created_at")],
-        key=lambda e: e.get("created_at", ""),
-        reverse=True,
-    )[:10]
-    for e in by_created:
-        name = e.get("name", "?")
-        repo = e.get("repository", "?")
-        created = (e.get("created_at") or "?")[:10]
-        stars = format_stars(e.get("stars", 0))
-        lines.append(f"- [{name}](https://github.com/{repo}) — Created {created}, ★{stars}")
-    
-    lines.append("")
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    return "\n".join(lines)
-
-
-def render_watchlist(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
-    entries = catalog.get("entries", [])
-    watchlist = [e for e in entries if e.get("score", 0) >= 50 and e.get("confidence") == "low"]
-    
-    lines = []
-    lines.append("# Watchlist")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append(f"**Projects:** {len(watchlist)}")
-    lines.append("")
-    lines.append("Projects that appear promising but require deeper verification.")
-    lines.append("")
-    
-    if watchlist:
-        for e in watchlist:
-            name = e.get("name", "?")
-            repo = e.get("repository", "?")
-            desc = (e.get("description") or "No description")[:100]
-            stars = format_stars(e.get("stars", 0))
-            score = e.get("score", 0)
-            lines.append(f"- [{name}](https://github.com/{repo}) — {desc} (★{stars}, Score {score})")
-    else:
-        lines.append("*No projects currently on the watchlist.*")
-    
-    lines.append("")
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    return "\n".join(lines)
-
-
-def render_archived(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
-    entries = catalog.get("entries", [])
-    archived = [e for e in entries if e.get("archived", False)]
-    stale = [e for e in entries if not e.get("archived") and e.get("maintenance_status") in ("stale", "slow")]
-    
-    lines = []
-    lines.append("# Archived & Historical Projects")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append("")
-    lines.append("This section preserves historically important or educational projects.")
-    lines.append("Archived or stale status does not negate educational value.")
-    lines.append("")
-    
-    if archived:
-        lines.append("## Archived Repositories")
-        lines.append("")
-        for e in archived:
-            name = e.get("name", "?")
-            repo = e.get("repository", "?")
-            desc = (e.get("description") or "No description")[:100]
-            stars = format_stars(e.get("stars", 0))
-            score = e.get("score", 0)
-            updated = (e.get("updated_at") or "?")[:10]
-            lines.append(f"- [{name}](https://github.com/{repo}) — {desc} (★{stars}, Score {score}, Updated {updated})")
-    else:
-        lines.append("*No archived repositories in current catalog.*")
-    
-    lines.append("")
-    if stale:
-        lines.append("## Stale / Slow Maintenance")
-        lines.append("")
-        for e in stale:
-            name = e.get("name", "?")
-            repo = e.get("repository", "?")
-            status = e.get("maintenance_status", "unclear")
-            desc = (e.get("description") or "No description")[:100]
-            lines.append(f"- [{name}](https://github.com/{repo}) — {desc} (Status: {status})")
-    else:
-        lines.append("*No stale repositories in current catalog.*")
-    
-    lines.append("")
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    return "\n".join(lines)
-
-
-def render_methodology(snapshot_date: str) -> str:
-    lines = []
-    lines.append("# Methodology")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append("")
-    lines.append("## Overview")
-    lines.append("")
-    lines.append("The Agentic Engineering Compendium uses a structured, evidence-backed methodology to catalog")
-    lines.append("and evaluate projects in the AI-agent ecosystem. The system runs in five loops:")
-    lines.append("")
-    lines.append("1. **Taxonomy, Source Mapping, Broad Discovery** — Maximize recall")
-    lines.append("2. **Metadata Enrichment & Deduplication** — Convert to structured records")
-    lines.append("3. **Deep Verification & Trust Review** — Manual review of important projects")
-    lines.append("4. **Scoring, Trends, Gap Analysis** — Rank and identify gaps")
-    lines.append("5. **Editorial Production & Final Audit** — Generate polished output")
-    lines.append("")
-    lines.append("## Scoring System (0-100)")
-    lines.append("")
-    lines.append("| Component | Max | Description |")
-    lines.append("|---|---|---|")
-    lines.append("| Relevance | 20 | Alignment with modern AI-agent engineering |")
-    lines.append("| Maintenance | 15 | Commit frequency, issue resolution, release cadence |")
-    lines.append("| Adoption | 10 | Stars (logarithmic), forks, ecosystem usage |")
-    lines.append("| Momentum | 10 | Recent pushes, releases, community activity |")
-    lines.append("| Documentation | 10 | README quality, docs site, examples |")
-    lines.append("| Production Readiness | 10 | Maturity, stability, deployment support |")
-    lines.append("| Security | 10 | License, security policy, vulnerability handling |")
-    lines.append("| Interoperability | 5 | Protocol support, multi-language, standards |")
-    lines.append("| Community | 5 | Contributor diversity, governance, responsiveness |")
-    lines.append("| Uniqueness | 5 | Technical novelty, educational value, filling a gap |")
-    lines.append("")
-    lines.append("### Star Scoring")
-    lines.append("Logarithmic: ln(stars + 1) / ln(100001) * 10. This prevents star count from dominating.")
-    lines.append("")
-    lines.append("### Labels")
-    lines.append("- **Essential (85-100):** Core infrastructure, widely adopted, well-maintained")
-    lines.append("- **Strong (75-84):** Production-quality, recommended for most use cases")
-    lines.append("- **Emerging (65-74):** Promising, gaining traction, worth watching")
-    lines.append("- **Watchlist (50-64):** Interesting but needs more verification")
-    lines.append("- **Excluded (<50):** Does not meet quality or relevance thresholds")
-    lines.append("")
-    lines.append("## Evidence Requirements")
-    lines.append("")
-    lines.append("Every accepted project must have evidence from:")
-    lines.append("- Canonical GitHub repository")
-    lines.append("- Official documentation")
-    lines.append("- Official registry entry")
-    lines.append("- Official organization")
-    lines.append("")
-    lines.append("## Discovery Sources (Hierarchical)")
-    lines.append("")
-    lines.append("1. **Tier 1:** Official GitHub orgs, SDKs, registries, specifications")
-    lines.append("2. **Tier 2:** Curated awesome lists, ecosystem directories, package registries")
-    lines.append("3. **Tier 3:** Social media, blogs, newsletters (discovery only, not sufficient for acceptance)")
-    lines.append("")
-    lines.append("## Penalties")
-    lines.append("- Archived repository: Severe penalty")
-    lines.append("- Missing or unclear license: Moderate penalty")
-    lines.append("- No meaningful agent relevance: Exclusion")
-    lines.append("- Abandoned fork: Exclusion")
-    lines.append("- Misleading README or marketing-only repos: Exclusion")
-    lines.append("")
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    return "\n".join(lines)
-
-
-def render_contributing(snapshot_date: str) -> str:
-    lines = []
-    lines.append("# Contributing")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append("")
-    lines.append("## How to Contribute")
-    lines.append("")
-    lines.append("### Suggest a Project")
-    lines.append("Open an issue with:")
-    lines.append("- Canonical project name")
-    lines.append("- Repository URL")
-    lines.append("- Category (from taxonomy)")
-    lines.append("- Project type")
-    lines.append("- Neutral description (12-30 words)")
-    lines.append("- Evidence of maintenance (last commit, release)")
-    lines.append("- License information")
-    lines.append("- Official/community status")
-    lines.append("- Reason for inclusion")
-    lines.append("- Disclosure of affiliation")
-    lines.append("- Security considerations (for sensitive MCP servers)")
-    lines.append("")
-    lines.append("### Correct Metadata")
-    lines.append("Open an issue describing the correction needed.")
-    lines.append("")
-    lines.append("### Report Archived/Security Issues")
-    lines.append("Use the appropriate issue template.")
-    lines.append("")
-    lines.append("## Development")
-    lines.append("")
-    lines.append("```bash")
-    lines.append("# Install dependencies")
-    lines.append("make setup")
-    lines.append("")
-    lines.append("# Run the full pipeline")
-    lines.append("make all")
-    lines.append("")
-    lines.append("# Validate only")
-    lines.append("make validate")
-    lines.append("")
-    lines.append("# Run tests")
-    lines.append("make test")
-    lines.append("```")
-    lines.append("")
-    lines.append(f"*Snapshot: {snapshot_date}*")
-    return "\n".join(lines)
-
-
-def render_security(snapshot_date: str) -> str:
-    lines = []
-    lines.append("# Security Policy")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append("")
-    lines.append("## Reporting Vulnerabilities")
-    lines.append("")
-    lines.append("If you discover a security vulnerability in a listed project, report it to the project maintainers")
-    lines.append("following their disclosure policy.")
-    lines.append("")
-    lines.append("For issues with the compendium itself (data integrity, credential leaks),")
-    lines.append("please open an issue.")
-    lines.append("")
-    lines.append("## Security Notes in the Catalog")
-    lines.append("")
-    lines.append("MCP servers with filesystem, shell, browser, credential, database, email, cloud,")
-    lines.append("or infrastructure access are flagged with security notes in the catalog.")
-    lines.append("")
-    lines.append("## Best Practices for MCP Security")
-    lines.append("")
-    lines.append("- Validate MCP server source code before deployment")
-    lines.append("- Use permission systems to limit server capabilities")
-    lines.append("- Never expose MCP servers with shell/filesystem access to untrusted users")
-    lines.append("- Review MCP server configurations for credential exposure")
-    lines.append("- Run MCP servers in isolated environments where possible")
-    lines.append("")
-    lines.append(f"*Snapshot: {snapshot_date}*")
     return "\n".join(lines)
 
 
 def render_build_your_own(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Build-your-own style tutorial listing."""
     entries = catalog.get("entries", [])
-    tutorials = [e for e in entries if e.get("primary_category") == "A.1"]
+    tutorials = [e for e in entries if e.get("primary_category") and e.get("primary_category", "").startswith("A.")]
     
     lines = []
-    lines.append("# Build Your Own Agentic Stack")
-    lines.append("")
-    lines.append(f"**Snapshot date:** {snapshot_date}")
-    lines.append("")
-    lines.append("A curated collection of implementation-oriented tutorials for building agent technology from scratch.")
-    lines.append("")
-    lines.append("## Build Your Own")
+    lines.append("# Build Your Own")
+    lines.append(f"")
+    lines.append("> Learn agentic engineering from first principles.")
     lines.append("")
     
-    # Group by topic
-    topics = {
-        "Agent Loop": [],
-        "MCP Server": [],
-        "MCP Client": [],
-        "Memory System": [],
-        "Evaluation": [],
-        "General": tutorials,
-    }
-    
-    for topic, projects in topics.items():
-        if projects:
-            lines.append(f"### {topic}")
-            lines.append("")
-            for p in projects:
-                name = p.get("name", "?")
-                repo = p.get("repository", "?")
-                desc = (p.get("description") or "No description")[:100]
-                lang = p.get("primary_language") or "?"
-                lines.append(f"- [{name}](https://github.com/{repo}) — {desc} `{lang}`")
-            lines.append("")
-    
-    if not tutorials:
-        lines.append("*No implementation-oriented tutorials in current catalog yet.*")
-        lines.append("Help us grow this section by [contributing](https://github.com/your-org/agentic-engineering-compendium)!")
-        lines.append("")
-    
+    if tutorials:
+        for t in tutorials:
+            repo = t.get("repository", "?")
+            desc = (t.get("description") or "No description")[:200]
+            lines.append(f"- [{repo}](https://github.com/{repo}) — {desc}")
+    else:
+        lines.append("No tutorials cataloged yet.")
+    lines.append("")
     lines.append(f"*Snapshot: {snapshot_date}*")
+    
+    return "\n".join(lines)
+
+
+def render_landscape(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Ecosystem landscape overview."""
+    entries = catalog.get("entries", [])
+    accepted = [e for e in entries if e.get("score", 0) >= 50]
+
+    lines = []
+    lines.append("# Ecosystem Landscape")
+    lines.append("")
+    lines.append("> How the layers of the AI-agent ecosystem fit together.")
+    lines.append("")
+    lines.append(f"**Snapshot:** {snapshot_date}")
+    lines.append("")
+    
+    for group in taxonomy.get("categories", {}).values():
+        gname = group["name"]
+        subcats = group.get("subcategories", {})
+        
+        # Count projects in this group
+        count = 0
+        for e in accepted:
+            pc = e.get("primary_category", "")
+            if pc in subcats:
+                count += 1
+        
+        lines.append(f"### {gname}")
+        lines.append("")
+        lines.append(f"_{group.get('description', '')}_")
+        lines.append("")
+        lines.append(f"**{count} projects** across {len(subcats)} subcategories:")
+        lines.append("")
+        for sc_id, sc in sorted(subcats.items()):
+            sc_count = sum(1 for e in accepted if e.get("primary_category") == sc_id)
+            lines.append(f"- **{sc['name']}** ({sc_count})")
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def render_top_picks(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Curated top picks."""
+    entries = catalog.get("entries", [])
+    strong = [e for e in entries if e.get("score", 0) >= 75]
+
+    lines = []
+    lines.append("# Top Picks")
+    lines.append("")
+    lines.append(f"> {len(strong)} projects with Strong rating (score >= 75)")
+    lines.append("")
+    lines.append(f"**Snapshot:** {snapshot_date}")
+    lines.append("")
+
+    for p in sorted(strong, key=lambda x: x.get("score", 0), reverse=True):
+        repo = p.get("repository", "?")
+        desc = (p.get("description") or "No description")[:200]
+        score = p.get("score", 0)
+        stars = format_stars(p.get("stars", 0))
+        cat = p.get("primary_category", "")
+        lines.append(f"### [{repo}](https://github.com/{repo})")
+        lines.append(f"")
+        lines.append(f"**Score:** {score}/100 | **Stars:** {stars} | **Category:** {get_category_name(taxonomy, cat)}")
+        lines.append("")
+        if desc:
+            lines.append(f">{desc}")
+            lines.append("")
+
+    return "\n".join(lines)
+
+
+def render_trending(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Trending / momentum analysis."""
+    entries = catalog.get("entries", [])
+    sorted_stars = sorted(entries, key=lambda x: x.get("stars", 0), reverse=True)
+
+    lines = []
+    lines.append("# Trending")
+    lines.append("")
+    lines.append("> Most starred projects across the ecosystem.")
+    lines.append("")
+    lines.append(f"**Snapshot:** {snapshot_date}")
+    lines.append("")
+
+    lines.append("| # | Project | Stars | Score |")
+    lines.append("|---|---|---|---|")
+    for i, p in enumerate(sorted_stars[:50], 1):
+        repo = p.get("repository", "?")
+        stars = format_stars(p.get("stars", 0))
+        score = p.get("score", 0)
+        lines.append(f"| {i} | [{repo}](https://github.com/{repo}) | {stars} | {score} |")
+
+    return "\n".join(lines)
+
+
+def render_watchlist(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Watchlist — promising but unverified."""
+    watchlist = [e for e in catalog.get("entries", []) if 50 <= e.get("score", 0) < 65]
+
+    lines = []
+    lines.append("# Watchlist")
+    lines.append("")
+    lines.append(f"> {len(watchlist)} projects with potential but needing verification")
+    lines.append("")
+    lines.append(f"**Snapshot:** {snapshot_date}")
+    lines.append("")
+
+    for p in sorted(watchlist, key=lambda x: x.get("stars", 0), reverse=True):
+        repo = p.get("repository", "?")
+        stars = format_stars(p.get("stars", 0))
+        score = p.get("score", 0)
+        lines.append(f"- [{repo}](https://github.com/{repo}) — Stars:{stars}, Score:{score}")
+
+    return "\n".join(lines)
+
+
+def render_archived(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Archived / stale projects."""
+    archived = [e for e in catalog.get("entries", []) if e.get("archived")]
+
+    lines = []
+    lines.append("# Archived / Stale Projects")
+    lines.append("")
+    if archived:
+        for p in archived:
+            lines.append(f"- {p.get('repository', '?')}")
+    else:
+        lines.append("No archived projects in the catalog.")
+    lines.append("")
+    lines.append(f"*Snapshot: {snapshot_date}*")
+
+    return "\n".join(lines)
+
+
+def render_methodology(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Scoring methodology."""
+    lines = []
+    lines.append("# Methodology")
+    lines.append("")
+    lines.append("## Scoring Dimensions")
+    lines.append("")
+    lines.append("| Dimension | Weight | Description |")
+    lines.append("|---|---|---|")
+    dims = [
+        ("Relevance", 20, "How central to the AI-agent ecosystem"),
+        ("Maintenance", 15, "Recent commits, releases, issue response"),
+        ("Adoption", 15, "Stars, forks, community size (logarithmic)"),
+        ("Momentum", 10, "Growth rate, recent activity"),
+        ("Documentation", 10, "README quality, docs site, examples"),
+        ("Production Readiness", 10, "Maturity, stability, deployment support"),
+        ("Security", 10, "License, security policy, vulnerability handling"),
+        ("Interoperability", 5, "APIs, standards, integrations"),
+        ("Community", 3, "Contributors, discussions, ecosystem"),
+        ("Uniqueness", 2, "Differentiation from similar projects"),
+    ]
+    for name, weight, desc in dims:
+        lines.append(f"| {name} | {weight}% | {desc} |")
+    lines.append("")
+    lines.append("## Rules")
+    lines.append("")
+    rules = [
+        "Stars use logarithmic weighting (100k stars != 100x 1k stars)",
+        "Excluded (score < 50): too few data, inactive, or unconfirmed",
+        "Null metadata = unknown (never invented)",
+        "Security-sensitive MCP servers require explicit security notes",
+        "Official status requires supporting evidence",
+        "All descriptions must be neutral (12-30 words, no marketing)",
+    ]
+    for r in rules:
+        lines.append(f"- {r}")
+    lines.append("")
+    lines.append(f"*Snapshot: {snapshot_date}*")
+
+    return "\n".join(lines)
+
+
+def render_contributing(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Contribution guidelines."""
+    lines = []
+    lines.append("# Contributing")
+    lines.append("")
+    lines.append("## How to Add a Project")
+    lines.append("")
+    lines.append("1. Open an issue using the **Suggest Project** template")
+    lines.append("2. Include the GitHub repository URL")
+    lines.append("3. Provide a brief description (12-30 words, neutral)")
+    lines.append("4. Suggest a primary category from the taxonomy")
+    lines.append("")
+    lines.append("## How to Correct Metadata")
+    lines.append("")
+    lines.append("Use the **Correct Metadata** template for any errors.")
+    lines.append("")
+    lines.append(f"*Snapshot: {snapshot_date}*")
+
+    return "\n".join(lines)
+
+
+def render_security(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Security policy."""
+    lines = []
+    lines.append("# Security Policy")
+    lines.append("")
+    lines.append("## Reporting a Vulnerability")
+    lines.append("")
+    lines.append("Please open an issue using the **Security Concern** template.")
+    lines.append("")
+    lines.append("## Security-Sensitive Projects")
+    lines.append("")
+    lines.append("The following MCP servers have security implications:")
+    lines.append("")
+    security_items = [e for e in catalog.get("entries", []) if e.get("security_notes")]
+    for item in security_items:
+        lines.append(f"- [{item['repository']}](https://github.com/{item['repository']})")
+        for note in item.get("security_notes", []):
+            lines.append(f"  - {note}")
+    lines.append("")
+    lines.append(f"*Snapshot: {snapshot_date}*")
+
     return "\n".join(lines)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Render Markdown documentation from catalog")
-    parser.add_argument("--catalog", default="data/catalog.json")
-    parser.add_argument("--taxonomy", default="data/taxonomy.json")
+    parser = argparse.ArgumentParser(description="Render catalog to Markdown")
+    parser.add_argument("--catalog", required=True, help="Path to catalog.json")
+    parser.add_argument("--taxonomy", required=True, help="Path to taxonomy.json")
     parser.add_argument("--output", default=".", help="Output directory")
     args = parser.parse_args()
-    
-    os.makedirs(args.output, exist_ok=True)
-    
-    print("=" * 60)
-    print("Agentic Engineering Compendium — Rendering (LOOP 5)")
-    print("=" * 60)
-    
+
     catalog = load_catalog(args.catalog)
     taxonomy = load_taxonomy(args.taxonomy)
     snapshot_date = catalog.get("snapshot_date", "2026-07-07")
-    
-    render_fns = {
+
+    # Render functions map
+    renderers = {
         "README.md": render_readme,
         "BUILD-YOUR-OWN.md": render_build_your_own,
         "CATALOG.md": render_catalog,
@@ -680,20 +612,24 @@ def main():
         "CONTRIBUTING.md": render_contributing,
         "SECURITY.md": render_security,
     }
-    
-    for filename, render_fn in render_fns.items():
-        if filename in ("METHODOLOGY.md", "CONTRIBUTING.md", "SECURITY.md"):
-            content = render_fn(snapshot_date)
-        else:
-            content = render_fn(catalog, taxonomy, snapshot_date)
-        
+
+    print("=" * 60)
+    print("Rendering (LOOP 5)")
+    print("=" * 60)
+
+    for filename, render_fn in renderers.items():
         output_path = os.path.join(args.output, filename)
+        content = render_fn(catalog, taxonomy, snapshot_date)
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(content)
-        
-        print(f"  Generated {output_path}")
-    
-    print(f"\nRendering complete! Generated {len(render_fns)} files.")
+        size = os.path.getsize(output_path)
+        kb = size / 1024
+        if kb > 100:
+            print(f"  Generated {filename} ({kb:.0f} KB)")
+        else:
+            print(f"  Generated {filename}")
+
+    print("Rendering complete! Generated 11 files.")
 
 
 if __name__ == "__main__":
