@@ -12,6 +12,42 @@ import os
 import sys
 from datetime import datetime
 from collections import Counter
+from html import escape
+
+
+MOJIBAKE_REPLACEMENTS = {
+    "â€”": "-",
+    "â€“": "-",
+    "Ã¤": "ae",
+    "Ã¶": "oe",
+    "Ã¼": "ue",
+    "Ã„": "Ae",
+    "Ã–": "Oe",
+    "Ãœ": "Ue",
+    "ÃŸ": "ss",
+}
+
+
+def clean_text(value: object) -> str:
+    """Return compact display-safe text for generated Markdown."""
+    text = "" if value is None else str(value)
+    for bad, good in MOJIBAKE_REPLACEMENTS.items():
+        text = text.replace(bad, good)
+    return " ".join(text.split())
+
+
+def truncate(value: object, limit: int) -> str:
+    """Trim text without cutting words where possible."""
+    text = clean_text(value)
+    if len(text) <= limit:
+        return text
+    trimmed = text[: limit - 1].rsplit(" ", 1)[0].strip()
+    return f"{trimmed}..." if trimmed else f"{text[: limit - 4]}..."
+
+
+def details_summary(value: object) -> str:
+    """Escape text used inside HTML summary tags."""
+    return escape(clean_text(value), quote=False)
 
 
 def load_catalog(path: str) -> dict:
@@ -62,7 +98,8 @@ def score_label(score: float) -> str:
 
 
 def score_badge(score: float) -> str:
-    if score >= 75: return "STRONG"
+    if score >= 85: return "Essential"
+    if score >= 75: return "Strong"
     if score >= 65: return "Emerging"
     if score >= 50: return "Watchlist"
     return "Excluded"
@@ -171,6 +208,103 @@ def _render_category_section(group_name: str, projects: list, taxonomy: dict) ->
     return lines
 
 
+def _anchor(name: str) -> str:
+    return (
+        clean_text(name)
+        .lower()
+        .replace(" ", "-")
+        .replace(",", "")
+        .replace("&", "and")
+        .replace(".", "")
+        .replace("(", "")
+        .replace(")", "")
+    )
+
+
+def _render_toc(taxonomy: dict, accepted: list) -> list:
+    """Render a readable table of contents."""
+    cat_counts = Counter()
+    for e in accepted:
+        pc = e.get("primary_category", "")
+        for group in taxonomy.get("categories", {}).values():
+            if pc in group.get("subcategories", {}):
+                cat_counts[group["name"]] += 1
+                break
+
+    lines = ["## Contents", ""]
+    for name, count in sorted(cat_counts.items()):
+        lines.append(f"- [{clean_text(name)}](#{_anchor(name)}) - {count} projects")
+    lines.extend(["", "---", ""])
+    return lines
+
+
+def _render_category_section(group_name: str, projects: list, taxonomy: dict) -> list:
+    """Render a category section as compact, readable project cards."""
+    lines = [f"## {clean_text(group_name)}", ""]
+
+    subcat_counts = Counter()
+    cat_map = {}
+    for e in projects:
+        pc = e.get("primary_category", "")
+        for group in taxonomy.get("categories", {}).values():
+            if pc in group.get("subcategories", {}):
+                name = clean_text(group["subcategories"][pc]["name"])
+                subcat_counts[name] += 1
+                cat_map[e["id"]] = name
+                break
+
+    if subcat_counts:
+        lines.append("| Subcategory | Projects |")
+        lines.append("|---|---:|")
+        for name, count in sorted(subcat_counts.items()):
+            lines.append(f"| {name} | {count} |")
+        lines.append("")
+
+    for p in sorted(projects, key=lambda x: x.get("score", 0), reverse=True):
+        repo = clean_text(p.get("repository", "?"))
+        desc = truncate(p.get("description") or "", 180)
+        score = p.get("score", 0)
+        stars = format_stars(p.get("stars", 0))
+        lang = clean_text(p.get("primary_language") or p.get("language") or "?")
+        official = p.get("official_status", "community")
+        official_str = "Official" if official == "official" else "Community"
+        sec_notes = [clean_text(note) for note in p.get("security_notes", [])]
+
+        summary = f"{repo} - {stars} stars - score {score}/100 - {score_badge(score)} - {lang}"
+        if official == "official":
+            summary += " - Official"
+        if sec_notes:
+            summary += " - security notes"
+
+        lines.append("<details>")
+        lines.append(f"<summary><strong>{details_summary(summary)}</strong></summary>")
+        lines.append("")
+        if desc:
+            lines.append(f"> {desc}")
+            lines.append("")
+        lines.append(f"[Open repository](https://github.com/{repo})")
+        lines.append("")
+        lines.append("| Category | Language | Status | Score | Stars |")
+        lines.append("|---|---|---|---:|---:|")
+        subcat = clean_text(cat_map.get(p["id"], p.get("primary_category", "?")))
+        lines.append(f"| {subcat} | {lang} | {official_str} | {score}/100 | {stars} |")
+        lines.append("")
+
+        topics = [clean_text(t) for t in p.get("topics", [])[:8]]
+        if topics:
+            lines.append("**Tags:** " + " ".join(f"`{t}`" for t in topics))
+            lines.append("")
+
+        if sec_notes:
+            lines.append("**Security notes:** " + "; ".join(sec_notes[:3]))
+            lines.append("")
+
+        lines.append("</details>")
+        lines.append("")
+
+    return lines
+
+
 def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
     """Render README.md as a comprehensive scrollable catalog."""
     entries = catalog.get("entries", [])
@@ -185,11 +319,11 @@ def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
     # ── HEADER ──
     lines.append("# Agentic Engineering Compendium")
     lines.append("")
-    lines.append("> Das vollstaendige AI-Agent-Oekosystem in einer durchsuchbaren Liste.")
+    lines.append("> A searchable, evidence-oriented map of the AI-agent engineering ecosystem.")
     lines.append("")
     lines.append(f"**Snapshot:** {snapshot_date}")
-    lines.append(f"**Katalog:** {len(entries)} Projekte (Score >=50: {len(accepted)}, Excluded: {len(excluded)})")
-    lines.append(f"**Kategorien:** 10 Hauptkategorien, 81 Subkategorien")
+    lines.append(f"**Catalog:** {len(entries)} projects ({len(accepted)} scored >= 50, {len(excluded)} excluded)")
+    lines.append("**Taxonomy:** 10 top-level categories, 81 subcategories")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -198,11 +332,14 @@ def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
     lines.extend(_render_toc(taxonomy, accepted))
 
     # ── SCORE DISTRIBUTION ──
-    lines.append("## Score-Verteilung")
+    lines.append("## Score Distribution")
     lines.append("")
-    lines.append(f"| Kategorie | Bereich | Anzahl |")
+    lines.append(f"| Rating | Score range | Projects |")
     lines.append(f"|---|---|---|")
-    lines.append(f"| Strong | 75-84 | {strong} |")
+    essential = sum(1 for e in accepted if e.get("score", 0) >= 85)
+    strong_only = sum(1 for e in accepted if 75 <= e.get("score", 0) < 85)
+    lines.append(f"| Essential | 85+ | {essential} |")
+    lines.append(f"| Strong | 75-84 | {strong_only} |")
     lines.append(f"| Emerging | 65-74 | {emerging} |")
     lines.append(f"| Watchlist | 50-64 | {watchlist} |")
     lines.append(f"| Excluded | <50 | {len(excluded)} |")
@@ -211,10 +348,10 @@ def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
     lines.append("")
 
     # ── TOP 10 ──
-    lines.append("## Top 10 Projekte")
+    lines.append("## Top 10 Projects")
     lines.append("")
     sorted_all = sorted(accepted, key=lambda x: x.get("score", 0), reverse=True)
-    lines.append("| # | Projekt | Stars | Score |")
+    lines.append("| # | Project | Stars | Score |")
     lines.append("|---|---|---|---|")
     for i, p in enumerate(sorted_all[:10], 1):
         repo = p.get("repository", "?")
@@ -227,9 +364,9 @@ def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
     lines.append("")
 
     # ── ALL PROJECTS BY CATEGORY ──
-    lines.append("# Vollstaendiger Katalog")
+    lines.append("# Complete Catalog")
     lines.append(f"")
-    lines.append(f"**{len(accepted)} Projekte** in allen Kategorien. Aufklappen fuer Details.")
+    lines.append(f"**{len(accepted)} projects** grouped by category. Expand a project for details.")
     lines.append("")
 
     # Group by top-level category
