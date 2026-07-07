@@ -1,0 +1,50 @@
+[
+  {
+    "source": "hackernews_show",
+    "title": "Show HN: Tracking GenAI cost and endpoint fragility so app teams don't have to",
+    "url": "https://llmintel.ai/demo",
+    "points": 2,
+    "relevance": "show-hn-project",
+    "checked_at": "2026-07-07T17:06:10.903279+00:00"
+  },
+  {
+    "source": "hackernews_show",
+    "title": "Show HN: Prizmi – a proactive AI assistant for everyday life",
+    "url": "https://prizmi.ai/",
+    "points": 2,
+    "relevance": "show-hn-project",
+    "checked_at": "2026-07-07T17:06:10.903279+00:00"
+  },
+  {
+    "source": "hackernews_show",
+    "title": "Show HN: Signal for LLM – The Modulator Architecture (Theory Complete)",
+    "url": "https://divinecanon.github.io/signalengine-EN/",
+    "points": 2,
+    "relevance": "show-hn-project",
+    "checked_at": "2026-07-07T17:06:10.903279+00:00"
+  },
+  {
+    "source": "hackernews_show",
+    "title": "Show HN: Context Warp Drive – Deterministic context folding for AI agents",
+    "url": "https://github.com/dogtorjonah/context-warp-drive",
+    "points": 3,
+    "relevance": "show-hn-project",
+    "checked_at": "2026-07-07T17:06:10.903279+00:00"
+  },
+  {
+    "source": "hackernews_show",
+    "title": "Show HN: Wayflow – an embeddable AI workflow builder (open source)",
+    "url": "https://wayflow.build/",
+    "points": 2,
+    "relevance": "show-hn-project",
+    "checked_at": "2026-07-07T17:06:10.903279+00:00"
+  },
+  {
+    "source": "hackernews_show",
+    "title": "Show HN: Otari: your open-source LLM control plane",
+    "url": "https://github.com/mozilla-ai/otari",
+    "points": 20,
+    "relevance": "show-hn-project",
+    "checked_at": "2026-07-07T17:06:10.903279+00:00"
+  }
+]

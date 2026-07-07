@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agentic Engineering Compendium Catalog Entry",
+  "type": "object",
+  "required": [
+    "id", "name", "owner", "repository", "repository_url",
+    "description", "primary_category", "project_type",
+    "official_status", "score", "confidence", "checked_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[^/]+/[^/]+$",
+      "description": "Canonical owner/repository identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Project display name"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Repository owner"
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[^/]+/[^/]+$",
+      "description": "Canonical owner/repository"
+    },
+    "repository_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical repository URL"
+    },
+    "homepage_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Project homepage or documentation site"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 300,
+      "description": "Neutral one-sentence description (12-30 words preferred)"
+    },
+    "primary_category": {
+      "type": "string",
+      "description": "Primary taxonomy category ID",
+      "pattern": "^[A-Z]\\.[0-9]+"
+    },
+    "secondary_categories": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[A-Z]\\.[0-9]+" },
+      "description": "Additional taxonomy category IDs"
+    },
+    "project_type": {
+      "type": "string",
+      "enum": [
+        "application", "framework", "runtime", "library", "SDK",
+        "protocol", "MCP server", "MCP client", "MCP host",
+        "gateway", "registry", "package manager", "developer tool",
+        "sandbox", "observability platform", "evaluation framework",
+        "benchmark", "dataset", "tutorial", "reference implementation",
+        "template", "collection", "research project",
+        "IDE extension", "CLI tool", "documentation"
+      ]
+    },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tags describing what the project enables"
+    },
+    "protocols": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Supported protocols (e.g., MCP, A2A, ANP)"
+    },
+    "compatible_hosts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Compatible MCP hosts, runtimes, or platforms"
+    },
+    "deployment_modes": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["local-first", "self-hosted", "cloud", "hybrid"] },
+      "description": "How the project can be deployed"
+    },
+    "official_status": {
+      "type": "string",
+      "enum": ["official", "community", "unclear"]
+    },
+    "official_evidence": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "URLs supporting official_status claim"
+    },
+    "primary_language": {
+      "type": ["string", "null"],
+      "description": "Primary programming language"
+    },
+    "languages": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "All programming languages used"
+    },
+    "topics": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "GitHub topics"
+    },
+    "license": {
+      "type": ["string", "null"],
+      "description": "SPDX license identifier"
+    },
+    "stars": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "forks": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "open_issues": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "created_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Repository creation timestamp"
+    },
+    "updated_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Repository last update timestamp"
+    },
+    "pushed_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Repository last push timestamp"
+    },
+    "latest_release_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Latest release timestamp"
+    },
+    "archived": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_fork": {
+      "type": "boolean",
+      "default": false
+    },
+    "maintenance_status": {
+      "type": "string",
+      "enum": ["active", "slow", "stale", "archived", "unclear"]
+    },
+    "documentation_quality": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "production_readiness": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "security_transparency": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "score_components": {
+      "type": "object",
+      "properties": {
+        "relevance": { "type": "number", "minimum": 0, "maximum": 20 },
+        "maintenance": { "type": "number", "minimum": 0, "maximum": 15 },
+        "adoption": { "type": "number", "minimum": 0, "maximum": 10 },
+        "momentum": { "type": "number", "minimum": 0, "maximum": 10 },
+        "documentation": { "type": "number", "minimum": 0, "maximum": 10 },
+        "production_readiness": { "type": "number", "minimum": 0, "maximum": 10 },
+        "security": { "type": "number", "minimum": 0, "maximum": 10 },
+        "interoperability": { "type": "number", "minimum": 0, "maximum": 5 },
+        "community": { "type": "number", "minimum": 0, "maximum": 5 },
+        "uniqueness": { "type": "number", "minimum": 0, "maximum": 5 }
+      },
+      "required": [
+        "relevance", "maintenance", "adoption", "momentum",
+        "documentation", "production_readiness", "security",
+        "interoperability", "community", "uniqueness"
+      ]
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low"]
+    },
+    "trend_data": {
+      "type": "object",
+      "properties": {
+        "stars_30d": { "type": ["integer", "null"] },
+        "stars_90d": { "type": ["integer", "null"] },
+        "method": { "type": "string", "enum": ["exact", "estimated", "proxy", null] }
+      },
+      "required": ["stars_30d", "stars_90d", "method"]
+    },
+    "install_methods": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "security_notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Security warnings or considerations"
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "source_urls": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" }
+    },
+    "discovered_from": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Discovery source identifiers"
+    },
+    "checked_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this entry was last verified"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+name: Validate Catalog
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Validate catalog
+        run: python scripts/validate.py --catalog data/catalog.json --schema data/catalog.schema.json
+      
+      - name: Check for duplicates
+        run: python -c "
+import json
+with open('data/catalog.json') as f:
+    data = json.load(f)
+entries = data.get('entries', [])
+repos = [e.get('repository', '') for e in entries if e.get('repository')]
+dups = {r for r in repos if repos.count(r) > 1}
+if dups:
+    print(f'ERROR: Duplicates: {dups}')
+    exit(1)
+print(f'OK: {len(entries)} entries, no duplicates')
+"
+      
+      - name: Run tests
+        run: |
+          pip install pytest
+          python -m pytest tests/ -v

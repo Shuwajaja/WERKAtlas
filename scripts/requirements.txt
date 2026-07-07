@@ -1,0 +1,5 @@
+# Minimal dependencies for the compendium scripts
+# Use `uv pip install -r requirements.txt` to install
+# Most scripts use only stdlib to minimize dependencies
+# Optional: requests for HTTP
+# Optional: pyyaml for YAML parsing

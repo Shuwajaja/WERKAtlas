@@ -1,0 +1,27 @@
+# Caches
+data/_loop_cache.json
+data/_research_cache.json
+data/_meta_loop_state.json
+
+# Candidate files (regeneratable)
+data/candidates.ndjson
+data/deep_candidates.ndjson
+data/filtered_candidates.ndjson
+data/loop_candidates.ndjson
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp

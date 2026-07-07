@@ -1,0 +1,53 @@
+{
+  "snapshot_date": "2026-07-07",
+  "tier_1_authoritative": {
+    "github_orgs": [
+      "modelcontextprotocol",
+      "anthropics",
+      "openai",
+      "google-gemini",
+      "langchain-ai",
+      "microsoft",
+      "meta-llama",
+      "ggml-ai",
+      "run-llama",
+      "huggingface",
+      "crewAI",
+      "AutoMQ",
+      "composio",
+      "agno-agi"
+    ],
+    "registries": [
+      "https://github.com/modelcontextprotocol/registry",
+      "https://github.com/modelcontextprotocol/servers",
+      "https://registry.mcp.so",
+      "https://smithery.ai",
+      "https://mcp.composio.dev",
+      "https://github.com/punkpeye/awesome-mcp-servers"
+    ],
+    "sdk_repos": [
+      "modelcontextprotocol/python-sdk",
+      "modelcontextprotocol/typescript-sdk",
+      "modelcontextprotocol/java-sdk",
+      "modelcontextprotocol/kotlin-sdk",
+      "modelcontextprotocol/specification"
+    ]
+  },
+  "tier_2_high_value": {
+    "awesome_lists": [
+      "https://github.com/awesome-selfhosted/awesome-selfhosted",
+      "https://github.com/e2b-dev/awesome-ai-agents",
+      "https://github.com/PatrickJS/awesome-cursorrules",
+      "https://github.com/punkpeye/awesome-mcp-servers",
+      "https://github.com/nicepkg/awesome-ai-coding-agents",
+      "https://github.com/f/awesome-chatgpt-prompts",
+      "https://github.com/sindresorhus/awesome"
+    ],
+    "ecosystem_directories": [
+      "https://smithery.ai",
+      "https://openinterpreter.com",
+      "https://glama.ai/mcp/servers",
+      "https://mcp.so"
+    ]
+  }
+}

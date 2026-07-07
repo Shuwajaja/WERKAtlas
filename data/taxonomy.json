@@ -1,0 +1,148 @@
+{
+  "snapshot_date": "2026-07-07",
+  "version": "1.0",
+  "description": "Canonical taxonomy for the Agentic Engineering Compendium",
+  "categories": {
+    "A": {
+      "name": "Learning and foundations",
+      "description": "Educational resources for understanding and building agent systems from first principles",
+      "subcategories": {
+        "A.1": { "name": "Build-your-own tutorials", "description": "Step-by-step implementation tutorials" },
+        "A.2": { "name": "Agent architecture fundamentals", "description": "Core architectural patterns and concepts" },
+        "A.3": { "name": "Courses, books, guides, and workshops", "description": "Structured learning materials" },
+        "A.4": { "name": "Reference implementations", "description": "Canonical example implementations" },
+        "A.5": { "name": "Research papers and surveys", "description": "Academic and industry research" }
+      }
+    },
+    "B": {
+      "name": "Frameworks and runtimes",
+      "description": "Software frameworks and execution runtimes for building and running AI agents",
+      "subcategories": {
+        "B.6": { "name": "Agent frameworks", "description": "General-purpose agent construction frameworks" },
+        "B.7": { "name": "Agent runtimes and execution engines", "description": "Execution environments for running agents" },
+        "B.8": { "name": "Graph and workflow orchestration", "description": "Graph-based workflow and pipeline orchestration" },
+        "B.9": { "name": "Multi-agent systems and swarms", "description": "Coordination of multiple agents" },
+        "B.10": { "name": "Durable and long-running agents", "description": "Persistent agent execution" },
+        "B.11": { "name": "State machines, events, and checkpointing", "description": "State management for agent systems" },
+        "B.12": { "name": "Planning, reasoning, and task decomposition", "description": "Planning and reasoning engines" }
+      }
+    },
+    "C": {
+      "name": "Coding and software engineering agents",
+      "description": "Tools and systems for AI-assisted software development",
+      "subcategories": {
+        "C.13": { "name": "Coding agents", "description": "AI agents for writing and editing code" },
+        "C.14": { "name": "Terminal and CLI agents", "description": "Command-line native agents" },
+        "C.15": { "name": "IDE integrations", "description": "Editor and IDE plugin agents" },
+        "C.16": { "name": "Code review and quality agents", "description": "Automated code review tools" },
+        "C.17": { "name": "Testing and debugging agents", "description": "Automated testing and debugging" },
+        "C.18": { "name": "Repository understanding and code intelligence", "description": "Codebase analysis tools" },
+        "C.19": { "name": "Software-development agent benchmarks", "description": "Benchmarks for coding agents" }
+      }
+    },
+    "D": {
+      "name": "MCP ecosystem",
+      "description": "Model Context Protocol infrastructure, tools, and services",
+      "subcategories": {
+        "D.20": { "name": "MCP servers", "description": "MCP-compatible server implementations" },
+        "D.21": { "name": "MCP clients and hosts", "description": "MCP client and host implementations" },
+        "D.22": { "name": "MCP SDKs", "description": "Software development kits for MCP" },
+        "D.23": { "name": "MCP registries and discovery", "description": "MCP server discovery and registries" },
+        "D.24": { "name": "MCP gateways, routers, and proxies", "description": "MCP traffic management" },
+        "D.25": { "name": "MCP inspectors, debuggers, and testing tools", "description": "MCP development tools" },
+        "D.26": { "name": "MCP security and permission systems", "description": "MCP security infrastructure" },
+        "D.27": { "name": "MCP deployment and server management", "description": "MCP operations tools" },
+        "D.28": { "name": "MCP collections and package managers", "description": "MCP package management" }
+      }
+    },
+    "E": {
+      "name": "Skills, extensions, and interoperability",
+      "description": "Agent capabilities, plugin systems, and cross-agent standards",
+      "subcategories": {
+        "E.29": { "name": "Agent skills", "description": "Reusable agent capability packages" },
+        "E.30": { "name": "Plugins and extensions", "description": "Agent plugin systems" },
+        "E.31": { "name": "Prompt and instruction packages", "description": "Structured prompt collections" },
+        "E.32": { "name": "Agent package managers", "description": "Package management for agent components" },
+        "E.33": { "name": "Cross-agent configuration portability", "description": "Portable agent configurations" },
+        "E.34": { "name": "Agent protocols and interoperability", "description": "Cross-agent communication protocols" },
+        "E.35": { "name": "Tool-use and function-calling libraries", "description": "Tool-use infrastructure" },
+        "E.36": { "name": "Connectors and integration platforms", "description": "External system connectors" }
+      }
+    },
+    "F": {
+      "name": "Context, knowledge, and memory",
+      "description": "Systems for managing agent context windows, knowledge, and persistent memory",
+      "subcategories": {
+        "F.37": { "name": "Agent memory", "description": "Persistent memory systems for agents" },
+        "F.38": { "name": "RAG and retrieval", "description": "Retrieval-augmented generation systems" },
+        "F.39": { "name": "Knowledge graphs", "description": "Graph-based knowledge representation" },
+        "F.40": { "name": "Context engineering", "description": "Context window management" },
+        "F.41": { "name": "Context compression and summarization", "description": "Context optimization techniques" },
+        "F.42": { "name": "Document and file understanding", "description": "Document processing for agents" },
+        "F.43": { "name": "Agent databases and persistence", "description": "Agent-specific data storage" }
+      }
+    },
+    "G": {
+      "name": "Execution and interaction",
+      "description": "Agent interaction with environments, browsers, and physical systems",
+      "subcategories": {
+        "G.44": { "name": "Browser agents", "description": "Web browser automation agents" },
+        "G.45": { "name": "Computer-use agents", "description": "General computer interaction agents" },
+        "G.46": { "name": "GUI and desktop automation", "description": "Desktop user interface automation" },
+        "G.47": { "name": "Web automation", "description": "Web scraping and automation" },
+        "G.48": { "name": "Code execution", "description": "Safe code execution environments" },
+        "G.49": { "name": "Sandboxes and isolation", "description": "Execution sandboxing" },
+        "G.50": { "name": "Containers and micro-VMs", "description": "Container-based isolation" },
+        "G.51": { "name": "Robotics and embodied agents", "description": "Physical-world agent systems" },
+        "G.52": { "name": "Voice, realtime, and multimodal agents", "description": "Multimodal interaction agents" }
+      }
+    },
+    "H": {
+      "name": "Reliability and operations",
+      "description": "Observability, evaluation, security, and operational tooling for agents",
+      "subcategories": {
+        "H.53": { "name": "Agent observability", "description": "Monitoring and observability for agents" },
+        "H.54": { "name": "Tracing and debugging", "description": "Agent execution tracing" },
+        "H.55": { "name": "Evaluation frameworks", "description": "Agent evaluation tooling" },
+        "H.56": { "name": "Benchmarks and datasets", "description": "Agent benchmark suites" },
+        "H.57": { "name": "Guardrails and policy enforcement", "description": "Safety and policy guardrails" },
+        "H.58": { "name": "Security, identity, and authorization", "description": "Agent security infrastructure" },
+        "H.59": { "name": "Secret management", "description": "Credential and secret handling" },
+        "H.60": { "name": "Human approval and human-in-the-loop systems", "description": "Human oversight tooling" },
+        "H.61": { "name": "Cost, latency, and token optimization", "description": "Optimization for cost and latency" },
+        "H.62": { "name": "Agent testing and simulation", "description": "Testing and simulation frameworks" },
+        "H.63": { "name": "Incident response and failure recovery", "description": "Failure handling for agents" }
+      }
+    },
+    "I": {
+      "name": "Models and infrastructure",
+      "description": "Model serving, inference infrastructure, and agent hosting",
+      "subcategories": {
+        "I.64": { "name": "Model gateways and routers", "description": "Model routing and gateway systems" },
+        "I.65": { "name": "Inference servers", "description": "Model inference serving" },
+        "I.66": { "name": "Local-first agent stacks", "description": "On-device agent systems" },
+        "I.67": { "name": "Local model integrations", "description": "Local LLM integration tools" },
+        "I.68": { "name": "Cloud agent platforms", "description": "Managed cloud agent platforms" },
+        "I.69": { "name": "Agent schedulers and automation", "description": "Agent task scheduling" },
+        "I.70": { "name": "Queues, workers, and background execution", "description": "Async execution infrastructure" },
+        "I.71": { "name": "Agent hosting and deployment", "description": "Agent deployment platforms" },
+        "I.72": { "name": "Agent control planes", "description": "Central agent management" }
+      }
+    },
+    "J": {
+      "name": "Applications and interfaces",
+      "description": "End-user agent applications, UIs, and specialized vertical agents",
+      "subcategories": {
+        "J.73": { "name": "Research agents", "description": "Research and analysis agents" },
+        "J.74": { "name": "Data and analytics agents", "description": "Data analysis agents" },
+        "J.75": { "name": "DevOps, cloud, and SRE agents", "description": "Infrastructure automation agents" },
+        "J.76": { "name": "Knowledge-work agents", "description": "Knowledge work assistance" },
+        "J.77": { "name": "Agent workspaces and chat interfaces", "description": "Agent interaction interfaces" },
+        "J.78": { "name": "Agent UIs and dashboards", "description": "Visual agent management tools" },
+        "J.79": { "name": "No-code and low-code agent builders", "description": "Visual agent development tools" },
+        "J.80": { "name": "Vertical agents", "description": "Domain-specific agent applications" },
+        "J.81": { "name": "Templates, examples, and starter kits", "description": "Agent project templates" }
+      }
+    }
+  }
+}
