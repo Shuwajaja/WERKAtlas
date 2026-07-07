@@ -432,6 +432,166 @@ def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
     return "\n".join(lines)
 
 
+def render_readme(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+    """Render README.md as a showcase front page plus the complete catalog."""
+    entries = catalog.get("entries", [])
+    accepted = [e for e in entries if e.get("score", 0) >= 50]
+    excluded = [e for e in entries if e.get("score", 0) < 50]
+    sorted_all = sorted(accepted, key=lambda x: x.get("score", 0), reverse=True)
+
+    essential = sum(1 for e in accepted if e.get("score", 0) >= 85)
+    strong = sum(1 for e in accepted if 75 <= e.get("score", 0) < 85)
+    emerging = sum(1 for e in accepted if 65 <= e.get("score", 0) < 75)
+    watchlist = sum(1 for e in accepted if 50 <= e.get("score", 0) < 65)
+
+    lines = [
+        "# Agentic Engineering Compendium",
+        "",
+        "> A searchable, evidence-oriented map of the AI-agent engineering ecosystem.",
+        "",
+        f"![Snapshot](https://img.shields.io/badge/snapshot-{snapshot_date.replace('-', '--')}-111111)",
+        f"![Projects](https://img.shields.io/badge/projects-{len(entries)}-2563eb)",
+        f"![Accepted](https://img.shields.io/badge/accepted-{len(accepted)}-16a34a)",
+        "![Categories](https://img.shields.io/badge/categories-81-7c3aed)",
+        "![Format](https://img.shields.io/badge/format-GitHub%20Markdown-0f172a)",
+        "",
+        "| Projects | Accepted | Excluded | Top-level categories | Subcategories | Snapshot |",
+        "|---:|---:|---:|---:|---:|---|",
+        f"| {len(entries)} | {len(accepted)} | {len(excluded)} | 10 | 81 | {snapshot_date} |",
+        "",
+        "## Start Here",
+        "",
+        "| Need | Start with |",
+        "|---|---|",
+        "| Best production-ready projects | [Top 25 Projects](#top-25-projects) |",
+        "| Category navigation | [Contents](#contents) |",
+        "| Ecosystem shape | [Ecosystem Map](#ecosystem-map) |",
+        "| Full data dump in one page | [Complete Catalog](#complete-catalog) |",
+        "| Scoring rules | [Methodology](METHODOLOGY.md) |",
+        "",
+        "## Ecosystem Map",
+        "",
+        "```mermaid",
+        "flowchart LR",
+        '  root["Agentic Engineering"]',
+        '  root --> apps["Applications & Interfaces"]',
+        '  root --> code["Coding Agents"]',
+        '  root --> ctx["Context & Memory"]',
+        '  root --> exec["Execution & Interaction"]',
+        '  root --> fw["Frameworks & Runtimes"]',
+        '  root --> mcp["MCP Ecosystem"]',
+        '  root --> ops["Reliability & Operations"]',
+        '  root --> infra["Models & Infrastructure"]',
+        '  root --> skills["Skills & Interop"]',
+        "  fw --> mcp",
+        "  code --> exec",
+        "  ctx --> ops",
+        "  apps --> skills",
+        "```",
+        "",
+        "---",
+        "",
+    ]
+
+    lines.extend(_render_toc(taxonomy, accepted))
+
+    lines.extend([
+        "## Score Distribution",
+        "",
+        "| Rating | Score range | Projects |",
+        "|---|---:|---:|",
+        f"| Essential | 85+ | {essential} |",
+        f"| Strong | 75-84 | {strong} |",
+        f"| Emerging | 65-74 | {emerging} |",
+        f"| Watchlist | 50-64 | {watchlist} |",
+        f"| Excluded | <50 | {len(excluded)} |",
+        "",
+        "---",
+        "",
+        "## Top 25 Projects",
+        "",
+        "| # | Project | Stars | Score | Category |",
+        "|---:|---|---:|---:|---|",
+    ])
+
+    for i, p in enumerate(sorted_all[:25], 1):
+        repo = clean_text(p.get("repository", "?"))
+        stars = format_stars(p.get("stars", 0))
+        score = p.get("score", 0)
+        cat = clean_text(get_category_name(taxonomy, p.get("primary_category", "")))
+        lines.append(f"| {i} | [{repo}](https://github.com/{repo}) | {stars} | {score} | {cat} |")
+
+    lines.extend([
+        "",
+        "---",
+        "",
+        "# Complete Catalog",
+        "",
+        f"**{len(accepted)} projects** grouped by category. Expand a project for details.",
+        "",
+    ])
+
+    grouped = {}
+    for e in accepted:
+        pc = e.get("primary_category", "")
+        for group in taxonomy.get("categories", {}).values():
+            if pc in group.get("subcategories", {}):
+                grouped.setdefault(group["name"], []).append(e)
+                break
+
+    for group_name in sorted(grouped.keys()):
+        lines.extend(_render_category_section(group_name, grouped[group_name], taxonomy))
+
+    if excluded:
+        lines.extend([
+            "## Excluded Projects",
+            "",
+            f"**{len(excluded)} projects** with score < 50 (insufficient data or not yet confirmed).",
+            "",
+            "<details>",
+            "<summary>Show excluded projects</summary>",
+            "",
+        ])
+        for e in sorted(excluded, key=lambda x: x.get("stars", 0), reverse=True)[:50]:
+            repo = clean_text(e.get("repository", "?"))
+            stars = format_stars(e.get("stars", 0))
+            lines.append(f"- [{repo}](https://github.com/{repo}) - {stars} stars")
+        if len(excluded) > 50:
+            lines.append(f"- ... and {len(excluded) - 50} more")
+        lines.extend(["", "</details>", ""])
+
+    lines.extend([
+        "---",
+        "",
+        "## About",
+        "",
+        "Generated by the five-loop research orchestrator with a meta-loop controller.",
+        "",
+        "| Resource | Description |",
+        "|---|---|",
+        "| [CATALOG.md](CATALOG.md) | Full categorized list |",
+        "| [LANDSCAPE.md](LANDSCAPE.md) | Architecture overview |",
+        "| [TOP-PICKS.md](TOP-PICKS.md) | Curated high-score set |",
+        "| [TRENDING.md](TRENDING.md) | Momentum analysis |",
+        "| [METHODOLOGY.md](METHODOLOGY.md) | Scoring method |",
+        "| [AGENTS.md](AGENTS.md) | Agent instructions |",
+        "| [data/](data/) | Machine-readable data |",
+        "| [scripts/](scripts/) | Automation |",
+        "",
+        "```bash",
+        "# Regenerate docs from checked-in data",
+        "make all",
+        "# Start the meta-loop controller",
+        "python scripts/meta_loop.py --continuous",
+        "```",
+        "",
+        "---",
+        f"*Snapshot: {snapshot_date} | {len(entries)} projects | Meta-loop controller*",
+    ])
+
+    return "\n".join(lines)
+
+
 def render_catalog(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
     """Render CATALOG.md — full categorized listing."""
     entries = catalog.get("entries", [])

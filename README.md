@@ -2,9 +2,45 @@
 
 > A searchable, evidence-oriented map of the AI-agent engineering ecosystem.
 
-**Snapshot:** 2026-07-07
-**Catalog:** 1468 projects (742 scored >= 50, 726 excluded)
-**Taxonomy:** 10 top-level categories, 81 subcategories
+![Snapshot](https://img.shields.io/badge/snapshot-2026--07--07-111111)
+![Projects](https://img.shields.io/badge/projects-1468-2563eb)
+![Accepted](https://img.shields.io/badge/accepted-742-16a34a)
+![Categories](https://img.shields.io/badge/categories-81-7c3aed)
+![Format](https://img.shields.io/badge/format-GitHub%20Markdown-0f172a)
+
+| Projects | Accepted | Excluded | Top-level categories | Subcategories | Snapshot |
+|---:|---:|---:|---:|---:|---|
+| 1468 | 742 | 726 | 10 | 81 | 2026-07-07 |
+
+## Start Here
+
+| Need | Start with |
+|---|---|
+| Best production-ready projects | [Top 25 Projects](#top-25-projects) |
+| Category navigation | [Contents](#contents) |
+| Ecosystem shape | [Ecosystem Map](#ecosystem-map) |
+| Full data dump in one page | [Complete Catalog](#complete-catalog) |
+| Scoring rules | [Methodology](METHODOLOGY.md) |
+
+## Ecosystem Map
+
+```mermaid
+flowchart LR
+  root["Agentic Engineering"]
+  root --> apps["Applications & Interfaces"]
+  root --> code["Coding Agents"]
+  root --> ctx["Context & Memory"]
+  root --> exec["Execution & Interaction"]
+  root --> fw["Frameworks & Runtimes"]
+  root --> mcp["MCP Ecosystem"]
+  root --> ops["Reliability & Operations"]
+  root --> infra["Models & Infrastructure"]
+  root --> skills["Skills & Interop"]
+  fw --> mcp
+  code --> exec
+  ctx --> ops
+  apps --> skills
+```
 
 ---
 
@@ -26,7 +62,7 @@
 ## Score Distribution
 
 | Rating | Score range | Projects |
-|---|---|---|
+|---|---:|---:|
 | Essential | 85+ | 11 |
 | Strong | 75-84 | 169 |
 | Emerging | 65-74 | 340 |
@@ -35,20 +71,35 @@
 
 ---
 
-## Top 10 Projects
+## Top 25 Projects
 
-| # | Project | Stars | Score |
-|---|---|---|---|
-| 1 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | 196k | 92 |
-| 2 | [openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter) | 64.3k | 88 |
-| 3 | [ollama/ollama](https://github.com/ollama/ollama) | 176k | 86 |
-| 4 | [weaviate/weaviate](https://github.com/weaviate/weaviate) | 16.5k | 86 |
-| 5 | [browser-use/browser-use](https://github.com/browser-use/browser-use) | 103k | 86 |
-| 6 | [run-llama/llama_index](https://github.com/run-llama/llama_index) | 50.7k | 85 |
-| 7 | [vllm-project/vllm](https://github.com/vllm-project/vllm) | 85.6k | 85 |
-| 8 | [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | 141k | 85 |
-| 9 | [microsoft/semantic-kernel](https://github.com/microsoft/semantic-kernel) | 28.3k | 85 |
-| 10 | [letta-ai/letta](https://github.com/letta-ai/letta) | 23.7k | 85 |
+| # | Project | Stars | Score | Category |
+|---:|---|---:|---:|---|
+| 1 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | 196k | 92 | MCP servers |
+| 2 | [openinterpreter/openinterpreter](https://github.com/openinterpreter/openinterpreter) | 64.3k | 88 | Coding agents |
+| 3 | [ollama/ollama](https://github.com/ollama/ollama) | 176k | 86 | Model gateways and routers |
+| 4 | [weaviate/weaviate](https://github.com/weaviate/weaviate) | 16.5k | 86 | Agent frameworks |
+| 5 | [browser-use/browser-use](https://github.com/browser-use/browser-use) | 103k | 86 | Agent frameworks |
+| 6 | [run-llama/llama_index](https://github.com/run-llama/llama_index) | 50.7k | 85 | RAG and retrieval |
+| 7 | [vllm-project/vllm](https://github.com/vllm-project/vllm) | 85.6k | 85 | Model gateways and routers |
+| 8 | [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | 141k | 85 | Graph and workflow orchestration |
+| 9 | [microsoft/semantic-kernel](https://github.com/microsoft/semantic-kernel) | 28.3k | 85 | Agent frameworks |
+| 10 | [letta-ai/letta](https://github.com/letta-ai/letta) | 23.7k | 85 | Agent frameworks |
+| 11 | [qdrant/qdrant](https://github.com/qdrant/qdrant) | 33.0k | 85 | Agent frameworks |
+| 12 | [langfuse/langfuse](https://github.com/langfuse/langfuse) | 30.6k | 84 | Agent observability |
+| 13 | [mem0ai/mem0](https://github.com/mem0ai/mem0) | 60.3k | 83 | RAG and retrieval |
+| 14 | [FlowiseAI/Flowise](https://github.com/FlowiseAI/Flowise) | 54.4k | 83 | RAG and retrieval |
+| 15 | [SWE-agent/SWE-agent](https://github.com/SWE-agent/SWE-agent) | 19.7k | 83 | Coding agents |
+| 16 | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) | 36.7k | 83 | Graph and workflow orchestration |
+| 17 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 137k | 82 | Coding agents |
+| 18 | [modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk) | 23.6k | 82 | Agent frameworks |
+| 19 | [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) | 88.2k | 82 | Agent frameworks |
+| 20 | [modelcontextprotocol/inspector](https://github.com/modelcontextprotocol/inspector) | 10.3k | 82 | Agent frameworks |
+| 21 | [openai/openai-agents-python](https://github.com/openai/openai-agents-python) | 27.7k | 82 | Agent frameworks |
+| 22 | [confident-ai/deepeval](https://github.com/confident-ai/deepeval) | 16.7k | 81 | Evaluation frameworks |
+| 23 | [Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach) | 52.6k | 81 | Agent frameworks |
+| 24 | [D4Vinci/Scrapling](https://github.com/D4Vinci/Scrapling) | 68.5k | 81 | MCP servers |
+| 25 | [ruvnet/ruflo](https://github.com/ruvnet/ruflo) | 63.4k | 81 | MCP servers |
 
 ---
 
@@ -11026,88 +11077,88 @@
 
 ## Excluded Projects
 
-**726 Projekte** mit Score < 50 (zu wenig Daten oder unbestätigt).
+**726 projects** with score < 50 (insufficient data or not yet confirmed).
 
 <details>
-<summary>Excluded Liste anzeigen</summary>
+<summary>Show excluded projects</summary>
 
-- [openJiuwen-ai/jiuwenswarm](https://github.com/openJiuwen-ai/jiuwenswarm) — Stars:999
-- [themanojdesai/python-a2a](https://github.com/themanojdesai/python-a2a) — Stars:999
-- [krishnaik06/Roadmap-To-Learn-Agentic-AI](https://github.com/krishnaik06/Roadmap-To-Learn-Agentic-AI) — Stars:997
-- [jonwiggins/optio](https://github.com/jonwiggins/optio) — Stars:996
-- [superloglabs/superlog](https://github.com/superloglabs/superlog) — Stars:995
-- [hrithikkoduri/WebRover](https://github.com/hrithikkoduri/WebRover) — Stars:993
-- [docker/compose-for-agents](https://github.com/docker/compose-for-agents) — Stars:990
-- [unclebob/swarm-forge](https://github.com/unclebob/swarm-forge) — Stars:990
-- [ENTERPILOT/GoModel](https://github.com/ENTERPILOT/GoModel) — Stars:988
-- [run-llama/chat-llamaindex](https://github.com/run-llama/chat-llamaindex) — Stars:985
-- [Gitlawb/zero](https://github.com/Gitlawb/zero) — Stars:984
-- [nicobailon/pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter) — Stars:968
-- [LiuMengxuan04/MiniCode](https://github.com/LiuMengxuan04/MiniCode) — Stars:966
-- [ThinkWatchProject/ThinkWatch](https://github.com/ThinkWatchProject/ThinkWatch) — Stars:957
-- [tensorlakeai/tensorlake](https://github.com/tensorlakeai/tensorlake) — Stars:955
-- [agents-io/PokeClaw](https://github.com/agents-io/PokeClaw) — Stars:952
-- [rivet-dev/secure-exec](https://github.com/rivet-dev/secure-exec) — Stars:928
-- [AnalyseDeCircuit/oxideterm](https://github.com/AnalyseDeCircuit/oxideterm) — Stars:916
-- [lahfir/agent-desktop](https://github.com/lahfir/agent-desktop) — Stars:916
-- [Pantheon-Security/medusa](https://github.com/Pantheon-Security/medusa) — Stars:909
-- [Agent-Field/SWE-AF](https://github.com/Agent-Field/SWE-AF) — Stars:899
-- [microsoft/WindowsAgentArena](https://github.com/microsoft/WindowsAgentArena) — Stars:878
-- [deedy/mac_computer_use](https://github.com/deedy/mac_computer_use) — Stars:877
-- [livekit/agents-js](https://github.com/livekit/agents-js) — Stars:876
-- [openai/openai-chatkit-starter-app](https://github.com/openai/openai-chatkit-starter-app) — Stars:865
-- [stackql/stackql](https://github.com/stackql/stackql) — Stars:861
-- [google-gemini/deprecated-generative-ai-android](https://github.com/google-gemini/deprecated-generative-ai-android) — Stars:860
-- [cuga-project/cuga-agent](https://github.com/cuga-project/cuga-agent) — Stars:855
-- [ComposioHQ/trustclaw](https://github.com/ComposioHQ/trustclaw) — Stars:850
-- [openai/openai-responses-starter-app](https://github.com/openai/openai-responses-starter-app) — Stars:850
-- [russelleNVy/three-man-team](https://github.com/russelleNVy/three-man-team) — Stars:837
-- [jmerelnyc/Photo-agents](https://github.com/jmerelnyc/Photo-agents) — Stars:836
-- [meta-llama/prompt-ops](https://github.com/meta-llama/prompt-ops) — Stars:833
-- [abshkbh/arrakis](https://github.com/abshkbh/arrakis) — Stars:828
-- [Haohao-end/openagent](https://github.com/Haohao-end/openagent) — Stars:822
-- [e2b-dev/surf](https://github.com/e2b-dev/surf) — Stars:822
-- [vllora/vllora](https://github.com/vllora/vllora) — Stars:809
-- [openai/model_spec](https://github.com/openai/model_spec) — Stars:805
-- [Shy2593666979/AgentChat](https://github.com/Shy2593666979/AgentChat) — Stars:797
-- [go-kratos/blades](https://github.com/go-kratos/blades) — Stars:797
-- [langchain-ai/react-agent](https://github.com/langchain-ai/react-agent) — Stars:791
-- [stacklok/codegate](https://github.com/stacklok/codegate) — Stars:789
-- [huggingface/tau](https://github.com/huggingface/tau) — Stars:788
-- [Free-The-Ai/free-ai](https://github.com/Free-The-Ai/free-ai) — Stars:767
-- [NirDiamant/Agent_Memory_Techniques](https://github.com/NirDiamant/Agent_Memory_Techniques) — Stars:762
-- [huggingface/hf-mount](https://github.com/huggingface/hf-mount) — Stars:760
-- [anthropics/launch-your-agent](https://github.com/anthropics/launch-your-agent) — Stars:746
-- [harnesslabs/arbiter](https://github.com/harnesslabs/arbiter) — Stars:745
-- [luckyPipewrench/pipelock](https://github.com/luckyPipewrench/pipelock) — Stars:741
-- [ReflexioAI/claude-smart](https://github.com/ReflexioAI/claude-smart) — Stars:740
-- ... und 676 weitere
+- [openJiuwen-ai/jiuwenswarm](https://github.com/openJiuwen-ai/jiuwenswarm) - 999 stars
+- [themanojdesai/python-a2a](https://github.com/themanojdesai/python-a2a) - 999 stars
+- [krishnaik06/Roadmap-To-Learn-Agentic-AI](https://github.com/krishnaik06/Roadmap-To-Learn-Agentic-AI) - 997 stars
+- [jonwiggins/optio](https://github.com/jonwiggins/optio) - 996 stars
+- [superloglabs/superlog](https://github.com/superloglabs/superlog) - 995 stars
+- [hrithikkoduri/WebRover](https://github.com/hrithikkoduri/WebRover) - 993 stars
+- [docker/compose-for-agents](https://github.com/docker/compose-for-agents) - 990 stars
+- [unclebob/swarm-forge](https://github.com/unclebob/swarm-forge) - 990 stars
+- [ENTERPILOT/GoModel](https://github.com/ENTERPILOT/GoModel) - 988 stars
+- [run-llama/chat-llamaindex](https://github.com/run-llama/chat-llamaindex) - 985 stars
+- [Gitlawb/zero](https://github.com/Gitlawb/zero) - 984 stars
+- [nicobailon/pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter) - 968 stars
+- [LiuMengxuan04/MiniCode](https://github.com/LiuMengxuan04/MiniCode) - 966 stars
+- [ThinkWatchProject/ThinkWatch](https://github.com/ThinkWatchProject/ThinkWatch) - 957 stars
+- [tensorlakeai/tensorlake](https://github.com/tensorlakeai/tensorlake) - 955 stars
+- [agents-io/PokeClaw](https://github.com/agents-io/PokeClaw) - 952 stars
+- [rivet-dev/secure-exec](https://github.com/rivet-dev/secure-exec) - 928 stars
+- [AnalyseDeCircuit/oxideterm](https://github.com/AnalyseDeCircuit/oxideterm) - 916 stars
+- [lahfir/agent-desktop](https://github.com/lahfir/agent-desktop) - 916 stars
+- [Pantheon-Security/medusa](https://github.com/Pantheon-Security/medusa) - 909 stars
+- [Agent-Field/SWE-AF](https://github.com/Agent-Field/SWE-AF) - 899 stars
+- [microsoft/WindowsAgentArena](https://github.com/microsoft/WindowsAgentArena) - 878 stars
+- [deedy/mac_computer_use](https://github.com/deedy/mac_computer_use) - 877 stars
+- [livekit/agents-js](https://github.com/livekit/agents-js) - 876 stars
+- [openai/openai-chatkit-starter-app](https://github.com/openai/openai-chatkit-starter-app) - 865 stars
+- [stackql/stackql](https://github.com/stackql/stackql) - 861 stars
+- [google-gemini/deprecated-generative-ai-android](https://github.com/google-gemini/deprecated-generative-ai-android) - 860 stars
+- [cuga-project/cuga-agent](https://github.com/cuga-project/cuga-agent) - 855 stars
+- [ComposioHQ/trustclaw](https://github.com/ComposioHQ/trustclaw) - 850 stars
+- [openai/openai-responses-starter-app](https://github.com/openai/openai-responses-starter-app) - 850 stars
+- [russelleNVy/three-man-team](https://github.com/russelleNVy/three-man-team) - 837 stars
+- [jmerelnyc/Photo-agents](https://github.com/jmerelnyc/Photo-agents) - 836 stars
+- [meta-llama/prompt-ops](https://github.com/meta-llama/prompt-ops) - 833 stars
+- [abshkbh/arrakis](https://github.com/abshkbh/arrakis) - 828 stars
+- [Haohao-end/openagent](https://github.com/Haohao-end/openagent) - 822 stars
+- [e2b-dev/surf](https://github.com/e2b-dev/surf) - 822 stars
+- [vllora/vllora](https://github.com/vllora/vllora) - 809 stars
+- [openai/model_spec](https://github.com/openai/model_spec) - 805 stars
+- [Shy2593666979/AgentChat](https://github.com/Shy2593666979/AgentChat) - 797 stars
+- [go-kratos/blades](https://github.com/go-kratos/blades) - 797 stars
+- [langchain-ai/react-agent](https://github.com/langchain-ai/react-agent) - 791 stars
+- [stacklok/codegate](https://github.com/stacklok/codegate) - 789 stars
+- [huggingface/tau](https://github.com/huggingface/tau) - 788 stars
+- [Free-The-Ai/free-ai](https://github.com/Free-The-Ai/free-ai) - 767 stars
+- [NirDiamant/Agent_Memory_Techniques](https://github.com/NirDiamant/Agent_Memory_Techniques) - 762 stars
+- [huggingface/hf-mount](https://github.com/huggingface/hf-mount) - 760 stars
+- [anthropics/launch-your-agent](https://github.com/anthropics/launch-your-agent) - 746 stars
+- [harnesslabs/arbiter](https://github.com/harnesslabs/arbiter) - 745 stars
+- [luckyPipewrench/pipelock](https://github.com/luckyPipewrench/pipelock) - 741 stars
+- [ReflexioAI/claude-smart](https://github.com/ReflexioAI/claude-smart) - 740 stars
+- ... and 676 more
 
 </details>
 
 ---
 
-## Ueber das Compendium
+## About
 
-Generiert durch 5-Loop Research Orchestrator mit Meta-Loop Controller.
+Generated by the five-loop research orchestrator with a meta-loop controller.
 
-| Ressource | Beschreibung |
+| Resource | Description |
 |---|---|
-| [CATALOG.md](CATALOG.md) | Volle kategorisierte Liste |
-| [LANDSCAPE.md](LANDSCAPE.md) | Architektur-Uebersicht |
-| [TOP-PICKS.md](TOP-PICKS.md) | Kuratierte Auswahl |
-| [TRENDING.md](TRENDING.md) | Momentum-Analyse |
-| [METHODOLOGY.md](METHODOLOGY.md) | Scoring |
-| [AGENTS.md](AGENTS.md) | Agent-Instructions |
-| [data/](data/) | Maschinenlesbare Daten |
-| [scripts/](scripts/) | Automatisierung |
+| [CATALOG.md](CATALOG.md) | Full categorized list |
+| [LANDSCAPE.md](LANDSCAPE.md) | Architecture overview |
+| [TOP-PICKS.md](TOP-PICKS.md) | Curated high-score set |
+| [TRENDING.md](TRENDING.md) | Momentum analysis |
+| [METHODOLOGY.md](METHODOLOGY.md) | Scoring method |
+| [AGENTS.md](AGENTS.md) | Agent instructions |
+| [data/](data/) | Machine-readable data |
+| [scripts/](scripts/) | Automation |
 
 ```bash
-# Alles regenerieren (braucht GitHub Token fuer API)
+# Regenerate docs from checked-in data
 make all
-# Meta-Loop starten
+# Start the meta-loop controller
 python scripts/meta_loop.py --continuous
 ```
 
 ---
-*Snapshot: 2026-07-07 | 1468 Projekte | Meta-Loop Controller*
+*Snapshot: 2026-07-07 | 1468 projects | Meta-loop controller*

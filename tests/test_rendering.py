@@ -46,8 +46,13 @@ def test_readme_has_readable_markdown_spacing():
     text = path.read_text(encoding="utf-8")
 
     assert "# Agentic Engineering Compendium\n\n>" in text
+    assert "![Snapshot]" in text
+    assert "\n\n## Start Here\n\n" in text
+    assert "\n\n## Ecosystem Map\n\n```mermaid\n" in text
     assert "\n\n## Contents\n\n" in text
     assert "\n\n| Rating | Score range | Projects |\n" in text
+    assert "\n\n## Top 25 Projects\n\n" in text
+    assert "\n\n# Complete Catalog\n\n" in text
     assert "\n</details>\n\n<details>\n" in text
 
 
