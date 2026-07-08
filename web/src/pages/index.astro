@@ -2,40 +2,107 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { catalogEntries } from '../utils/dataLoader';
 
-// Compute some basic stats for the Dashboard
+// Compute statistics for WERKHub Dashboard
 const totalCount = catalogEntries.length;
 const averageScore = Math.round(catalogEntries.reduce((sum, item) => sum + item.score, 0) / totalCount);
 const officialCount = catalogEntries.filter(item => item.official_status === 'official').length;
+
+// Tiers breakdown
+const essentialCount = catalogEntries.filter(item => item.score_label === 'essential').length;
+const strongCount = catalogEntries.filter(item => item.score_label === 'strong').length;
+const emergingCount = catalogEntries.filter(item => item.score_label === 'emerging').length;
+const watchlistCount = catalogEntries.filter(item => item.score_label === 'watchlist').length;
+
+// Top 5 highest rated entries
+const topEntries = [...catalogEntries]
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 5);
 ---
 
-<BaseLayout title="Dashboard">
+<BaseLayout title="WERKHub Control Deck">
   <div class="space-y-grid-xl">
-    <!-- Main Welcome -->
+    <!-- Main Welcome Terminal -->
     <div class="border-2 border-steel-border bg-graphite-900 p-grid-xl relative overflow-hidden shadow-flat-md">
-      <div class="absolute right-4 top-4 font-mono text-[10px] text-graphite-600">
-        SYS_VER: 1.0.0 // ATLAS_INITIALIZED
+      <div class="absolute right-4 top-4 font-mono text-[9px] text-graphite-600 bg-graphite-950 border border-steel-border px-1.5 py-0.5">
+        SYS_STATUS: ONLINE // BRND: COOL_GRAPHITE
       </div>
-      <h2 class="text-graphite-50 font-mono text-xl font-bold mb-grid-sm">
-        WELCOME TO WERKATLAS
+      <h2 class="text-graphite-50 font-mono text-lg font-bold mb-grid-sm flex items-center gap-2">
+        <span class="text-caution-yellow">■</span> WERKAtlas Dashboard // Ecosystem Control Deck
       </h2>
-      <p class="text-graphite-400 max-w-3xl text-sm leading-relaxed">
-        The Agentic Engineering Compendium is an index of repositories, libraries, SDKs, and developer tools powering the current wave of agentic software architecture.
+      <p class="text-graphite-400 max-w-4xl text-xs leading-relaxed font-mono">
+        Indexierte Repositories, SDKs und Entwicklungs-Tools des WERKAgent/WERKCommander-Ökosystems. 
+        Datengestützte Bewertung und Klassifizierung aller Komponenten nach Reife, Maintenance und Interoperabilität.
       </p>
     </div>
 
     <!-- Quick Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-grid-lg">
-      <div class="border border-steel-border bg-graphite-900 p-grid-lg">
-        <div class="font-mono text-xs text-graphite-600 uppercase">Total Cataloged Projects</div>
-        <div class="text-3xl font-mono font-bold text-graphite-50 mt-grid-sm">{totalCount}</div>
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg shadow-flat-sm">
+        <div class="font-mono text-[10px] text-graphite-600 uppercase">Erfasste Repositories</div>
+        <div class="text-3xl font-mono font-bold text-graphite-50 mt-grid-xs">{totalCount}</div>
       </div>
-      <div class="border border-steel-border bg-graphite-900 p-grid-lg">
-        <div class="font-mono text-xs text-graphite-600 uppercase">Average Engineering Score</div>
-        <div class="text-3xl font-mono font-bold text-caution-yellow mt-grid-sm">{averageScore} / 100</div>
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg shadow-flat-sm">
+        <div class="font-mono text-[10px] text-graphite-600 uppercase">Durchschnittlicher Score</div>
+        <div class="text-3xl font-mono font-bold text-caution-yellow mt-grid-xs">{averageScore} <span class="text-xs text-graphite-600">/ 100</span></div>
       </div>
-      <div class="border border-steel-border bg-graphite-900 p-grid-lg">
-        <div class="font-mono text-xs text-graphite-600 uppercase">Official Vendor Projects</div>
-        <div class="text-3xl font-mono font-bold text-graphite-50 mt-grid-sm">{officialCount}</div>
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg shadow-flat-sm">
+        <div class="font-mono text-[10px] text-graphite-600 uppercase">Offizielle Hersteller-Projekte</div>
+        <div class="text-3xl font-mono font-bold text-graphite-50 mt-grid-xs">{officialCount}</div>
+      </div>
+    </div>
+
+    <!-- Ecosystem Status & Rankings -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-grid-xl">
+      <!-- Tier Distribution -->
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-md">
+        <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm">
+          Scoring Tiers
+        </h3>
+        <div class="space-y-grid-sm font-mono text-xs">
+          <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
+            <span class="text-caution-orange">★ Essential (≥85)</span>
+            <span class="text-graphite-100 font-bold">{essentialCount}</span>
+          </div>
+          <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
+            <span class="text-caution-yellow">✦ Strong (75-84)</span>
+            <span class="text-graphite-100 font-bold">{strongCount}</span>
+          </div>
+          <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
+            <span class="text-graphite-300">▪ Emerging (65-74)</span>
+            <span class="text-graphite-100 font-bold">{emergingCount}</span>
+          </div>
+          <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
+            <span class="text-graphite-600">▪ Watchlist (50-64)</span>
+            <span class="text-graphite-100 font-bold">{watchlistCount}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Curated Components -->
+      <div class="lg:col-span-2 border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-md">
+        <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm">
+          Top-Bewertete Ecosystem Komponenten
+        </h3>
+        <div class="space-y-grid-sm">
+          {topEntries.map(entry => (
+            <div class="flex items-center justify-between font-mono text-xs border border-steel-border/50 bg-graphite-950 p-grid-sm hover:border-steel-glare transition-colors">
+              <div class="truncate">
+                <a href={`/WERKAtlas/project/${entry.repository.replace('/', '-')}/`} class="text-graphite-100 hover:text-caution-yellow font-bold">
+                  {entry.repository}
+                </a>
+                <span class="text-graphite-600 text-[10px] ml-2 select-none uppercase">// {entry.project_type}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class={`text-[9px] px-1 py-0.5 rounded-sm uppercase ${
+                  entry.score_label === 'essential' ? 'bg-caution-orange/20 text-caution-orange border border-caution-orange/30' : 'bg-caution-yellow/20 text-caution-yellow border border-caution-yellow/30'
+                }`}>
+                  {entry.score_label}
+                </span>
+                <span class="text-caution-yellow font-bold">{entry.score}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </div>
