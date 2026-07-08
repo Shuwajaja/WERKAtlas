@@ -113,7 +113,8 @@ flowchart LR
 |---|---:|
 | Agent workspaces and chat interfaces | 3 |
 | No-code and low-code agent builders | 5 |
-| Templates, examples, and starter kits | 134 |
+| Templates, examples, and starter kits | 44 |
+| Vertical agents | 1 |
 
 <details>
 <summary><strong>nocobase/nocobase - 23.3k stars - score 76/100 - Strong - TypeScript</strong></summary>
@@ -5374,7 +5375,7 @@ flowchart LR
 <details>
 <summary><strong>langflow-ai/langflow - 151k stars - score 76/100 - Strong - Python</strong></summary>
 
-> Langflow is a powerful tool for building and deploying AI-powered agents and workflows.
+> 首家工业级全流程 AI 影视生产平台。Industry-first professional AI Agent platform for controllable film & video production. From shorts t
 
 [Open repository](https://github.com/langflow-ai/langflow)
 
@@ -5389,7 +5390,7 @@ flowchart LR
 <details>
 <summary><strong>microsoft/autogen - 59.6k stars - score 75/100 - Strong - Python</strong></summary>
 
-> A programming framework for agentic AI
+> AI-agent Skill for generating polished HTML slide decks: editorial magazine and Swiss layouts, image prompts, social cov
 
 [Open repository](https://github.com/microsoft/autogen)
 
@@ -6138,7 +6139,7 @@ flowchart LR
 <details>
 <summary><strong>gitroomhq/postiz-app - 32.8k stars - score 74/100 - Emerging - TypeScript</strong></summary>
 
-> 📨 The ultimate agentic social media scheduling tool 🤖
+> ToolJet is the open-source foundation of ToolJet AI - the enterprise app generation platform for building internal tools
 
 [Open repository](https://github.com/gitroomhq/postiz-app)
 
@@ -6153,7 +6154,7 @@ flowchart LR
 <details>
 <summary><strong>nearai/ironclaw - 12.5k stars - score 74/100 - Emerging - Rust</strong></summary>
 
-> IronClaw is an Agent OS focused on privacy, security and extensibility
+> Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy and maint
 
 [Open repository](https://github.com/nearai/ironclaw)
 
@@ -6168,7 +6169,7 @@ flowchart LR
 <details>
 <summary><strong>browser-use/web-ui - 16.2k stars - score 73/100 - Emerging - Python</strong></summary>
 
-> 🖥️ Run AI Agent in your browser.
+> ChatDev 2.0: Dev All through LLM-powered Multi-Agent Collaboration
 
 [Open repository](https://github.com/browser-use/web-ui)
 
@@ -6441,7 +6442,7 @@ flowchart LR
 <details>
 <summary><strong>NVIDIA/SkillSpector - 12.3k stars - score 73/100 - Emerging - Python</strong></summary>
 
-> Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, and security risks.
+> AI agents, automations and apps that run your operations. Model agnostic.
 
 [Open repository](https://github.com/NVIDIA/SkillSpector)
 
@@ -6454,7 +6455,7 @@ flowchart LR
 <details>
 <summary><strong>microsoft/TinyTroupe - 7.5k stars - score 72.9/100 - Emerging - Jupyter Notebook</strong></summary>
 
-> LLM-powered multiagent persona simulation for imagination enhancement and business insights.
+> Symphony turns project work into isolated, autonomous implementation runs, allowing teams to manage work instead of supe
 
 [Open repository](https://github.com/microsoft/TinyTroupe)
 
@@ -6935,7 +6936,7 @@ flowchart LR
 <details>
 <summary><strong>TeamWiseFlow/xiaobei - 8.3k stars - score 70/100 - Emerging - Python</strong></summary>
 
-> 为 OPC/中小微企业老板们量身打造的"AI 搞钱搭子"
+> Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern and Agent-Native Cloud Technologies: OpenAI Agent
 
 [Open repository](https://github.com/TeamWiseFlow/xiaobei)
 
@@ -6950,7 +6951,7 @@ flowchart LR
 <details>
 <summary><strong>millionco/react-doctor - 13.4k stars - score 70/100 - Emerging - TypeScript</strong></summary>
 
-> Your agent writes bad React. This catches it
+> An Open-Source Asynchronous Coding Agent
 
 [Open repository](https://github.com/millionco/react-doctor)
 
@@ -6965,7 +6966,7 @@ flowchart LR
 <details>
 <summary><strong>deepseek-ai/DeepSeek-OCR - 23.5k stars - score 70/100 - Emerging - Python</strong></summary>
 
-> Contexts Optical Compression
+> Build, Manage and Deploy AI/ML Systems
 
 [Open repository](https://github.com/deepseek-ai/DeepSeek-OCR)
 
@@ -7414,7 +7415,7 @@ flowchart LR
 <details>
 <summary><strong>coleam00/ottomator-agents - 5.7k stars - score 68.0/100 - Emerging - Python</strong></summary>
 
-> All the open source AI Agents hosted on the oTTomator Live Agent Studio platform!
+> Give your agents the power of the Hugging Face ecosystem
 
 [Open repository](https://github.com/coleam00/ottomator-agents)
 
@@ -7427,7 +7428,7 @@ flowchart LR
 <details>
 <summary><strong>openai/openai-realtime-agents - 6.9k stars - score 68.0/100 - Emerging - TypeScript</strong></summary>
 
-> This is a simple demonstration of more advanced, agentic patterns built on top of the Realtime API.
+> Open-source credential gateway with a built-in vault. give your AI agents access to services without exposing keys.
 
 [Open repository](https://github.com/openai/openai-realtime-agents)
 
@@ -7440,7 +7441,7 @@ flowchart LR
 <details>
 <summary><strong>openai/parameter-golf - 5.1k stars - score 68/100 - Emerging - Python</strong></summary>
 
-> Train the smallest LM you can that fits in 16MB. Best model wins!
+> 🤖 AgentVerse 🪐 is designed to facilitate the deployment of multiple LLM-based agents in various applications, which prim
 
 [Open repository](https://github.com/openai/parameter-golf)
 
@@ -7453,7 +7454,7 @@ flowchart LR
 <details>
 <summary><strong>earthtojake/text-to-cad - 7.8k stars - score 68.0/100 - Emerging - JavaScript</strong></summary>
 
-> A collection of agent skills for CAD, robotics and hardware design
+> The official Go SDK for Model Context Protocol servers and clients. Maintained in collaboration with Google.
 
 [Open repository](https://github.com/earthtojake/text-to-cad)
 
@@ -7468,7 +7469,7 @@ flowchart LR
 <details>
 <summary><strong>langchain-ai/chat-langchain - 6.4k stars - score 68.0/100 - Emerging - TypeScript</strong></summary>
 
-> AI agent ecosystem project for building, running, or evaluating autonomous AI systems.
+> Build databases, automations, apps & agents with AI — no code.  Open source platform available on cloud and self-hosted.
 
 [Open repository](https://github.com/langchain-ai/chat-langchain)
 
@@ -7481,7 +7482,7 @@ flowchart LR
 <details>
 <summary><strong>2FastLabs/agent-squad - 7.7k stars - score 67.9/100 - Emerging - Swift</strong></summary>
 
-> Flexible and powerful framework for managing multiple AI agents and handling complex conversations
+> AI Agent 驱动的开源视频生成工作台 — 小说→角色/场景/道具设计→剧本→分镜图→视频，跨镜头角色与场景一致 | Open-source AI video workspace powered by AI Agents, Nano B
 
 [Open repository](https://github.com/2FastLabs/agent-squad)
 
@@ -7629,7 +7630,7 @@ flowchart LR
 <details>
 <summary><strong>nikmcfly/MiroFish-Offline - 2.4k stars - score 66.9/100 - Emerging - Python</strong></summary>
 
-> Offline multi-agent simulation & prediction engine. English fork of MiroFish with Neo4j + Ollama local stack.
+> Native web workspace for Hermes Agent — chat, terminal, memory, skills, inspector.
 
 [Open repository](https://github.com/nikmcfly/MiroFish-Offline)
 
@@ -7719,7 +7720,7 @@ flowchart LR
 <details>
 <summary><strong>GammaLabTechnologies/harmonist - 2.2k stars - score 66.4/100 - Emerging - Python</strong></summary>
 
-> Portable AI agent orchestration with mechanical protocol enforcement. 186 agents, zero runtime dependencies.
+> Ship your code, on autopilot. An open source agent that lives on your machines 24/7 and keeps your apps running. 🦀
 
 [Open repository](https://github.com/GammaLabTechnologies/harmonist)
 
@@ -7882,7 +7883,7 @@ flowchart LR
 <details>
 <summary><strong>norvig/paip-lisp - 7.5k stars - score 65.9/100 - Emerging - Common Lisp</strong></summary>
 
-> Lisp code for the textbook "Paradigms of Artificial Intelligence Programming"
+> OpenWiki is a CLI that writes and maintains agent documentation for your codebase.
 
 [Open repository](https://github.com/norvig/paip-lisp)
 
@@ -7895,7 +7896,7 @@ flowchart LR
 <details>
 <summary><strong>MiroMindAI/MiroFlow - 3.1k stars - score 65.8/100 - Emerging - Python</strong></summary>
 
-> 🏆 Top-1 on 5+ benchmarks | Web UI | Supports MiroThinker, Claude, Kimi, OpenAI
+> A minimal Python framework for building custom AI inference servers with full control over logic, batching, and scaling.
 
 [Open repository](https://github.com/MiroMindAI/MiroFlow)
 
@@ -7910,7 +7911,7 @@ flowchart LR
 <details>
 <summary><strong>open-gitagent/opengap - 2.9k stars - score 65.8/100 - Emerging - TypeScript</strong></summary>
 
-> A framework-agnostic, git-native standard for defining AI agents
+> The official Swift SDK for Model Context Protocol servers and clients.
 
 [Open repository](https://github.com/open-gitagent/opengap)
 
@@ -7925,7 +7926,7 @@ flowchart LR
 <details>
 <summary><strong>mattpocock/sandcastle - 6.7k stars - score 65.8/100 - Emerging - TypeScript</strong></summary>
 
-> Orchestrate sandboxed coding agents in TypeScript with sandcastle.run()
+> 反中共政治宣传库。Anti Chinese government propaganda. 住在中国真名用户的网友请别给星星，不然你要被警察请喝茶。常见问答集，新闻集和饭店和音乐建议。卐习万岁卐。冠状病毒审查郝海东新疆改造中心六四事件法轮功 
 
 [Open repository](https://github.com/mattpocock/sandcastle)
 
@@ -8054,7 +8055,7 @@ flowchart LR
 <details>
 <summary><strong>TencentCloudADP/youtu-agent - 4.6k stars - score 65.3/100 - Emerging - Python</strong></summary>
 
-> A simple yet powerful agent framework that delivers with open-source models
+> Mano-P: Open-source GUI-VLA agent for edge devices. #1 on OSWorld (specialized, 58.2%). Runs locally on Apple M4 Mac min
 
 [Open repository](https://github.com/TencentCloudADP/youtu-agent)
 
@@ -8084,7 +8085,7 @@ flowchart LR
 <details>
 <summary><strong>vercel-labs/deepsec - 5.1k stars - score 65.3/100 - Emerging - TypeScript</strong></summary>
 
-> Deepsec is a security harness for finding vulnerabilities in your codebase powered by coding agents
+> The open source control plane for agentic engineering.
 
 [Open repository](https://github.com/vercel-labs/deepsec)
 
@@ -8097,7 +8098,7 @@ flowchart LR
 <details>
 <summary><strong>codeaholicguy/ai-devkit - 1.5k stars - score 65.2/100 - Emerging - TypeScript</strong></summary>
 
-> The control plane for AI coding agents.
+> Data framework for your LLM applications. Focus on server side solution
 
 [Open repository](https://github.com/codeaholicguy/ai-devkit)
 
@@ -8127,7 +8128,7 @@ flowchart LR
 <details>
 <summary><strong>agentjido/jido - 1.8k stars - score 65.0/100 - Emerging - Elixir</strong></summary>
 
-> 🤖 Autonomous agent framework for Elixir. Built for distributed, autonomous behavior and dynamic workflows.
+> 🌸 Best framework to build web agents, and deploy serverless web automation functions on reliable browser infra.
 
 [Open repository](https://github.com/agentjido/jido)
 
@@ -8187,7 +8188,7 @@ flowchart LR
 <details>
 <summary><strong>langroid/langroid - 4.1k stars - score 64.2/100 - Watchlist - Python</strong></summary>
 
-> Harness LLMs with Multi-Agent Programming
+> A harness optimized to smaller LLMs
 
 [Open repository](https://github.com/langroid/langroid)
 
@@ -8406,7 +8407,7 @@ flowchart LR
 <details>
 <summary><strong>sweepai/sweep - 7.7k stars - score 57.8/100 - Watchlist - Jupyter Notebook</strong></summary>
 
-> Sweep: AI coding assistant for JetBrains
+> Amazon Elastic Container Service Agent
 
 [Open repository](https://github.com/sweepai/sweep)
 
@@ -8656,7 +8657,7 @@ flowchart LR
 |---|---:|
 | MCP clients and hosts | 4 |
 | MCP gateways, routers, and proxies | 5 |
-| MCP servers | 70 |
+| MCP servers | 77 |
 
 <details>
 <summary><strong>n8n-io/n8n - 196k stars - score 92/100 - Essential - TypeScript</strong></summary>
@@ -8931,7 +8932,7 @@ flowchart LR
 <details>
 <summary><strong>nukeop/nuclear - 18.0k stars - score 78/100 - Strong - TypeScript</strong></summary>
 
-> Streaming music player that finds free music for you
+> Convert documentation websites, GitHub repositories, and PDFs into Claude AI skills with automatic conflict detection
 
 [Open repository](https://github.com/nukeop/nuclear)
 
@@ -8946,7 +8947,7 @@ flowchart LR
 <details>
 <summary><strong>triggerdotdev/trigger.dev - 15.6k stars - score 78/100 - Strong - TypeScript</strong></summary>
 
-> Trigger.dev – build and deploy fully‑managed AI agents and workflows
+> ARIS ⚔️ (Auto-Research-In-Sleep) — Lightweight Markdown-only skills for autonomous ML research: cross-model review loops
 
 [Open repository](https://github.com/triggerdotdev/trigger.dev)
 
@@ -8961,7 +8962,7 @@ flowchart LR
 <details>
 <summary><strong>mcp-use/mcp-use - 10.3k stars - score 78/100 - Strong - TypeScript</strong></summary>
 
-> The fullstack MCP framework to develop MCP Apps for ChatGPT / Claude & MCP Servers for AI Agents.
+> HexStrike AI MCP Agents is an advanced MCP server that lets AI agents (Claude, GPT, Copilot, etc.) autonomously run 150+
 
 [Open repository](https://github.com/mcp-use/mcp-use)
 
@@ -9111,7 +9112,7 @@ flowchart LR
 <details>
 <summary><strong>xpzouying/xiaohongshu-mcp - 14.6k stars - score 75/100 - Strong - Go</strong></summary>
 
-> MCP for xiaohongshu.com
+> Expose your FastAPI endpoints as Model Context Protocol (MCP) tools, with Auth!
 
 [Open repository](https://github.com/xpzouying/xiaohongshu-mcp)
 
@@ -9156,7 +9157,7 @@ flowchart LR
 <details>
 <summary><strong>0xJacky/nginx-ui - 11.3k stars - score 74/100 - Emerging - Go</strong></summary>
 
-> Yet another WebUI for Nginx
+> MCP for xiaohongshu.com
 
 [Open repository](https://github.com/0xJacky/nginx-ui)
 
@@ -9351,7 +9352,7 @@ flowchart LR
 <details>
 <summary><strong>Upsonic/Upsonic - 7.9k stars - score 69.9/100 - Emerging - Python</strong></summary>
 
-> Build autonomous AI agents in Python.
+> Yet another WebUI for Nginx
 
 [Open repository](https://github.com/Upsonic/Upsonic)
 
@@ -9366,7 +9367,7 @@ flowchart LR
 <details>
 <summary><strong>FunnyWolf/Viper - 5.1k stars - score 69.5/100 - Emerging - ?</strong></summary>
 
-> Adversary simulation and Red teaming platform with AI
+> ⚡️next-generation personal AI assistant powered by LLM, RAG and agent loops, supporting computer-use, browser-use and co
 
 [Open repository](https://github.com/FunnyWolf/Viper)
 
@@ -9843,6 +9844,19 @@ flowchart LR
 
 </details>
 
+<details>
+<summary><strong>[modelcontextprotocol/mcpb](https://github.com/modelcontextprotocol/mcpb)  Star:2.0k  Score:56.6  Status:Watchlist  (TypeScript)</strong></summary>
+
+> Desktop Extensions: One-click local MCP server installation in desktop apps
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| MCP servers | TypeScript | Community | 56.6/100 | 2.0k |
+
+[GitHub](https://github.com/modelcontextprotocol/mcpb)
+
+</details>
+
 ## Models and infrastructure
 
 | Subcategory | Projects |
@@ -10255,13 +10269,27 @@ flowchart LR
 
 </details>
 
+<details>
+<summary><strong>[microsoft/onnxruntime-genai](https://github.com/microsoft/onnxruntime-genai)  Star:1.1k  Score:52.7  Status:Watchlist  (C++)</strong></summary>
+
+> Generative AI extensions for onnxruntime
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Inference servers | C++ | Community | 52.7/100 | 1.1k |
+
+[GitHub](https://github.com/microsoft/onnxruntime-genai)
+
+</details>
+
 ## Reliability and operations
 
 | Subcategory | Projects |
 |---|---:|
 | Agent observability | 9 |
-| Evaluation frameworks | 10 |
-| Guardrails and policy enforcement | 7 |
+| Benchmarks and datasets | 2 |
+| Evaluation frameworks | 30 |
+| Guardrails and policy enforcement | 18 |
 
 <details>
 <summary><strong>langfuse/langfuse - 30.6k stars - score 84/100 - Strong - TypeScript</strong></summary>
@@ -10416,7 +10444,7 @@ flowchart LR
 <details>
 <summary><strong>Giskard-AI/giskard-oss - 5.5k stars - score 67.5/100 - Emerging - Python</strong></summary>
 
-> 🐢 Open-Source Evaluation & Testing library for LLM Agents
+> Product Management skills framework built on battle-tested methods for Claude Code, Cowork, Codex, and AI agents.
 
 [Open repository](https://github.com/Giskard-AI/giskard-oss)
 
@@ -10504,7 +10532,7 @@ flowchart LR
 <details>
 <summary><strong>BoundaryML/baml - 8.5k stars - score 63.8/100 - Watchlist - Rust</strong></summary>
 
-> The programming language for agents
+> Next-generation AI Agent Optimization Platform: Cozeloop addresses challenges in AI agent development by providing full-
 
 [Open repository](https://github.com/BoundaryML/baml)
 
@@ -10660,7 +10688,7 @@ flowchart LR
 <details>
 <summary><strong>ComposioHQ/awesome-claude-skills - 67.1k stars - score 78/100 - Strong - Python</strong></summary>
 
-> A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows
+> AI agent ecosystem project for building, running, or evaluating autonomous AI systems.
 
 [Open repository](https://github.com/ComposioHQ/awesome-claude-skills)
 
@@ -10705,7 +10733,7 @@ flowchart LR
 <details>
 <summary><strong>addyosmani/agent-skills - 71.8k stars - score 76/100 - Strong - JavaScript</strong></summary>
 
-> Production-grade engineering skills for AI coding agents.
+> Free, local, open-source 24/7 Cowork app for OpenClaw, Hermes Agent, Claude Code, Codex, OpenCode, Gemini CLI and 20+ mo
 
 [Open repository](https://github.com/addyosmani/agent-skills)
 
@@ -10913,7 +10941,7 @@ flowchart LR
 <details>
 <summary><strong>agentskills/agentskills - 22.6k stars - score 68/100 - Emerging - Python</strong></summary>
 
-> Specification and documentation for Agent Skills
+> Connect any AI model to 1200+ integrations (MCP, CLI, API)
 
 [Open repository](https://github.com/agentskills/agentskills)
 
@@ -11072,6 +11100,155 @@ flowchart LR
 | Tool-use and function-calling libraries | Python | Community | 60.9/100 | 1.3k |
 
 **Tags:** `agent-skills`
+
+</details>
+
+<details>
+<summary><strong>[microsoft/OpenAPI.NET](https://github.com/microsoft/OpenAPI.NET)  Star:1.6k  Score:56.0  Status:Watchlist  (C#)</strong></summary>
+
+> The OpenAPI.NET SDK contains a useful object model for OpenAPI documents in .NET along with common serializers to extrac
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Agent protocols and interoperability | C# | Community | 56.0/100 | 1.6k |
+
+Tags: `http` `openapi`
+
+[GitHub](https://github.com/microsoft/OpenAPI.NET)
+
+</details>
+
+<details>
+<summary><strong>[anthropics/claude-agent-sdk-demos](https://github.com/anthropics/claude-agent-sdk-demos)  Star:2.6k  Score:55.6  Status:Watchlist  (TypeScript)</strong></summary>
+
+> Claude Code SDK Demos
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Tool-use and function-calling libraries | TypeScript | Community | 55.6/100 | 2.6k |
+
+[GitHub](https://github.com/anthropics/claude-agent-sdk-demos)
+
+</details>
+
+<details>
+<summary><strong>[google-gemini/deprecated-generative-ai-python](https://github.com/google-gemini/deprecated-generative-ai-python)  Star:2.3k  Score:55.6  Status:Watchlist  (Python)</strong></summary>
+
+> This SDK is now deprecated, use the new unified Google GenAI SDK. 
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Tool-use and function-calling libraries | Python | Community | 55.6/100 | 2.3k |
+
+[GitHub](https://github.com/google-gemini/deprecated-generative-ai-python)
+
+</details>
+
+<details>
+<summary><strong>[google-gemini/deprecated-generative-ai-js](https://github.com/google-gemini/deprecated-generative-ai-js)  Star:1.2k  Score:54.8  Status:Watchlist  (TypeScript)</strong></summary>
+
+> This SDK is now deprecated, use the new unified Google GenAI SDK.
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Tool-use and function-calling libraries | TypeScript | Community | 54.8/100 | 1.2k |
+
+[GitHub](https://github.com/google-gemini/deprecated-generative-ai-js)
+
+</details>
+
+<details>
+<summary><strong>[openai/openai-dotnet](https://github.com/openai/openai-dotnet)  Star:2.6k  Score:54.6  Status:Watchlist  (C#)</strong></summary>
+
+> The official .NET library for the OpenAI API
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Tool-use and function-calling libraries | C# | Community | 54.6/100 | 2.6k |
+
+Tags: `csharp` `dotnet` `openai`
+
+[GitHub](https://github.com/openai/openai-dotnet)
+
+</details>
+
+<details>
+<summary><strong>[google-gemini/deprecated-generative-ai-swift](https://github.com/google-gemini/deprecated-generative-ai-swift)  Star:1.1k  Score:53.9  Status:Watchlist</strong></summary>
+
+> This SDK is now deprecated, use the unified Firebase SDK.
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Tool-use and function-calling libraries | ? | Community | 53.9/100 | 1.1k |
+
+[GitHub](https://github.com/google-gemini/deprecated-generative-ai-swift)
+
+</details>
+
+<details>
+<summary><strong>[openai/openai-go](https://github.com/openai/openai-go)  Star:3.3k  Score:53.8  Status:Watchlist  (Go)</strong></summary>
+
+> The official Go library for the OpenAI API
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Tool-use and function-calling libraries | Go | Community | 53.8/100 | 3.3k |
+
+[GitHub](https://github.com/openai/openai-go)
+
+</details>
+
+<details>
+<summary><strong>[Genesis-Embodied-AI/RoboGen](https://github.com/Genesis-Embodied-AI/RoboGen)  Star:1.2k  Score:53.8  Status:Watchlist  (Python)</strong></summary>
+
+> A generative and self-guided robotic agent that endlessly propose and master new skills.
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Agent skills | Python | Community | 53.8/100 | 1.2k |
+
+[GitHub](https://github.com/Genesis-Embodied-AI/RoboGen)
+
+</details>
+
+<details>
+<summary><strong>[openai/openai-openapi](https://github.com/openai/openai-openapi)  Star:2.4k  Score:53.7  Status:Watchlist</strong></summary>
+
+> OpenAPI specification for the OpenAI API
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Agent protocols and interoperability | ? | Community | 53.7/100 | 2.4k |
+
+Tags: `openai` `openai-api`
+
+[GitHub](https://github.com/openai/openai-openapi)
+
+</details>
+
+<details>
+<summary><strong>[openai/openai-apps-sdk-examples](https://github.com/openai/openai-apps-sdk-examples)  Star:2.3k  Score:53.6  Status:Watchlist  (TypeScript)</strong></summary>
+
+> Example apps for the Apps SDK
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Tool-use and function-calling libraries | TypeScript | Community | 53.6/100 | 2.3k |
+
+[GitHub](https://github.com/openai/openai-apps-sdk-examples)
+
+</details>
+
+<details>
+<summary><strong>[openai/openai-java](https://github.com/openai/openai-java)  Star:1.5k  Score:52.9  Status:Watchlist  (Kotlin)</strong></summary>
+
+> The official Java library for the OpenAI API
+
+| Kategorie | Sprache | Status | Score | Stars |
+|---|---|---|---|---|
+| Tool-use and function-calling libraries | Kotlin | Community | 52.9/100 | 1.5k |
+
+[GitHub](https://github.com/openai/openai-java)
 
 </details>
 

@@ -737,19 +737,28 @@ def render_top_picks(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
 def render_trending(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
     """Trending / momentum analysis."""
     entries = catalog.get("entries", [])
-    sorted_stars = sorted(entries, key=lambda x: x.get("stars", 0), reverse=True)
+    def get_momentum(e):
+        stars = e.get("stars", 0)
+        trend = e.get("trend_data") or {}
+        stars_30d = trend.get("stars_30d")
+        if stars_30d is None:
+            return 0
+        growth = max(0, stars - stars_30d)
+        growth_rate = growth / max(1, stars_30d)
+        return growth * (1 + growth_rate)
+    sorted_trending = sorted(entries, key=get_momentum, reverse=True)
 
     lines = []
     lines.append("# Trending")
     lines.append("")
-    lines.append("> Most starred projects across the ecosystem.")
+    lines.append("> Fast-growing projects sorted by 30-day growth and growth velocity.")
     lines.append("")
     lines.append(f"**Snapshot:** {snapshot_date}")
     lines.append("")
 
     lines.append("| # | Project | Stars | Score |")
     lines.append("|---|---|---|---|")
-    for i, p in enumerate(sorted_stars[:50], 1):
+    for i, p in enumerate(sorted_trending[:50], 1):
         repo = p.get("repository", "?")
         stars = format_stars(p.get("stars", 0))
         score = p.get("score", 0)

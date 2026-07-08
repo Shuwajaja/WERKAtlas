@@ -1,0 +1,24 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: comparison.spec.ts >> Feature 2: Project Comparison View >> Tier 2: Comparing less than 2 projects shows validation warning on compare page
+- Location: comparison.spec.ts:58:7
+
+# Error details
+
+```
+Error: browserType.launch: Executable doesn't exist at C:\Users\clangner3\AppData\Local\ms-playwright\firefox-1532\firefox\firefox.exe
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+```

@@ -20,39 +20,39 @@ _Educational resources for understanding and building agent systems from first p
 
 _Software frameworks and execution runtimes for building and running AI agents_
 
-**275 projects** across 7 subcategories:
+**135 projects** across 7 subcategories:
 
 - **Durable and long-running agents** (0)
 - **State machines, events, and checkpointing** (0)
 - **Planning, reasoning, and task decomposition** (0)
-- **Agent frameworks** (228)
+- **Agent frameworks** (87)
 - **Agent runtimes and execution engines** (0)
 - **Graph and workflow orchestration** (18)
-- **Multi-agent systems and swarms** (29)
+- **Multi-agent systems and swarms** (30)
 
 ### Coding and software engineering agents
 
 _Tools and systems for AI-assisted software development_
 
-**48 projects** across 7 subcategories:
+**88 projects** across 7 subcategories:
 
-- **Coding agents** (43)
+- **Coding agents** (73)
 - **Terminal and CLI agents** (0)
-- **IDE integrations** (5)
-- **Code review and quality agents** (0)
+- **IDE integrations** (10)
+- **Code review and quality agents** (3)
 - **Testing and debugging agents** (0)
-- **Repository understanding and code intelligence** (0)
+- **Repository understanding and code intelligence** (2)
 - **Software-development agent benchmarks** (0)
 
 ### MCP ecosystem
 
 _Model Context Protocol infrastructure, tools, and services_
 
-**79 projects** across 9 subcategories:
+**87 projects** across 9 subcategories:
 
-- **MCP servers** (70)
+- **MCP servers** (77)
 - **MCP clients and hosts** (4)
-- **MCP SDKs** (0)
+- **MCP SDKs** (1)
 - **MCP registries and discovery** (0)
 - **MCP gateways, routers, and proxies** (5)
 - **MCP inspectors, debuggers, and testing tools** (0)
@@ -64,58 +64,58 @@ _Model Context Protocol infrastructure, tools, and services_
 
 _Agent capabilities, plugin systems, and cross-agent standards_
 
-**28 projects** across 8 subcategories:
+**71 projects** across 8 subcategories:
 
-- **Agent skills** (0)
+- **Agent skills** (15)
 - **Plugins and extensions** (0)
-- **Prompt and instruction packages** (0)
+- **Prompt and instruction packages** (2)
 - **Agent package managers** (0)
 - **Cross-agent configuration portability** (0)
-- **Agent protocols and interoperability** (0)
-- **Tool-use and function-calling libraries** (28)
-- **Connectors and integration platforms** (0)
+- **Agent protocols and interoperability** (9)
+- **Tool-use and function-calling libraries** (41)
+- **Connectors and integration platforms** (4)
 
 ### Context, knowledge, and memory
 
 _Systems for managing agent context windows, knowledge, and persistent memory_
 
-**70 projects** across 7 subcategories:
+**94 projects** across 7 subcategories:
 
 - **Agent memory** (8)
-- **RAG and retrieval** (55)
+- **RAG and retrieval** (57)
 - **Knowledge graphs** (7)
 - **Context engineering** (0)
-- **Context compression and summarization** (0)
+- **Context compression and summarization** (4)
 - **Document and file understanding** (0)
-- **Agent databases and persistence** (0)
+- **Agent databases and persistence** (18)
 
 ### Execution and interaction
 
 _Agent interaction with environments, browsers, and physical systems_
 
-**31 projects** across 9 subcategories:
+**54 projects** across 9 subcategories:
 
 - **Browser agents** (20)
 - **Computer-use agents** (3)
 - **GUI and desktop automation** (0)
 - **Web automation** (0)
-- **Code execution** (0)
-- **Sandboxes and isolation** (8)
+- **Code execution** (1)
+- **Sandboxes and isolation** (9)
 - **Containers and micro-VMs** (0)
-- **Robotics and embodied agents** (0)
-- **Voice, realtime, and multimodal agents** (0)
+- **Robotics and embodied agents** (4)
+- **Voice, realtime, and multimodal agents** (17)
 
 ### Reliability and operations
 
 _Observability, evaluation, security, and operational tooling for agents_
 
-**26 projects** across 11 subcategories:
+**59 projects** across 11 subcategories:
 
 - **Agent observability** (9)
 - **Tracing and debugging** (0)
-- **Evaluation frameworks** (10)
-- **Benchmarks and datasets** (0)
-- **Guardrails and policy enforcement** (7)
+- **Evaluation frameworks** (30)
+- **Benchmarks and datasets** (2)
+- **Guardrails and policy enforcement** (18)
 - **Security, identity, and authorization** (0)
 - **Secret management** (0)
 - **Human approval and human-in-the-loop systems** (0)
@@ -127,12 +127,12 @@ _Observability, evaluation, security, and operational tooling for agents_
 
 _Model serving, inference infrastructure, and agent hosting_
 
-**27 projects** across 9 subcategories:
+**38 projects** across 9 subcategories:
 
 - **Model gateways and routers** (26)
-- **Inference servers** (1)
-- **Local-first agent stacks** (0)
-- **Local model integrations** (0)
+- **Inference servers** (6)
+- **Local-first agent stacks** (1)
+- **Local model integrations** (5)
 - **Cloud agent platforms** (0)
 - **Agent schedulers and automation** (0)
 - **Queues, workers, and background execution** (0)
@@ -143,14 +143,14 @@ _Model serving, inference infrastructure, and agent hosting_
 
 _End-user agent applications, UIs, and specialized vertical agents_
 
-**142 projects** across 9 subcategories:
+**101 projects** across 9 subcategories:
 
 - **Research agents** (0)
-- **Data and analytics agents** (0)
-- **DevOps, cloud, and SRE agents** (0)
+- **Data and analytics agents** (1)
+- **DevOps, cloud, and SRE agents** (25)
 - **Knowledge-work agents** (0)
-- **Agent workspaces and chat interfaces** (3)
+- **Agent workspaces and chat interfaces** (25)
 - **Agent UIs and dashboards** (0)
 - **No-code and low-code agent builders** (5)
-- **Vertical agents** (0)
-- **Templates, examples, and starter kits** (134)
+- **Vertical agents** (1)
+- **Templates, examples, and starter kits** (44)

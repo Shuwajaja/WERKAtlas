@@ -175,14 +175,14 @@
       "properties": {
         "relevance": { "type": "number", "minimum": 0, "maximum": 20 },
         "maintenance": { "type": "number", "minimum": 0, "maximum": 15 },
-        "adoption": { "type": "number", "minimum": 0, "maximum": 10 },
+        "adoption": { "type": "number", "minimum": 0, "maximum": 15 },
         "momentum": { "type": "number", "minimum": 0, "maximum": 10 },
         "documentation": { "type": "number", "minimum": 0, "maximum": 10 },
         "production_readiness": { "type": "number", "minimum": 0, "maximum": 10 },
         "security": { "type": "number", "minimum": 0, "maximum": 10 },
         "interoperability": { "type": "number", "minimum": 0, "maximum": 5 },
-        "community": { "type": "number", "minimum": 0, "maximum": 5 },
-        "uniqueness": { "type": "number", "minimum": 0, "maximum": 5 }
+        "community": { "type": "number", "minimum": 0, "maximum": 3 },
+        "uniqueness": { "type": "number", "minimum": 0, "maximum": 2 }
       },
       "required": [
         "relevance", "maintenance", "adoption", "momentum",
@@ -204,7 +204,7 @@
       "properties": {
         "stars_30d": { "type": ["integer", "null"] },
         "stars_90d": { "type": ["integer", "null"] },
-        "method": { "type": "string", "enum": ["exact", "estimated", "proxy", null] }
+        "method": { "type": ["string", "null"], "enum": ["exact", "estimated", "proxy", "git", null] }
       },
       "required": ["stars_30d", "stars_90d", "method"]
     },

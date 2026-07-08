@@ -1,0 +1,224 @@
+diff --git a/scripts/score.py b/scripts/score.py
+index a2d9a6c..b3e8c9d 100644
+--- a/scripts/score.py
++++ b/scripts/score.py
+@@ -94,11 +94,11 @@ def score_maintenance(entry: dict) -> float:
+ 
+ 
+ def score_adoption(entry: dict) -> float:
+-    """Score adoption and ecosystem use (0-10)."""
++    """Score adoption and ecosystem use (0-15)."""
+     stars = entry.get("stars", 0)
+     forks = entry.get("forks", 0)
+     
+-    star_score = log_stars(stars)
+-    fork_score = min(3, math.log(forks + 1) / math.log(10001) * 3)
++    star_score = min(11, log_stars(stars) * 1.1)
++    fork_score = min(4, math.log(forks + 1) / math.log(10001) * 4)
+     
+-    return min(10, star_score + fork_score)
++    return min(15, star_score + fork_score)
+ 
+ 
+ def score_momentum(entry: dict) -> float:
+@@ -198,23 +198,17 @@ def score_production_readiness(entry: dict) -> float:
+ 
+ 
+ def score_security(entry: dict) -> float:
+     """Score security and operational transparency (0-10)."""
+-    score = 3  # baseline
+-    
+-    if entry.get("license"):
+-        score += 2
+-    
+-    # High profile projects typically have better security practices
+-    stars = entry.get("stars", 0)
+-    if stars >= 5000:
+-        score += 2
+-    if stars >= 50000:
+-        score += 1
+-    
+-    # Security notes (from verification)
+-    security_notes = entry.get("security_notes", [])
+-    if security_notes:
+-        score -= 1  # flagged but aware
+-    
+-    return max(0, min(10, score))
++    transparency = entry.get("security_transparency")
++    if transparency is not None and transparency > 0:
++        score = float(transparency)
++    else:
++        score = 5.0  # neutral baseline
++        if entry.get("license"):
++            score += 2.0
++            
++    notes = entry.get("security_notes", [])
++    if notes:
++        score -= len(notes) * 2.0
++        
++    return max(0.0, min(10.0, score))
+ 
+ 
+ def score_interoperability(entry: dict) -> float:
+@@ -242,20 +236,14 @@ def score_interoperability(entry: dict) -> float:
+ 
+ 
+ def score_community(entry: dict) -> float:
+-    """Score community and governance (0-5)."""
++    """Score community and governance (0-3)."""
+     stars = entry.get("stars", 0)
+     forks = entry.get("forks", 0)
+     
+-    score = 1  # baseline
++    score = 1.0  # baseline
+     
+     if stars >= 1000:
+-        score += 1
++        score += 0.5
+     if stars >= 10000:
+-        score += 1
++        score += 0.5
+     if forks >= 200:
+-        score += 1
++        score += 0.5
+     if forks >= 1000:
+-        score += 1
+-    
+-    return min(5, score)
++        score += 0.5
++    
++    return min(3.0, score)
+ 
+ 
+ def score_uniqueness(entry: dict) -> float:
+-    """Score technical uniqueness or educational value (0-5)."""
+-    # Placeholder - will be refined in LOOP 3 verification
+-    stars = entry.get("stars", 0)
+-    
+-    # Very high star repos are often unique/foundational
+-    if stars >= 50000:
+-        return 5
+-    elif stars >= 10000:
+-        return 4
+-    elif stars >= 5000:
+-        return 3
+-    elif stars >= 1000:
+-        return 2
+-    else:
+-        return 1
++    """Score technical uniqueness or educational value (0-2)."""
++    score = 0.5  # baseline
++    
++    ptype = (entry.get("project_type") or "").lower()
++    unique_types = {
++        "protocol": 1.0,
++        "specification": 1.0,
++        "benchmark": 1.0,
++        "dataset": 1.0,
++        "tutorial": 1.0,
++        "reference implementation": 1.0,
++        "research project": 1.0,
++        "sandbox": 0.5,
++        "observability platform": 0.5,
++        "evaluation framework": 0.5
++    }
++    score += unique_types.get(ptype, 0.0)
++    
++    if entry.get("protocols") or entry.get("compatible_hosts"):
++        score += 0.5
++        
++    desc = (entry.get("description") or "").lower()
++    unique_keywords = ["novel", "experimental", "unique", "first", "alternative", "educational", "pioneering"]
++    if any(kw in desc for kw in unique_keywords):
++        score += 0.5
++        
++    return min(2.0, score)
+ 
+ 
+diff --git a/data/catalog.schema.json b/data/catalog.schema.json
+index 54bc089..de8fa7b 100644
+--- a/data/catalog.schema.json
++++ b/data/catalog.schema.json
+@@ -176,11 +176,11 @@
+         "relevance": { "type": "number", "minimum": 0, "maximum": 20 },
+         "maintenance": { "type": "number", "minimum": 0, "maximum": 15 },
+-        "adoption": { "type": "number", "minimum": 0, "maximum": 10 },
++        "adoption": { "type": "number", "minimum": 0, "maximum": 15 },
+         "momentum": { "type": "number", "minimum": 0, "maximum": 10 },
+         "documentation": { "type": "number", "minimum": 0, "maximum": 10 },
+         "production_readiness": { "type": "number", "minimum": 0, "maximum": 10 },
+         "security": { "type": "number", "minimum": 0, "maximum": 10 },
+         "interoperability": { "type": "number", "minimum": 0, "maximum": 5 },
+-        "community": { "type": "number", "minimum": 0, "maximum": 5 },
+-        "uniqueness": { "type": "number", "minimum": 0, "maximum": 5 }
++        "community": { "type": "number", "minimum": 0, "maximum": 3 },
++        "uniqueness": { "type": "number", "minimum": 0, "maximum": 2 }
+       },
+diff --git a/tests/test_scoring.py b/tests/test_scoring.py
+index a543029..d97cf1e 100644
+--- a/tests/test_scoring.py
++++ b/tests/test_scoring.py
+@@ -59,10 +59,10 @@ def test_entry_scores_in_range():
+     assert 0 <= score_relevance(entry) <= 20
+     assert 0 <= score_maintenance(entry) <= 15
+-    assert 0 <= score_adoption(entry) <= 10
++    assert 0 <= score_adoption(entry) <= 15
+     assert 0 <= score_momentum(entry) <= 10
+     assert 0 <= score_documentation(entry) <= 10
+     assert 0 <= score_production_readiness(entry) <= 10
+     assert 0 <= score_security(entry) <= 10
+     assert 0 <= score_interoperability(entry) <= 5
+-    assert 0 <= score_community(entry) <= 5
+-    assert 0 <= score_uniqueness(entry) <= 5
++    assert 0 <= score_community(entry) <= 3
++    assert 0 <= score_uniqueness(entry) <= 2
+diff --git a/scripts/classify.py b/scripts/classify.py
+index b54c089..de8fa7b 100644
+--- a/scripts/classify.py
++++ b/scripts/classify.py
+@@ -172,9 +172,3 @@ def infer_category(entry: dict, taxonomy: dict) -> tuple:
+-    # Default: try to infer from repo content
+-    # Frameworks are often larger, well-organized repos
+-    if entry.get("stars", 0) > 5000 and entry.get("languages", []):
+-        return ("B.6", [])
+-    
+-    # Best guess
+-    return ("J.81", [])
++    # Return None to require manual classification if no specific rules match
++    return (None, [])
+diff --git a/scripts/render.py b/scripts/render.py
+index d920c7b..cf8290a 100644
+--- a/scripts/render.py
++++ b/scripts/render.py
+@@ -441,12 +441,18 @@ def render_trending(catalog: dict, taxonomy: dict, snapshot_date: str) -> str:
+     """Trending / momentum analysis."""
+     entries = catalog.get("entries", [])
+-    sorted_stars = sorted(entries, key=lambda x: x.get("stars", 0), reverse=True)
++    def get_momentum(e):
++        stars = e.get("stars", 0)
++        trend = e.get("trend_data") or {}
++        stars_30d = trend.get("stars_30d")
++        if stars_30d is None:
++            return 0
++        growth = max(0, stars - stars_30d)
++        growth_rate = growth / max(1, stars_30d)
++        return growth * (1 + growth_rate)
++    sorted_trending = sorted(entries, key=get_momentum, reverse=True)
+ 
+     lines = []
+     lines.append("# Trending")
+     lines.append("")
+-    lines.append("> Most starred projects across the ecosystem.")
++    lines.append("> Fast-growing projects sorted by 30-day growth and growth velocity.")
+     lines.append("")
+     lines.append(f"**Snapshot:** {snapshot_date}")
+     lines.append("")
+ 
+     lines.append("| # | Project | Stars | Score |")
+     lines.append("|---|---|---|---|")
+-    for i, p in enumerate(sorted_stars[:50], 1):
++    for i, p in enumerate(sorted_trending[:50], 1):
+         repo = p.get("repository", "?")
+         stars = format_stars(p.get("stars", 0))
+         score = p.get("score", 0)
+         lines.append(f"| {i} | [{repo}](https://github.com/{repo}) | {stars} | {score} |")

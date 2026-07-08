@@ -10,7 +10,7 @@ def test_no_duplicate_repos():
     if not path.exists():
         return
     
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     
     entries = data.get("entries", data if isinstance(data, list) else [])
@@ -26,7 +26,7 @@ def test_no_duplicate_ids():
     if not path.exists():
         return
     
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     
     entries = data.get("entries", data if isinstance(data, list) else [])

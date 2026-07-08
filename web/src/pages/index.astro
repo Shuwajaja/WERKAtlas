@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { catalogEntries } from '../utils/dataLoader';
+
+// Compute some basic stats for the Dashboard
+const totalCount = catalogEntries.length;
+const averageScore = Math.round(catalogEntries.reduce((sum, item) => sum + item.score, 0) / totalCount);
+const officialCount = catalogEntries.filter(item => item.official_status === 'official').length;
+---
+
+<BaseLayout title="Dashboard">
+  <div class="space-y-grid-xl">
+    <!-- Main Welcome -->
+    <div class="border-2 border-steel-border bg-graphite-900 p-grid-xl relative overflow-hidden shadow-flat-md">
+      <div class="absolute right-4 top-4 font-mono text-[10px] text-graphite-600">
+        SYS_VER: 1.0.0 // ATLAS_INITIALIZED
+      </div>
+      <h2 class="text-graphite-50 font-mono text-xl font-bold mb-grid-sm">
+        WELCOME TO WERKATLAS
+      </h2>
+      <p class="text-graphite-400 max-w-3xl text-sm leading-relaxed">
+        The Agentic Engineering Compendium is an index of repositories, libraries, SDKs, and developer tools powering the current wave of agentic software architecture.
+      </p>
+    </div>
+
+    <!-- Quick Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-grid-lg">
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg">
+        <div class="font-mono text-xs text-graphite-600 uppercase">Total Cataloged Projects</div>
+        <div class="text-3xl font-mono font-bold text-graphite-50 mt-grid-sm">{totalCount}</div>
+      </div>
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg">
+        <div class="font-mono text-xs text-graphite-600 uppercase">Average Engineering Score</div>
+        <div class="text-3xl font-mono font-bold text-caution-yellow mt-grid-sm">{averageScore} / 100</div>
+      </div>
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg">
+        <div class="font-mono text-xs text-graphite-600 uppercase">Official Vendor Projects</div>
+        <div class="text-3xl font-mono font-bold text-graphite-50 mt-grid-sm">{officialCount}</div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

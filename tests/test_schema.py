@@ -21,7 +21,7 @@ def test_catalog_is_valid_json():
     path = Path(__file__).parent.parent / "data" / "catalog.json"
     if not path.exists():
         return
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     assert "entries" in data or isinstance(data, list)
 
@@ -31,7 +31,7 @@ def test_catalog_entries_have_required_fields():
     path = Path(__file__).parent.parent / "data" / "catalog.json"
     if not path.exists():
         return
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     entries = data.get("entries", data if isinstance(data, list) else [])
     
@@ -48,7 +48,7 @@ def test_no_invented_stars():
     path = Path(__file__).parent.parent / "data" / "catalog.json"
     if not path.exists():
         return
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     entries = data.get("entries", data if isinstance(data, list) else [])
     

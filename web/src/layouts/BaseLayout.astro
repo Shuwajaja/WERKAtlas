@@ -1,0 +1,137 @@
+---
+import { catalogEntries, taxonomy } from '../utils/dataLoader';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+// Compute totals
+const totalProjects = catalogEntries.length;
+const totalDomains = Object.keys(taxonomy.categories).length;
+const currentDate = '2026-07-08';
+---
+
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-graphite-950 text-graphite-400 font-sans antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/WERKAtlas/favicon.svg" />
+    <title>{title} — WERKAtlas</title>
+    <!-- JetBrains Mono and Inter fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="h-full flex flex-col overflow-hidden bg-blueprint">
+    <!-- Header -->
+    <header class="border-b-2 border-steel-border bg-graphite-900 px-grid-xl py-grid-md flex flex-wrap items-center justify-between gap-grid-md z-10">
+      <div class="flex items-center gap-grid-md">
+        <span class="text-caution-yellow font-mono text-xs select-none px-grid-sm py-0.5 border border-caution-yellow rounded-sm shadow-flat-caution">
+          SYS_READY
+        </span>
+        <h1 class="text-graphite-50 font-mono font-bold text-lg tracking-wider">
+          WERKAtlas <span class="text-graphite-600">//</span> Compendium
+        </h1>
+      </div>
+      
+      <!-- Totals & Metadata Bar -->
+      <div class="flex items-center gap-grid-lg font-mono text-xs text-graphite-600">
+        <div>
+          SNAPSHOT: <span class="text-graphite-100">{currentDate}</span>
+        </div>
+        <div class="hidden sm:block border-l border-steel-border h-4"></div>
+        <div>
+          PROJECTS: <span class="text-graphite-100">{totalProjects}</span>
+        </div>
+        <div class="hidden sm:block border-l border-steel-border h-4"></div>
+        <div>
+          DOMAINS: <span class="text-graphite-100">{totalDomains}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- App Body (Sidebar + Content) -->
+    <div class="flex-1 flex overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="w-64 border-r-2 border-steel-border bg-graphite-900 flex flex-col justify-between hidden md:flex z-10">
+        <nav class="p-grid-lg flex flex-col gap-grid-sm font-mono text-sm">
+          <div class="text-graphite-600 text-xs font-bold uppercase tracking-widest mb-grid-sm px-grid-sm">
+            Navigation
+          </div>
+          <a
+            href="/WERKAtlas/"
+            class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-none border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
+          >
+            <span class="text-caution-yellow">▪</span> Dashboard
+          </a>
+          <a
+            href="/WERKAtlas/explorer/"
+            class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-none border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
+          >
+            <span class="text-caution-yellow">▪</span> Atlas Explorer
+          </a>
+          <a
+            href="/WERKAtlas/trending/"
+            class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-none border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
+          >
+            <span class="text-caution-yellow">▪</span> Trending
+          </a>
+          <a
+            href="/WERKAtlas/watchlist/"
+            class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-none border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
+          >
+            <span class="text-caution-yellow">▪</span> Watchlist
+          </a>
+          <a
+            href="/WERKAtlas/methodology/"
+            class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-none border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
+          >
+            <span class="text-caution-yellow">▪</span> Methodology
+          </a>
+        </nav>
+
+        <!-- System Status Footer in Sidebar -->
+        <div class="p-grid-lg border-t border-steel-border font-mono text-[10px] text-graphite-600 flex flex-col gap-1">
+          <div>LOC_ENV: C:\Workplace</div>
+          <div>BUILD: Astro (Static)</div>
+          <div>DESIGN: Cool Graphite</div>
+        </div>
+      </aside>
+
+      <!-- Main Scrollable Content Area -->
+      <main class="flex-1 overflow-y-auto p-grid-xl relative">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  .bg-blueprint {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(55, 59, 64, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(55, 59, 64, 0.1) 1px, transparent 1px);
+    background-color: #121416; /* Fallback to graphite-900 style */
+  }
+
+  /* Custom scrollbars for a industrial/retro layout */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0C0D0E; /* graphite-950 */
+    border-left: 1px solid #373B40; /* steel-border */
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #373B40; /* steel-border */
+    border: 1px solid #0C0D0E;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4E545C; /* steel-glare */
+  }
+</style>
