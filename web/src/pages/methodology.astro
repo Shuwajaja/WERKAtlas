@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Methodology & Scoring System">
+  <div class="space-y-grid-xl max-w-4xl">
+    <!-- Header Block -->
+    <div class="border-2 border-steel-border bg-graphite-900 p-grid-xl relative overflow-hidden shadow-flat-md">
+      <h2 class="text-graphite-50 font-mono text-xl font-bold mb-grid-sm uppercase">
+        Methodology & Scoring System
+      </h2>
+      <p class="text-graphite-400 text-sm leading-relaxed">
+        Erklärung des datengestützten Bewertungssystems für den WERKAtlas.
+      </p>
+    </div>
+
+    <!-- Methodology Content -->
+    <div class="border border-steel-border bg-graphite-900 p-grid-xl space-y-grid-lg font-mono text-xs text-graphite-400">
+      <h3 class="text-graphite-50 text-sm font-bold border-b border-steel-border pb-grid-sm uppercase">
+        1. Die 10 Scoring Dimensionen (Maximal 100 Punkte)
+      </h3>
+      <p class="leading-relaxed">
+        Jedes Projekt wird vollautomatisch anhand von GitHub-API Signalen und vordefinierten Metriken bewertet. Die maximale Punktzahl beträgt 100.
+      </p>
+      
+      <div class="space-y-grid-md">
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Relevance (Relevanz)</span>
+            <span class="text-caution-yellow">Max: 20 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Bewertet die thematische Nähe zu modernen Software-Agenten, Multi-Agenten-Systemen und dem Model Context Protocol (MCP).</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Maintenance (Aktivität)</span>
+            <span class="text-caution-yellow">Max: 15 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Strikter zeitlicher Verfall seit dem letzten Commit (pushed_at). Archivierte Repositories erhalten automatisch 0 Punkte.</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Adoption (Verbreitung)</span>
+            <span class="text-caution-yellow">Max: 15 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Logarithmische Skalierung der Stars (Max: 11 pts) und Forks (Max: 4 pts) zur Verhinderung von Ausreißer-Verzerrungen.</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Momentum (Dynamik)</span>
+            <span class="text-caution-yellow">Max: 10 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Boni für extrem frische Commits und kürzliche Releases innerhalb der letzten 30 bis 90 Tage.</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Documentation (Dokumentation)</span>
+            <span class="text-caution-yellow">Max: 10 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Vorhandensein einer Homepage, Detailliertheit der Beschreibung (Description Length) und Anzahl der Topics.</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Production Readiness (Produktionsreife)</span>
+            <span class="text-caution-yellow">Max: 10 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Vorhandensein und Alter formaler GitHub-Releases sowie die absolute Fork-Tiefe.</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Security (Sicherheit)</span>
+            <span class="text-caution-yellow">Max: 10 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Verifizierbare Sicherheitserklärung (security_transparency), Vorhandensein einer Open-Source Lizenz und Abzug bei bekannten Schwachstellen.</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Interoperability (Interoperabilität)</span>
+            <span class="text-caution-yellow">Max: 5 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Unterstützung von offenen Protokollen wie MCP, A2A, OpenAPI und mehrsprachiger SDK-Implementierung.</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Community (Community)</span>
+            <span class="text-caution-yellow">Max: 3 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Indikator für aktive Mitwirkung der Community anhand der Forks und Stars.</p>
+        </div>
+
+        <div class="border border-steel-border/50 p-grid-md">
+          <div class="flex justify-between font-bold text-graphite-100">
+            <span>Uniqueness (Einzigartigkeit)</span>
+            <span class="text-caution-yellow">Max: 2 pts</span>
+          </div>
+          <p class="text-graphite-600 mt-1">Nischenboni für spezielle Projekt-Typen (Protokolle, Benchmarks, Sandboxes) und innovative Konzepte.</p>
+        </div>
+      </div>
+
+      <h3 class="text-graphite-50 text-sm font-bold border-b border-steel-border pb-grid-sm pt-grid-lg uppercase">
+        2. Tiers / Ränge
+      </h3>
+      <ul class="list-disc pl-grid-lg space-y-grid-sm">
+        <li><strong class="text-caution-orange">Essential (≥85)</strong>: Kerninfrastruktur des Agentic Engineering (z.B. offizielle Spezifikationen, hochreife Standardbibliotheken).</li>
+        <li><strong class="text-caution-yellow">Strong (75-84)</strong>: Extrem etablierte und stabile Frameworks für den produktiven Einsatz.</li>
+        <li><strong class="text-graphite-100">Emerging (65-74)</strong>: Schnell wachsende oder qualitativ hochwertige Projekte mit vielversprechenden Eigenschaften.</li>
+        <li><strong>Watchlist (50-64)</strong>: Experimentelle Ansätze oder junge Projekte unter Beobachtung.</li>
+        <li><strong class="text-graphite-600">Minimal (<50)</strong>: Projekte mit geringem Reifegrad, fehlender Aktivität oder ungenügenden Community-Signalen.</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

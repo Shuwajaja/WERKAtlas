@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { catalogEntries, taxonomy } from '../utils/dataLoader';
+
+// Wir laden die Einträge, absteigend nach Score sortiert
+const entries = [...catalogEntries].sort((a, b) => b.score - a.score);
+
+// Alle verfügbaren Kategorien flach klopfen für Filter-Optionen
+const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat]) => {
+  return Object.entries(cat.subcategories).map(([subId, sub]) => ({
+    id: subId,
+    name: `${subId} - ${sub.name}`,
+    group: cat.name
+  }));
+});
+---
+
+<BaseLayout title="Atlas Explorer">
+  <div class="space-y-grid-xl">
+    <!-- Header Block -->
+    <div class="border-2 border-steel-border bg-graphite-900 p-grid-xl relative overflow-hidden shadow-flat-md">
+      <h2 class="text-graphite-50 font-mono text-xl font-bold mb-grid-sm uppercase">
+        Atlas Explorer
+      </h2>
+      <p class="text-graphite-400 max-w-3xl text-sm leading-relaxed">
+        Suche, filtere und vergleiche alle erfassten Agentic Engineering Projekte interaktiv im Live-Grid.
+      </p>
+    </div>
+
+    <!-- Live Explorer Interface -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-grid-xl items-start">
+      <!-- Sidebar Filters -->
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-lg">
+        <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm">
+          Filter & Sortierung
+        </h3>
+        
+        <!-- Search Input -->
+        <div class="space-y-grid-xs">
+          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Suche (Name/Repo/Desc)</label>
+          <input 
+            type="text" 
+            id="explorer-search" 
+            placeholder="z.B. MCP, langgraph..."
+            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
+          />
+        </div>
+
+        <!-- Category Select -->
+        <div class="space-y-grid-xs">
+          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Kategorie</label>
+          <select 
+            id="explorer-category" 
+            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
+          >
+            <option value="ALL">Alle Kategorien</option>
+            {subcategories.map(sub => (
+              <option value={sub.id}>{sub.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <!-- Score Label Select -->
+        <div class="space-y-grid-xs">
+          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Scoring Tier</label>
+          <select 
+            id="explorer-tier" 
+            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
+          >
+            <option value="ALL">Alle Ränge</option>
+            <option value="essential">Essential (≥85)</option>
+            <option value="strong">Strong (75-84)</option>
+            <option value="emerging">Emerging (65-74)</option>
+            <option value="watchlist">Watchlist (50-64)</option>
+            <option value="minimal">Minimal (<50)</option>
+          </select>
+        </div>
+
+        <!-- Sort Select -->
+        <div class="space-y-grid-xs">
+          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Sortierung</label>
+          <select 
+            id="explorer-sort" 
+            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
+          >
+            <option value="score-desc">Score (absteigend)</option>
+            <option value="stars-desc">Sterne (absteigend)</option>
+            <option value="forks-desc">Forks (absteigend)</option>
+            <option value="name-asc">Name (A-Z)</option>
+          </select>
+        </div>
+
+        <!-- Clear Filters -->
+        <button 
+          id="explorer-clear"
+          class="w-full border border-steel-border text-graphite-400 font-mono text-xs py-grid-xs hover:border-caution-yellow hover:text-caution-yellow transition-colors"
+        >
+          FILTER ZURÜCKSETZEN
+        </button>
+      </div>
+
+      <!-- Results Grid -->
+      <div class="lg:col-span-3 space-y-grid-md">
+        <!-- Results Counter & Info -->
+        <div class="flex items-center justify-between border border-steel-border bg-graphite-900 px-grid-lg py-grid-sm font-mono text-xs">
+          <div>
+            GEFUNDEN: <span id="explorer-count" class="text-graphite-50">{entries.length}</span> / {entries.length}
+          </div>
+        </div>
+
+        <!-- Grid Container -->
+        <div id="explorer-grid" class="grid grid-cols-1 md:grid-cols-2 gap-grid-lg">
+          {entries.map(entry => (
+            <div 
+              class="project-card border border-steel-border bg-graphite-900 hover:border-steel-glare p-grid-lg flex flex-col justify-between transition-colors shadow-flat-sm"
+              data-id={entry.id}
+              data-name={entry.name}
+              data-repo={entry.repository}
+              data-desc={entry.description}
+              data-cat={entry.primary_category}
+              data-tier={entry.score_label || 'minimal'}
+              data-score={entry.score}
+              data-stars={entry.stars}
+              data-forks={entry.forks}
+            >
+              <div>
+                <!-- Top Header: Type & Score -->
+                <div class="flex items-start justify-between gap-grid-md mb-grid-sm">
+                  <span class="font-mono text-[9px] text-graphite-600 bg-graphite-950 border border-steel-border px-1.5 py-0.5 select-none uppercase">
+                    {entry.project_type}
+                  </span>
+                  
+                  <div class="flex items-center gap-2">
+                    <span class={`font-mono text-[9px] px-1 py-0.5 rounded-sm uppercase ${
+                      entry.score_label === 'essential' ? 'bg-caution-orange/20 text-caution-orange border border-caution-orange/30' :
+                      entry.score_label === 'strong' ? 'bg-caution-yellow/20 text-caution-yellow border border-caution-yellow/30' :
+                      entry.score_label === 'emerging' ? 'bg-graphite-100/10 text-graphite-100 border border-steel-border' :
+                      'bg-graphite-950 text-graphite-600 border border-steel-border'
+                    }`}>
+                      {entry.score_label || 'minimal'}
+                    </span>
+                    <span class="font-mono font-bold text-graphite-50 text-sm">{entry.score}</span>
+                  </div>
+                </div>
+
+                <!-- Repo and Name -->
+                <h4 class="font-mono font-bold text-graphite-100 text-sm truncate mb-grid-xs">
+                  <a href={`/WERKAtlas/project/${entry.repository.replace('/', '-')}/`} class="hover:underline hover:text-caution-yellow">
+                    {entry.repository}
+                  </a>
+                </h4>
+
+                <!-- Description -->
+                <p class="text-xs text-graphite-400 line-clamp-3 leading-relaxed mb-grid-md">
+                  {entry.description}
+                </p>
+              </div>
+
+              <!-- Meta Footer -->
+              <div class="border-t border-steel-border/50 pt-grid-sm mt-grid-sm flex items-center justify-between font-mono text-[10px] text-graphite-600">
+                <div class="flex items-center gap-grid-md">
+                  <span>★ {entry.stars.toLocaleString()}</span>
+                  <span>⑂ {entry.forks.toLocaleString()}</span>
+                </div>
+                <div>
+                  CAT: <span class="text-graphite-400">{entry.primary_category}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Search / Filter script -->
+  <script>
+    const searchInput = document.getElementById('explorer-search') as HTMLInputElement;
+    const categorySelect = document.getElementById('explorer-category') as HTMLSelectElement;
+    const tierSelect = document.getElementById('explorer-tier') as HTMLSelectElement;
+    const sortSelect = document.getElementById('explorer-sort') as HTMLSelectElement;
+    const clearBtn = document.getElementById('explorer-clear') as HTMLButtonElement;
+    const countEl = document.getElementById('explorer-count') as HTMLElement;
+    const grid = document.getElementById('explorer-grid') as HTMLElement;
+    const cards = Array.from(grid.querySelectorAll('.project-card')) as HTMLElement[];
+
+    function updateExplorer() {
+      const q = searchInput.value.toLowerCase().trim();
+      const cat = categorySelect.value;
+      const tier = tierSelect.value;
+      const sortBy = sortSelect.value;
+
+      let visibleCount = 0;
+
+      // Filter
+      cards.forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        const repo = (card.dataset.repo || '').toLowerCase();
+        const desc = (card.dataset.desc || '').toLowerCase();
+        const pcat = card.dataset.cat || '';
+        const ptier = card.dataset.tier || '';
+
+        const matchesQuery = !q || name.includes(q) || repo.includes(q) || desc.includes(q);
+        const matchesCat = cat === 'ALL' || pcat === cat;
+        const matchesTier = tier === 'ALL' || ptier === tier;
+
+        if (matchesQuery && matchesCat && matchesTier) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Sort visible cards
+      const sorted = cards.slice().sort((a, b) => {
+        if (sortBy === 'score-desc') {
+          return parseFloat(b.dataset.score || '0') - parseFloat(a.dataset.score || '0');
+        } else if (sortBy === 'stars-desc') {
+          return parseInt(b.dataset.stars || '0') - parseInt(a.dataset.stars || '0');
+        } else if (sortBy === 'forks-desc') {
+          return parseInt(b.dataset.forks || '0') - parseInt(a.dataset.forks || '0');
+        } else if (sortBy === 'name-asc') {
+          return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+        }
+        return 0;
+      });
+
+      sorted.forEach(card => grid.appendChild(card));
+      countEl.innerText = visibleCount.toString();
+    }
+
+    // Event listeners
+    searchInput?.addEventListener('input', updateExplorer);
+    categorySelect?.addEventListener('change', updateExplorer);
+    tierSelect?.addEventListener('change', updateExplorer);
+    sortSelect?.addEventListener('change', updateExplorer);
+
+    clearBtn?.addEventListener('click', () => {
+      searchInput.value = '';
+      categorySelect.value = 'ALL';
+      tierSelect.value = 'ALL';
+      sortSelect.value = 'score-desc';
+      updateExplorer();
+    });
+
+    // Run once at start
+    updateExplorer();
+  </script>
+</BaseLayout>

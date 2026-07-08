@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { catalogEntries } from '../utils/dataLoader';
+
+// Wir berechnen das Momentum und filtern Projekte mit Trenddaten
+// Formel für Momentum (aus METHODOLOGY.md):
+// growth = current_stars - stars_30d
+// growth_rate = growth / stars_30d
+// momentum = growth * (1 + growth_rate)
+const trendingProjects = catalogEntries
+  .filter(entry => entry.trend_data && entry.trend_data.stars_30d !== null && entry.trend_data.stars_30d !== undefined)
+  .map(entry => {
+    const currentStars = entry.stars || 0;
+    const stars30d = entry.trend_data!.stars_30d || 0;
+    const growth = currentStars - stars30d;
+    const growthRate = stars30d > 0 ? (growth / stars30d) : 0;
+    const momentum = Math.max(0, growth * (1 + growthRate));
+
+    return {
+      ...entry,
+      growth,
+      growthRate,
+      momentum: Math.round(momentum * 10) / 10
+    };
+  })
+  .sort((a, b) => b.momentum - a.momentum);
+
+// Top 50 schnell wachsende Projekte
+const topTrending = trendingProjects.slice(0, 50);
+---
+
+<BaseLayout title="Trending Momentum">
+  <div class="space-y-grid-xl">
+    <!-- Header Block -->
+    <div class="border-2 border-steel-border bg-graphite-900 p-grid-xl relative overflow-hidden shadow-flat-md">
+      <h2 class="text-graphite-50 font-mono text-xl font-bold mb-grid-sm uppercase">
+        Trending Momentum
+      </h2>
+      <p class="text-graphite-400 max-w-3xl text-sm leading-relaxed">
+        Die am schnellsten wachsenden Repositories basierend auf ihrem Sternen-Zuwachs und relativem Momentum in den letzten 30 Tagen.
+      </p>
+    </div>
+
+    <!-- Info Banner -->
+    <div class="border border-steel-border bg-graphite-900 p-grid-lg font-mono text-xs text-graphite-400 flex flex-col gap-2">
+      <p><span class="text-caution-yellow">▪ Formula:</span> Momentum = Growth × (1 + Growth Rate)</p>
+      <p><span class="text-caution-yellow">▪ Definition:</span> Belohnt sowohl massiven absoluten Zuwachs als auch überproportional schnelles relatives Wachstum kleinerer Projekte.</p>
+    </div>
+
+    <!-- Table Layout for Trending -->
+    <div class="border border-steel-border bg-graphite-900 overflow-hidden shadow-flat-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left font-mono text-xs border-collapse">
+          <thead>
+            <tr class="bg-graphite-950 border-b border-steel-border text-graphite-600">
+              <th class="p-grid-md">#</th>
+              <th class="p-grid-md">Projekt</th>
+              <th class="p-grid-md text-right">Momentum</th>
+              <th class="p-grid-md text-right">Zuwachs (30d)</th>
+              <th class="p-grid-md text-right">Wachstumsrate</th>
+              <th class="p-grid-md text-right">Sterne Aktuell</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-steel-border/50">
+            {topTrending.map((project, idx) => (
+              <tr class="hover:bg-graphite-800/50 transition-colors">
+                <td class="p-grid-md text-graphite-600 font-bold">{idx + 1}</td>
+                <td class="p-grid-md font-sans">
+                  <a href={`/WERKAtlas/project/${project.repository.replace('/', '-')}/`} class="font-mono text-graphite-100 hover:text-caution-yellow hover:underline block font-bold">
+                    {project.repository}
+                  </a>
+                  <span class="text-[10px] text-graphite-600 line-clamp-1">{project.description}</span>
+                </td>
+                <td class="p-grid-md text-right text-caution-orange font-bold font-mono">{project.momentum.toLocaleString()}</td>
+                <td class="p-grid-md text-right text-graphite-100 font-mono">+{project.growth.toLocaleString()}</td>
+                <td class="p-grid-md text-right text-graphite-400 font-mono">{(project.growthRate * 100).toFixed(1)}%</td>
+                <td class="p-grid-md text-right text-graphite-400 font-mono">{project.stars.toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

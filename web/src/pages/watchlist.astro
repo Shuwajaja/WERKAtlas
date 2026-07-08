@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { catalogEntries } from '../utils/dataLoader';
+
+// Wir filtern alle Einträge auf der Watchlist (Score-Label: watchlist)
+const watchlistEntries = catalogEntries
+  .filter(entry => entry.score_label === 'watchlist')
+  .sort((a, b) => b.score - a.score);
+---
+
+<BaseLayout title="Ecosystem Watchlist">
+  <div class="space-y-grid-xl">
+    <!-- Header Block -->
+    <div class="border-2 border-steel-border bg-graphite-900 p-grid-xl relative overflow-hidden shadow-flat-md">
+      <h2 class="text-graphite-50 font-mono text-xl font-bold mb-grid-sm uppercase">
+        Ecosystem Watchlist
+      </h2>
+      <p class="text-graphite-400 max-w-3xl text-sm leading-relaxed">
+        Aufstrebende oder experimentelle Projekte mit einem Score von 50 bis 64. Diese Projekte zeigen vielversprechende Ansätze, bedürfen aber einer engeren Beobachtung hinsichtlich Reife und Stabilität.
+      </p>
+    </div>
+
+    <!-- Watchlist Grid -->
+    {watchlistEntries.length === 0 ? (
+      <div class="border border-steel-border bg-graphite-900 p-grid-xl text-center text-graphite-600 font-mono text-xs">
+        KEINE PROJEKTE AKTUELL AUF DER WATCHLIST.
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-grid-lg">
+        {watchlistEntries.map(entry => (
+          <div class="border border-steel-border bg-graphite-900 hover:border-steel-glare p-grid-lg flex flex-col justify-between transition-colors shadow-flat-sm">
+            <div>
+              <div class="flex items-center justify-between mb-grid-sm">
+                <span class="font-mono text-[9px] text-graphite-600 bg-graphite-950 border border-steel-border px-1.5 py-0.5 select-none uppercase">
+                  {entry.project_type}
+                </span>
+                <span class="font-mono font-bold text-caution-yellow text-sm">{entry.score} pts</span>
+              </div>
+
+              <h4 class="font-mono font-bold text-graphite-100 text-sm truncate mb-grid-xs">
+                <a href={`/WERKAtlas/project/${entry.repository.replace('/', '-')}/`} class="hover:underline hover:text-caution-yellow">
+                  {entry.repository}
+                </a>
+              </h4>
+
+              <p class="text-xs text-graphite-400 line-clamp-3 leading-relaxed mb-grid-md">
+                {entry.description}
+              </p>
+            </div>
+
+            <div class="border-t border-steel-border/50 pt-grid-sm mt-grid-sm flex items-center justify-between font-mono text-[10px] text-graphite-600">
+              <span>★ {entry.stars.toLocaleString()}</span>
+              <span>CAT: <span class="text-graphite-400">{entry.primary_category}</span></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>

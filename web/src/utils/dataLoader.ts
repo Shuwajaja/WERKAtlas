@@ -38,6 +38,7 @@ export const CatalogEntrySchema = z.object({
   production_readiness: z.number().optional(),
   security_transparency: z.number().optional(),
   score: z.number(),
+  score_label: z.enum(['essential', 'strong', 'emerging', 'watchlist', 'minimal']).optional(),
   confidence: z.enum(['high', 'medium', 'low']),
   score_components: z.object({
     relevance: z.number(),
@@ -51,6 +52,11 @@ export const CatalogEntrySchema = z.object({
     community: z.number(),
     uniqueness: z.number(),
   }),
+  score_explanations: z.array(z.object({
+    dimension: z.string(),
+    impact: z.enum(['positive', 'negative', 'neutral']),
+    text: z.string(),
+  })).optional().default([]),
   trend_data: z.object({
     stars_30d: z.number().nullable().optional(),
     stars_90d: z.number().nullable().optional(),

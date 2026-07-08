@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { catalogEntries, taxonomy } from '../../utils/dataLoader';
+
+export async function getStaticPaths() {
+  return catalogEntries.map(entry => {
+    const slug = entry.repository.replace('/', '-').lowerCase || entry.repository.replace('/', '-').toLowerCase();
+    return {
+      params: { slug },
+      props: { entry }
+    };
+  });
+}
+
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+
+// Kategorie-Name auflösen
+let categoryName = 'Unbekannt';
+for (const cat of Object.values(taxonomy.categories)) {
+  if (cat.subcategories[entry.primary_category]) {
+    categoryName = cat.subcategories[entry.primary_category].name;
+    break;
+  }
+}
+---
+
+<BaseLayout title={entry.repository}>
+  <div class="space-y-grid-xl max-w-5xl">
+    <!-- Breadcrumb -->
+    <div class="font-mono text-xs text-graphite-600">
+      <a href="/WERKAtlas/explorer/" class="hover:text-caution-yellow">EXPLORER</a> 
+      <span class="mx-2">/</span> 
+      <span class="text-graphite-100">{entry.repository.toUpperCase()}</span>
+    </div>
+
+    <!-- Project Identity Card -->
+    <div class="border-2 border-steel-border bg-graphite-900 p-grid-xl relative overflow-hidden shadow-flat-md">
+      <div class="absolute right-4 top-4 font-mono text-[10px] text-graphite-600 bg-graphite-950 border border-steel-border px-1.5 py-0.5 select-none uppercase">
+        {entry.project_type}
+      </div>
+
+      <h2 class="text-graphite-50 font-mono text-2xl font-bold mb-grid-xs truncate">
+        {entry.name}
+      </h2>
+      <p class="text-caution-orange font-mono text-xs mb-grid-md">
+        <a href={entry.repository_url} target="_blank" class="hover:underline">
+          github.com/{entry.repository} ↗
+        </a>
+      </p>
+
+      <p class="text-graphite-400 text-sm leading-relaxed max-w-4xl">
+        {entry.description}
+      </p>
+    </div>
+
+    <!-- Details Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-grid-xl items-start">
+      
+      <!-- Primary Data and Stats -->
+      <div class="md:col-span-2 space-y-grid-xl">
+        
+        <!-- Score Component Breakdown -->
+        <div class="border border-steel-border bg-graphite-900 p-grid-lg">
+          <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm mb-grid-md">
+            Scoring Analyse
+          </h3>
+          
+          <div class="grid grid-cols-2 gap-grid-md">
+            {Object.entries(entry.score_components).map(([key, val]) => (
+              <div class="flex items-center justify-between font-mono text-xs border-b border-steel-border/30 pb-1">
+                <span class="text-graphite-600 capitalize">{key.replace('_', ' ')}</span>
+                <span class="text-graphite-100 font-bold">{val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Explanations/Signals list -->
+        {entry.score_explanations && entry.score_explanations.length > 0 && (
+          <div class="border border-steel-border bg-graphite-900 p-grid-lg">
+            <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm mb-grid-md">
+              Evidence & Signale
+            </h3>
+            <ul class="space-y-2">
+              {entry.score_explanations.map((exp: any) => (
+                <li class="font-mono text-xs flex items-start gap-2">
+                  <span class={`font-bold select-none ${
+                    exp.impact === 'positive' ? 'text-caution-orange' :
+                    exp.impact === 'negative' ? 'text-red-500' : 'text-graphite-600'
+                  }`}>
+                    {exp.impact === 'positive' ? '[+]' : exp.impact === 'negative' ? '[-]' : '[•]'}
+                  </span>
+                  <span class="text-graphite-400">{exp.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <!-- Sidebar Metadata -->
+      <div class="border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-lg">
+        <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm">
+          Metadaten
+        </h3>
+
+        <!-- Overall Score Box -->
+        <div class="border border-steel-border bg-graphite-950 p-grid-md text-center">
+          <div class="font-mono text-[10px] text-graphite-600 uppercase">Engineering Score</div>
+          <div class="text-3xl font-mono font-bold text-caution-yellow">{entry.score}</div>
+          <div class="font-mono text-[9px] text-caution-orange uppercase tracking-wider mt-1">
+            {entry.score_label || 'minimal'}
+          </div>
+        </div>
+
+        <div class="font-mono text-xs space-y-grid-md text-graphite-400">
+          <div>
+            <span class="text-graphite-600 block text-[9px] uppercase">Ecosystem Kategorie</span>
+            <span class="text-graphite-100 font-bold">{entry.primary_category} - {categoryName}</span>
+          </div>
+
+          <div>
+            <span class="text-graphite-600 block text-[9px] uppercase">Stars & Forks</span>
+            <span class="text-graphite-100 font-bold">★ {entry.stars.toLocaleString()} / ⑂ {entry.forks.toLocaleString()}</span>
+          </div>
+
+          {entry.license && (
+            <div>
+              <span class="text-graphite-600 block text-[9px] uppercase">Lizenz</span>
+              <span class="text-graphite-100 font-bold">{entry.license}</span>
+            </div>
+          )}
+
+          {entry.protocols && entry.protocols.length > 0 && (
+            <div>
+              <span class="text-graphite-600 block text-[9px] uppercase">Protokolle</span>
+              <span class="text-graphite-100 font-bold">{entry.protocols.join(', ')}</span>
+            </div>
+          )}
+
+          {entry.languages && entry.languages.length > 0 && (
+            <div>
+              <span class="text-graphite-600 block text-[9px] uppercase">Sprachen</span>
+              <span class="text-graphite-100 font-bold">{entry.languages.join(', ')}</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
