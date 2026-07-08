@@ -17,6 +17,20 @@ const watchlistCount = catalogEntries.filter(item => item.score_label === 'watch
 const topEntries = [...catalogEntries]
   .sort((a, b) => b.score - a.score)
   .slice(0, 5);
+
+// Calculate trending projects (Top 3 Momentum)
+const trendingProjects = catalogEntries
+  .filter(entry => entry.trend_data && entry.trend_data.stars_30d !== null && entry.trend_data.stars_30d !== undefined)
+  .map(entry => {
+    const currentStars = entry.stars || 0;
+    const stars30d = entry.trend_data!.stars_30d || 0;
+    const growth = currentStars - stars30d;
+    const growthRate = stars30d > 0 ? (growth / stars30d) : 0;
+    const momentum = Math.max(0, growth * (1 + growthRate));
+    return { ...entry, growth, momentum: Math.round(momentum) };
+  })
+  .sort((a, b) => b.momentum - a.momentum)
+  .slice(0, 3);
 ---
 
 <BaseLayout title="WERKHub Control Deck">
@@ -53,33 +67,54 @@ const topEntries = [...catalogEntries]
 
     <!-- Ecosystem Status & Rankings -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-grid-xl">
-      <!-- Tier Distribution -->
-      <div class="border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-md">
-        <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm">
-          Scoring Tiers
-        </h3>
-        <div class="space-y-grid-sm font-mono text-xs">
-          <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
-            <span class="text-caution-orange">★ Essential (≥85)</span>
-            <span class="text-graphite-100 font-bold">{essentialCount}</span>
+      <!-- Left Column: Tier Distribution & Trending -->
+      <div class="space-y-grid-xl">
+        <!-- Tiers -->
+        <div class="border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-md shadow-flat-sm">
+          <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm">
+            Scoring Tiers
+          </h3>
+          <div class="space-y-grid-sm font-mono text-xs">
+            <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
+              <span class="text-caution-orange">★ Essential (≥85)</span>
+              <span class="text-graphite-100 font-bold">{essentialCount}</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
+              <span class="text-caution-yellow">✦ Strong (75-84)</span>
+              <span class="text-graphite-100 font-bold">{strongCount}</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
+              <span class="text-graphite-300">▪ Emerging (65-74)</span>
+              <span class="text-graphite-100 font-bold">{emergingCount}</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
+              <span class="text-graphite-600">▪ Watchlist (50-64)</span>
+              <span class="text-graphite-100 font-bold">{watchlistCount}</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
-            <span class="text-caution-yellow">✦ Strong (75-84)</span>
-            <span class="text-graphite-100 font-bold">{strongCount}</span>
-          </div>
-          <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
-            <span class="text-graphite-300">▪ Emerging (65-74)</span>
-            <span class="text-graphite-100 font-bold">{emergingCount}</span>
-          </div>
-          <div class="flex items-center justify-between border-b border-steel-border/30 pb-1">
-            <span class="text-graphite-600">▪ Watchlist (50-64)</span>
-            <span class="text-graphite-100 font-bold">{watchlistCount}</span>
+        </div>
+
+        <!-- Dashboard Trending Block -->
+        <div class="border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-md shadow-flat-sm">
+          <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm flex justify-between items-center">
+            <span>Trending (30d)</span>
+            <a href="/WERKAtlas/trending/" class="text-[9px] text-caution-yellow hover:underline">ALLE ↗</a>
+          </h3>
+          <div class="space-y-grid-sm font-mono text-[11px]">
+            {trendingProjects.map(project => (
+              <div class="flex justify-between items-center border-b border-steel-border/30 pb-1">
+                <a href={`/WERKAtlas/project/${project.repository.replace('/', '-')}/`} class="text-graphite-100 hover:text-caution-yellow truncate max-w-[150px]">
+                  {project.repository}
+                </a>
+                <span class="text-caution-orange font-bold">+{project.growth} ★</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <!-- Top Curated Components -->
-      <div class="lg:col-span-2 border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-md">
+      <!-- Right Column: Top Curated Components (larger span) -->
+      <div class="lg:col-span-2 border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-md shadow-flat-sm">
         <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm">
           Top-Bewertete Ecosystem Komponenten
         </h3>
