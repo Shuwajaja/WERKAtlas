@@ -25,3 +25,15 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# Node / JavaScript
+node_modules/
+web/node_modules/
+site/node_modules/
+dist/
+web/dist/
+site/dist/
+.astro/
+web/.astro/
+site/.astro/
+package-lock.json
