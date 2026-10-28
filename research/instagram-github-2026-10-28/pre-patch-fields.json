@@ -1,0 +1,162 @@
+{
+  "anthropics/skills": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "upstash/context7": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "volcengine/OpenViking": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "coreyhaines31/marketingskills": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "obra/superpowers": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "activepieces/activepieces": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "vercel-labs/agent-browser": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "Panniantong/Agent-Reach": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "addyosmani/agent-skills": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "cloudflare/agentic-inbox": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "mukul975/Anthropic-Cybersecurity-Skills": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "thedotmack/claude-mem": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "AgriciDaniel/claude-seo": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "manaflow-ai/cmux": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "openai/codex": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "NousResearch/hermes-agent": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "vectorize-io/hindsight": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "langflow-ai/langflow": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "mvanhorn/last30days-skill": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "teng-lin/notebooklm-py": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "THU-MAIC/OpenMAIC": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "stablyai/orca": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "VectifyAI/PageIndex": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "earendil-works/pi": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "x1xhlol/system-prompts-and-models-of-ai-tools": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "triggerdotdev/trigger.dev": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "superagent-ai/vibekit": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "ruvnet/ruflo": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "FlowiseAI/Flowise": {
+    "license": "NOASSERTION",
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "gsd-build/get-shit-done": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "google-gemini/deprecated-generative-ai-python": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  },
+  "HKUDS/Vibe-Trading": {
+    "license": null,
+    "archived": false,
+    "maintenance_status": "unclear"
+  }
+}
