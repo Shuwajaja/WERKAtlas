@@ -128,12 +128,42 @@ for (const cat of Object.values(taxonomy.categories)) {
             <span class="text-graphite-100 font-bold">★ {entry.stars.toLocaleString()} / ⑂ {entry.forks.toLocaleString()}</span>
           </div>
 
-          {entry.license && (
-            <div>
-              <span class="text-graphite-600 block text-[9px] uppercase">Lizenz</span>
-              <span class="text-graphite-100 font-bold">{entry.license}</span>
-            </div>
-          )}
+          <div>
+            <span class="text-graphite-600 block text-[9px] uppercase">Lizenz</span>
+            <span class="text-graphite-100 font-bold">{entry.license || 'unbekannt'}</span>
+          </div>
+
+          <div>
+            <span class="text-graphite-600 block text-[9px] uppercase">Wartung</span>
+            <span class="text-graphite-100 font-bold">{entry.maintenance_status || 'unbekannt'}</span>
+          </div>
+
+          <div>
+            <span class="text-graphite-600 block text-[9px] uppercase">Prüfdatum</span>
+            <span class="text-graphite-100 font-bold">{entry.checked_at || 'unbekannt'}</span>
+          </div>
+
+          <div data-testid="source-urls">
+            <span class="text-graphite-600 block text-[9px] uppercase">Quellen</span>
+            {entry.source_urls && entry.source_urls.length > 0 ? (
+              <ul class="space-y-1">
+                {entry.source_urls.map((url: string) => (
+                  <li><a href={url} class="text-graphite-100 font-bold break-all hover:text-caution-yellow">{url}</a></li>
+                ))}
+              </ul>
+            ) : (
+              <span class="text-graphite-100 font-bold">Keine Quellenangabe</span>
+            )}
+          </div>
+
+          <div>
+            <span class="text-graphite-600 block text-[9px] uppercase">Gefunden über</span>
+            {entry.discovered_from && entry.discovered_from.length > 0 ? (
+              <span class="text-graphite-100 font-bold break-all">{entry.discovered_from.join(', ')}</span>
+            ) : (
+              <span class="text-graphite-100 font-bold">unbekannt</span>
+            )}
+          </div>
 
           {entry.protocols && entry.protocols.length > 0 && (
             <div>

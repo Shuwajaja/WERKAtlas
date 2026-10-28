@@ -18,6 +18,18 @@ const topEntries = [...catalogEntries]
   .sort((a, b) => b.score - a.score)
   .slice(0, 5);
 
+const compareCatalog = catalogEntries.map(entry => ({
+  id: entry.id,
+  name: entry.name,
+  repository: entry.repository,
+  primary_category: entry.primary_category,
+  score: entry.score,
+  stars: entry.stars ?? null,
+  license: entry.license ?? null,
+  maintenance_status: entry.maintenance_status ?? null,
+  checked_at: entry.checked_at ?? null,
+}));
+
 // Calculate trending projects (Top 3 Momentum)
 const trendingProjects = catalogEntries
   .filter(entry => entry.trend_data && entry.trend_data.stars_30d !== null && entry.trend_data.stars_30d !== undefined)
@@ -128,6 +140,14 @@ const trendingProjects = catalogEntries
                 <span class="text-graphite-600 text-[10px] ml-2 select-none uppercase">// {entry.project_type}</span>
               </div>
               <div class="flex items-center gap-3">
+                <button
+                  type="button"
+                  class="font-mono text-[9px] uppercase border border-steel-border px-1 py-0.5 text-graphite-100 hover:border-caution-yellow"
+                  data-testid="compare-btn"
+                  data-compare-id={entry.id}
+                >
+                  Vergleichen
+                </button>
                 <span class={`text-[9px] px-1 py-0.5 rounded-sm uppercase ${
                   entry.score_label === 'essential' ? 'bg-caution-orange/20 text-caution-orange border border-caution-orange/30' : 'bg-caution-yellow/20 text-caution-yellow border border-caution-yellow/30'
                 }`}>
@@ -140,5 +160,165 @@ const trendingProjects = catalogEntries
         </div>
       </div>
     </div>
+
+    <div
+      id="comparison-bar"
+      data-testid="comparison-bar"
+      hidden
+      class="border border-caution-yellow bg-graphite-950 p-grid-md font-mono text-xs text-graphite-100 flex flex-wrap items-center gap-3"
+    >
+      <span>Vergleich <span data-testid="comparison-count">0</span></span>
+      <div id="comparison-chips" class="flex flex-wrap gap-2"></div>
+      <button type="button" data-testid="clear-comparison-btn" class="border border-steel-border px-2 py-1">Leeren</button>
+      <button type="button" data-testid="launch-comparison-btn" class="border border-caution-yellow px-2 py-1 text-caution-yellow">Öffnen</button>
+    </div>
+    <p id="comparison-limit-toast" data-testid="comparison-limit-toast" hidden class="font-mono text-xs text-caution-orange">
+      Maximal 3 Projekte.
+    </p>
+
+    <section id="comparison-panel" hidden class="border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-md">
+      <p id="comparison-warning" data-testid="comparison-warning" hidden class="font-mono text-xs text-caution-orange">
+        Select at least 2 projects.
+      </p>
+      <div id="comparison-table" data-testid="comparison-table" class="overflow-x-auto font-mono text-xs text-graphite-100"></div>
+    </section>
   </div>
 </BaseLayout>
+
+<script define:vars={{ compareCatalog }}>
+  const MAX_COMPARE = 3;
+  const byId = new Map(compareCatalog.map((entry) => [entry.id, entry]));
+  const fields = [
+    ['name', 'Name'],
+    ['primary_category', 'Kategorie'],
+    ['score', 'Score'],
+    ['stars', 'Stars'],
+    ['license', 'Lizenz'],
+    ['maintenance_status', 'Wartung'],
+    ['checked_at', 'Geprüft'],
+  ];
+  const bar = document.getElementById('comparison-bar');
+  const count = document.querySelector('[data-testid="comparison-count"]');
+  const chips = document.getElementById('comparison-chips');
+  const clearButton = document.querySelector('[data-testid="clear-comparison-btn"]');
+  const launchButton = document.querySelector('[data-testid="launch-comparison-btn"]');
+  const toast = document.getElementById('comparison-limit-toast');
+  const panel = document.getElementById('comparison-panel');
+  const warning = document.getElementById('comparison-warning');
+  const table = document.getElementById('comparison-table');
+  const buttons = Array.from(document.querySelectorAll('[data-testid="compare-btn"]'));
+
+  const params = new URLSearchParams(window.location.search);
+  let selected = (params.get('compare') || '')
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .slice(0, MAX_COMPARE);
+
+  function cellValue(project, key) {
+    if (!project) return null;
+    const value = project[key];
+    if (value === null || value === undefined || value === '') return null;
+    return String(value);
+  }
+
+  function renderTable(ids) {
+    const fromQuery = new URLSearchParams(window.location.search).has('compare');
+    if (!fromQuery) {
+      panel.hidden = true;
+      return;
+    }
+    panel.hidden = false;
+    warning.hidden = ids.length >= 2;
+    table.replaceChildren();
+    const header = document.createElement('div');
+    header.className = 'grid gap-3';
+    header.style.gridTemplateColumns = `repeat(${Math.max(ids.length, 1)}, minmax(0, 1fr))`;
+    ids.forEach((id) => {
+      const project = byId.get(id);
+      const column = document.createElement('div');
+      column.dataset.testid = 'comparison-column';
+      column.className = 'border border-steel-border p-2';
+      column.textContent = project ? project.repository : id;
+      header.appendChild(column);
+    });
+    table.appendChild(header);
+    fields.forEach(([key, label]) => {
+      const row = document.createElement('div');
+      if (key === 'score') row.dataset.testid = 'comparison-row-score';
+      row.className = 'grid gap-3 border-t border-steel-border py-1';
+      row.style.gridTemplateColumns = `8rem repeat(${Math.max(ids.length, 1)}, minmax(0, 1fr))`;
+      const name = document.createElement('span');
+      name.textContent = label;
+      row.appendChild(name);
+      ids.forEach((id) => {
+        const value = cellValue(byId.get(id), key);
+        const cell = document.createElement('span');
+        if (value === null) {
+          cell.dataset.testid = 'comparison-val-missing';
+          cell.textContent = '-';
+        } else {
+          cell.textContent = value;
+        }
+        row.appendChild(cell);
+      });
+      table.appendChild(row);
+    });
+  }
+
+  function render() {
+    bar.hidden = selected.length === 0;
+    count.textContent = String(selected.length);
+    chips.replaceChildren();
+    selected.forEach((id) => {
+      const chip = document.createElement('span');
+      chip.className = 'border border-steel-border px-1 py-0.5';
+      chip.textContent = id + ' ';
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.dataset.testid = 'remove-compare-item';
+      remove.textContent = '×';
+      remove.addEventListener('click', () => {
+        selected = selected.filter((item) => item !== id);
+        render();
+      });
+      chip.appendChild(remove);
+      chips.appendChild(chip);
+    });
+    buttons.forEach((button) => {
+      const id = button.getAttribute('data-compare-id');
+      button.disabled = Boolean(id) && !selected.includes(id) && selected.length >= MAX_COMPARE;
+    });
+    toast.hidden = true;
+    renderTable(selected);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-compare-id');
+      if (!id) return;
+      if (selected.includes(id)) {
+        selected = selected.filter((item) => item !== id);
+      } else if (selected.length >= MAX_COMPARE) {
+        toast.hidden = false;
+        return;
+      } else {
+        selected = selected.concat(id);
+      }
+      render();
+    });
+  });
+
+  clearButton.addEventListener('click', () => {
+    selected = [];
+    render();
+  });
+
+  launchButton.addEventListener('click', () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('compare', selected.join(','));
+    window.location.assign(url.pathname + '?' + url.searchParams.toString());
+  });
+
+  render();
+</script>
