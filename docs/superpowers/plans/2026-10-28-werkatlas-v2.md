@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** WERKAtlas als geprüfte, inkrementell aktualisierbare Wissensbasis erhalten, die Menschen über die Astro-Oberfläche und Agenten über einen nur-lesenden MCP-Server durchsuchen.
+**Goal:** Ein Agent findet in den bestehenden 1468 Katalogeinträgen ein passendes Werkzeug über `search`, `get_project` und `list_categories`. Neue Funde werden ein Review-PR. `main` bleibt frei von ungeprüften Radar-Übernahmen.
 
-**Architecture:** Kanonische Daten bleiben `data/catalog.json` plus `data/taxonomy.json`. Abgeleitete Dateien (CSV, NDJSON, Suchindex, Markdown) werden nicht neu erfunden und in P0 nicht neu geschrieben. Jeder Ausbauschritt ist ein eigener Review-PR von `main`. Der erste Schritt ist ein nur-lesender Audit, der Identitäts- und Schemafehler hart ablehnt und fehlende Modellfelder als unbekannt zählt.
+**Architecture:** Kanonische Daten bleiben `data/catalog.json` plus `data/taxonomy.json`. Die Suche liest diese Dateien. Sie bekommt keine Vektordatenbank und keinen zweiten Katalog. Die Astro-Oberfläche bleibt die menschliche Ansicht derselben Daten und wird erst verändert, wenn der MCP-Vertrag steht. Das Zielbild steht in `docs/superpowers/specs/2026-10-28-werkatlas-v2-ziel.md`.
 
-**Tech Stack:** Python 3.10, pytest, vorhandenes JSON-Schema, Astro/Zod im bestehenden `web/`, GitHub Actions, öffentliches `gh api` nur in späteren Aktualisierungs-PRs. Keine neue Datenbank, kein MCP-SDK, kein Repomix in CI.
+**Tech Stack:** Python 3.10, pytest, vorhandenes JSON-Schema, Astro/Zod im bestehenden `web/`, GitHub Actions. MCP spricht JSON-RPC über stdin/stdout mit der Standardbibliothek. Kein MCP-SDK, kein Repomix, keine bezahlte Embedding-API.
 
 ## Global Constraints
 
@@ -102,23 +102,25 @@ Der Audit liest lokale JSON-Dateien und schreibt nur, wenn `--report` gesetzt is
 
 ---
 
-## PR-Reihenfolge
+## Zielbild und Ausführungsreihenfolge
 
-Jeder PR geht von `main` aus. Keiner stapelt sich auf PR #1.
+Das Ziel ist in `docs/superpowers/specs/2026-10-28-werkatlas-v2-ziel.md` festgehalten. Diese Reihenfolge gilt. Die Task-Nummern weiter unten sind Arbeitsanweisungen, keine Freigabe, sie parallel zu bauen.
 
-| PR | Branch-Muster | Liefert | Schreibt den Katalog |
+| Schritt | Aufgabe | Task unten | Schreibt den Katalog |
 | --- | --- | --- | --- |
-| P0 | `cursor/werkatlas-v2-p0-audit-e194` | Nur-lesender Audit und dieser Plan | nein |
-| P1 | `cursor/werkatlas-v2-p1-no-direct-push-e194` | Cron pusht nicht mehr nach `main` | nein |
-| P2 | `cursor/werkatlas-v2-p2-model-fields-e194` | Optionale leere Modellfelder im Schema und in Zod | nein |
-| P3 | `cursor/werkatlas-v2-p3-github-refresh-e194` | Bericht für eine GitHub-ID, ohne Schreiben | nein |
-| P4 | `cursor/werkatlas-v2-p4-mcp-e194` | Nur-lesender MCP-Server | nein |
-| P5 | `cursor/werkatlas-v2-p5-filters-e194` | Filter, Quellen, Aktualität | nein |
-| P6 | `cursor/werkatlas-v2-p6-compare-e194` | Vergleich laut vorhandenem Playwright-Vertrag | nein |
-| P7 | `cursor/werkatlas-v2-p7-instagram-dry-run-e194` | Importprüfung verifizierter GitHub-IDs | nein |
-| P8 | `cursor/werkatlas-v2-p8-search-index-order-e194` | Stabile Schlüsselreihenfolge im Suchindex | nein |
+| 1. Bestand | Audit der Identitätsregeln. Offen als PR #2. | Task 1, erledigt | nein |
+| 2. Bestand | Täglicher Workflow pusht nicht mehr nach `main` und bewertet nicht neu. | Task 2 | nein |
+| 3. Nutzen | Feldsuche und read-only MCP: `search`, `get_project`, `list_categories`. | Task 5 | nein |
+| 4. Datenqualität | Eine belegte GitHub-Differenz pro PR. Leere Felder bleiben leer. README-Badge 742 nicht blind neu rendern. | Task 4, danach erst Task 3 | nein, bis ein eigener Apply-PR den Beleg zeigt |
+| 5. Research | Radar-Vorschläge und Instagram-IDs nur als Bericht. | Task 8 | nein |
+| 6. Oberfläche | Filter, Quellen, Aktualität, Vergleich. | Task 6, Task 7 | nein |
+| später | Stabile Schlüsselreihenfolge, falls der Suchindex neu gebaut wird. Die Website liest ihn nicht. | Task 9 | nein |
 
-Repomix bleibt außerhalb dieser PRs. Ein Mensch kann es später für genau ein Repository aufrufen. CI installiert es nicht.
+Am 2026-10-28 liegen 678 Einträge bei Score mindestens 50 und 790 darunter. Das README-Badge „accepted 742 / excluded 726“ ist der ältere Render derselben Schwelle, nicht die heutige Zählung. `data/candidates.ndjson` ist nicht im Repository. Die 110 Instagram-IDs sind Research und kein importierter Bestand.
+
+Der Workflow `.github/workflows/scheduled-update.yml` läuft um 02:00 UTC, also 03:00 Uhr Europe/Berlin. Der gewünschte Radar um 08:00 Uhr Europe/Berlin ist davon getrennt und darf Vorschläge liefern, ohne Zeilen einzufügen.
+
+Repomix bleibt außerhalb dieser Schritte. Ein Mensch kann es später für genau ein Repository aufrufen. CI installiert es nicht.
 
 ---
 
@@ -590,12 +592,12 @@ git commit -m "fix: sort search index fields for a stable rebuild"
 
 ## Selbstprüfung
 
-- Architektur, Pipeline, Suche, Astro, Workflows und Tests stehen im Bestandsaudit. P0 baut nichts davon neu.
+- Das Ziel ist ein lesender Zugriff auf den bestehenden Katalog, gemessen an `search`, `get_project` und `list_categories`.
+- Architektur, Pipeline, Suche, Astro, Workflows und Tests stehen im Bestandsaudit. Kein Schritt baut daraus ein neues System.
 - Dubletten, GitHub-IDs, Quellen, Alter und Schema sind die harten und weichen Regeln von Task 1.
-- Das Zielmodell ist Task 3, ohne Befüllung. Task 4, 6 und 7 zeigen nur vorhandene Werte.
-- Inkrementelle Updates sind Task 2 und Task 4. Der Schreibvorgang in den Katalog bleibt einem eigenen, hier bewusst nicht enthaltenen Apply-PR vorbehalten.
-- Suche und MCP sind Task 5, 6 und 9. Die bestehende Explorer-Suche bleibt.
+- Ausführungsreihenfolge: Bestand sichern, dann MCP, dann belegte Datenqualität, dann Research-Berichte, dann UI. Task 3 wartet, bis Task 4 einen Beleg hat. Task 6 und Task 7 warten auf Task 5.
+- Der Schreibvorgang in den Katalog bleibt einem eigenen Apply-PR vorbehalten.
+- 742 ist das alte README-Badge. Die heutige Schwelle Score mindestens 50 trifft 678 Einträge.
 - Repomix hat keinen Task und keine Installation.
 - Instagram ist Task 8 und nur eine ID-Prüfung.
-- Filter, Bewertungen, Quellen, Vergleich und Aktualität sind Task 6 und Task 7. Bewertungen sind die vorhandenen Scores.
-- Kein Task öffnet eine Datenbank oder ein zweites Repository.
+- Kein Task öffnet eine Datenbank, eine Embedding-Pipeline oder ein zweites Repository.
