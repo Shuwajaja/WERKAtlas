@@ -21,6 +21,9 @@ jobs:
       
       - name: Validate catalog
         run: python scripts/validate.py --catalog data/catalog.json --schema data/catalog.schema.json
+
+      - name: Audit catalog invariants
+        run: python scripts/audit_catalog.py --catalog data/catalog.json --schema data/catalog.schema.json --taxonomy data/taxonomy.json --as-of 2026-10-28
       
       - name: Check for duplicates
         run: python -c "

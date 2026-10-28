@@ -31,6 +31,10 @@ render:
 validate:
 	python scripts/validate.py --catalog data/catalog.json --schema data/catalog.schema.json
 
+# Read-only identity and schema audit. Does not rewrite the catalog.
+audit:
+	python scripts/audit_catalog.py --catalog data/catalog.json --schema data/catalog.schema.json --taxonomy data/taxonomy.json --as-of 2026-10-28
+
 # Check external links
 check-links:
 	python scripts/check_links.py --catalog data/catalog.json
