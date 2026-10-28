@@ -6,7 +6,7 @@ Nur-lesender Zugriff auf `data/catalog.json`. Der Server installiert nichts, sta
 python mcp/server.py --catalog data/catalog.json --taxonomy data/taxonomy.json
 ```
 
-Transport ist JSON-RPC 2.0 mit `Content-Length` auf stdin und stdout.
+Transport ist JSON-RPC 2.0 als **eine JSON-Zeile pro Nachricht** auf stdin und stdout (MCP-stdio-Spezifikation).
 
 | Werkzeug | Wirkung |
 | --- | --- |

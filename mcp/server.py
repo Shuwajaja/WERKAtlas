@@ -2,7 +2,7 @@
 """Read-only WERKAtlas MCP server.
 
 Tools: search, get_project, list_categories.
-Transport: Content-Length JSON-RPC on stdin/stdout.
+Transport: newline-delimited JSON-RPC on stdin/stdout (MCP stdio spec).
 The process does not write the catalog, open a shell, or install anything.
 
 Usage:
@@ -16,7 +16,7 @@ import json
 import sys
 from pathlib import Path
 
-PROTOCOL_VERSION = "2024-11-05"
+PROTOCOL_VERSION = "2025-06-18"
 SERVER_NAME = "werkatlas"
 SERVER_VERSION = "2.0.0"
 MAX_LIMIT = 50
@@ -102,28 +102,20 @@ def handle_message(message: dict, entries: list, taxonomy: dict) -> dict | None:
 
 
 def encode_message(payload: dict) -> bytes:
-    body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    header = f"Content-Length: {len(body)}\r\n\r\n".encode("ascii")
-    return header + body
+    """One JSON-RPC object per line, no embedded newlines."""
+    return json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8") + b"\n"
 
 
 def read_message(buffer: bytes) -> tuple[dict | None, bytes]:
-    separator = b"\r\n\r\n"
-    index = buffer.find(separator)
-    if index == -1:
+    """Parse one newline-delimited JSON message from buffer."""
+    newline = buffer.find(b"\n")
+    if newline == -1:
         return None, buffer
-    header = buffer[:index].decode("ascii", errors="strict")
-    length = None
-    for line in header.split("\r\n"):
-        if line.lower().startswith("content-length:"):
-            length = int(line.split(":", 1)[1].strip())
-    if length is None:
-        raise ValueError("missing Content-Length")
-    start = index + len(separator)
-    if len(buffer) < start + length:
-        return None, buffer
-    body = buffer[start : start + length]
-    return json.loads(body.decode("utf-8")), buffer[start + length :]
+    line = buffer[:newline].strip()
+    rest = buffer[newline + 1 :]
+    if not line:
+        return read_message(rest) if rest else (None, rest)
+    return json.loads(line.decode("utf-8")), rest
 
 
 def serve(entries: list, taxonomy: dict) -> None:
@@ -131,7 +123,7 @@ def serve(entries: list, taxonomy: dict) -> None:
     stdout = sys.stdout.buffer
     buffer = b""
     while True:
-        chunk = stdin.read(4096)
+        chunk = stdin.read(1)
         if not chunk:
             return
         buffer += chunk

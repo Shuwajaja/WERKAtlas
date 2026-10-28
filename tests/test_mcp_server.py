@@ -1,7 +1,9 @@
 """Read-only catalog tools for agents. No shell and no writes."""
 
 import json
+import subprocess
 import sys
+import threading
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -118,11 +120,84 @@ def test_tools_call_search_returns_catalog_text():
     assert names == ["search", "get_project", "list_categories"]
 
 
-def test_framing_round_trip():
+def test_framing_is_one_json_line_without_content_length():
     raw = encode_message({"jsonrpc": "2.0", "id": 1, "method": "ping"})
+    assert raw.endswith(b"\n")
+    assert raw.count(b"\n") == 1
+    assert b"Content-Length" not in raw
     message, rest = read_message(raw)
     assert rest == b""
     assert message["method"] == "ping"
+    assert read_message(b'{"jsonrpc":"2.0","id":1,"method":"ping"}')[0] is None
+
+
+def test_short_stdio_initialize_answers_while_stdin_stays_open():
+    request = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+            "protocolVersion": "2025-06-18",
+            "capabilities": {},
+            "clientInfo": {"name": "werkatlas-test", "version": "0"},
+        },
+    }
+    line = (json.dumps(request) + "\n").encode("utf-8")
+    assert len(line) < 500
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            str(ROOT / "mcp" / "server.py"),
+            "--catalog",
+            str(ROOT / "data" / "catalog.json"),
+            "--taxonomy",
+            str(ROOT / "data" / "taxonomy.json"),
+        ],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    assert process.stdin is not None and process.stdout is not None
+    process.stdin.write(line)
+    process.stdin.flush()
+    received: list[bytes] = []
+
+    def read_one_line() -> None:
+        received.append(process.stdout.readline())
+
+    reader = threading.Thread(target=read_one_line)
+    reader.start()
+    reader.join(8)
+    try:
+        assert not reader.is_alive(), process.stderr.read1(2000) if process.stderr else b""
+        payload = json.loads(received[0].decode("utf-8"))
+        assert payload["id"] == 1
+        assert payload["result"]["protocolVersion"] == "2025-06-18"
+        assert b"Content-Length" not in received[0]
+        follow = (
+            json.dumps({"jsonrpc": "2.0", "method": "notifications/initialized"}) + "\n"
+            + json.dumps(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/call",
+                    "params": {"name": "get_project", "arguments": {"id": "n8n-io/n8n"}},
+                }
+            )
+            + "\n"
+        ).encode("utf-8")
+        process.stdin.write(follow)
+        process.stdin.flush()
+        received.clear()
+        reader = threading.Thread(target=read_one_line)
+        reader.start()
+        reader.join(8)
+        assert not reader.is_alive()
+        project = json.loads(json.loads(received[0].decode("utf-8"))["result"]["content"][0]["text"])
+        assert project["id"] == "n8n-io/n8n"
+    finally:
+        process.kill()
+        process.wait(timeout=5)
 
 
 def test_real_catalog_search_finds_n8n_without_writing(tmp_path):
