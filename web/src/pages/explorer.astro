@@ -90,6 +90,45 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
           </select>
         </div>
 
+        <div class="space-y-grid-xs">
+          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Lizenz</label>
+          <select
+            id="explorer-license"
+            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
+          >
+            <option value="ALL">Alle Lizenzen</option>
+            <option value="present">Lizenz vorhanden</option>
+            <option value="missing">Lizenz unbekannt</option>
+          </select>
+        </div>
+
+        <div class="space-y-grid-xs">
+          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Wartung</label>
+          <select
+            id="explorer-maintenance"
+            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
+          >
+            <option value="ALL">Alle Wartungsstände</option>
+            <option value="active">active</option>
+            <option value="slow">slow</option>
+            <option value="stale">stale</option>
+            <option value="archived">archived</option>
+            <option value="unclear">unclear</option>
+          </select>
+        </div>
+
+        <div class="space-y-grid-xs">
+          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Aktualität</label>
+          <select
+            id="explorer-freshness"
+            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
+          >
+            <option value="ALL">Alle Prüfdaten</option>
+            <option value="fresh">Geprüft in 90 Tagen vor 2026-10-28</option>
+            <option value="stale">Älter als 90 Tage vor 2026-10-28</option>
+          </select>
+        </div>
+
         <!-- Clear Filters -->
         <button 
           id="explorer-clear"
@@ -122,6 +161,10 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
               data-score={entry.score}
               data-stars={entry.stars}
               data-forks={entry.forks}
+              data-type={entry.project_type}
+              data-license={entry.license ? 'present' : 'missing'}
+              data-maintenance={entry.maintenance_status || 'unclear'}
+              data-checked={entry.checked_at || ''}
             >
               <div>
                 <!-- Top Header: Type & Score -->
@@ -179,7 +222,12 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
     const categorySelect = document.getElementById('explorer-category') as HTMLSelectElement;
     const tierSelect = document.getElementById('explorer-tier') as HTMLSelectElement;
     const sortSelect = document.getElementById('explorer-sort') as HTMLSelectElement;
+    const licenseSelect = document.getElementById('explorer-license') as HTMLSelectElement;
+    const maintenanceSelect = document.getElementById('explorer-maintenance') as HTMLSelectElement;
+    const freshnessSelect = document.getElementById('explorer-freshness') as HTMLSelectElement;
     const clearBtn = document.getElementById('explorer-clear') as HTMLButtonElement;
+    const AS_OF = Date.parse('2026-10-28T00:00:00Z');
+    const NINETY_DAYS = 90 * 24 * 60 * 60 * 1000;
     const countEl = document.getElementById('explorer-count') as HTMLElement;
     const grid = document.getElementById('explorer-grid') as HTMLElement;
     const cards = Array.from(grid.querySelectorAll('.project-card')) as HTMLElement[];
@@ -189,6 +237,9 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
       const cat = categorySelect.value;
       const tier = tierSelect.value;
       const sortBy = sortSelect.value;
+      const license = licenseSelect.value;
+      const maintenance = maintenanceSelect.value;
+      const freshness = freshnessSelect.value;
 
       let visibleCount = 0;
 
@@ -197,14 +248,21 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
         const name = (card.dataset.name || '').toLowerCase();
         const repo = (card.dataset.repo || '').toLowerCase();
         const desc = (card.dataset.desc || '').toLowerCase();
+        const kind = (card.dataset.type || '').toLowerCase();
         const pcat = card.dataset.cat || '';
         const ptier = card.dataset.tier || '';
+        const checked = Date.parse(card.dataset.checked || '');
+        const age = Number.isNaN(checked) ? Number.POSITIVE_INFINITY : AS_OF - checked;
+        const freshnessValue = age <= NINETY_DAYS ? 'fresh' : 'stale';
 
-        const matchesQuery = !q || name.includes(q) || repo.includes(q) || desc.includes(q);
+        const matchesQuery = !q || name.includes(q) || repo.includes(q) || desc.includes(q) || kind.includes(q);
         const matchesCat = cat === 'ALL' || pcat === cat;
         const matchesTier = tier === 'ALL' || ptier === tier;
+        const matchesLicense = license === 'ALL' || (card.dataset.license || 'missing') === license;
+        const matchesMaintenance = maintenance === 'ALL' || (card.dataset.maintenance || 'unclear') === maintenance;
+        const matchesFreshness = freshness === 'ALL' || freshnessValue === freshness;
 
-        if (matchesQuery && matchesCat && matchesTier) {
+        if (matchesQuery && matchesCat && matchesTier && matchesLicense && matchesMaintenance && matchesFreshness) {
           card.style.display = '';
           visibleCount++;
         } else {
@@ -235,12 +293,18 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
     categorySelect?.addEventListener('change', updateExplorer);
     tierSelect?.addEventListener('change', updateExplorer);
     sortSelect?.addEventListener('change', updateExplorer);
+    licenseSelect?.addEventListener('change', updateExplorer);
+    maintenanceSelect?.addEventListener('change', updateExplorer);
+    freshnessSelect?.addEventListener('change', updateExplorer);
 
     clearBtn?.addEventListener('click', () => {
       searchInput.value = '';
       categorySelect.value = 'ALL';
       tierSelect.value = 'ALL';
       sortSelect.value = 'score-desc';
+      licenseSelect.value = 'ALL';
+      maintenanceSelect.value = 'ALL';
+      freshnessSelect.value = 'ALL';
       updateExplorer();
     });
 
