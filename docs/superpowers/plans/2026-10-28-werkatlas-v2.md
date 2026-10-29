@@ -25,7 +25,7 @@
 - Subagenten schreiben nur nach `research/subagents/`.
 - Kein Ausführen von Drittcode. Keine bezahlten APIs.
 - `scripts/render.py` nicht über das Repository laufen lassen. Ein Probelauf schreibt README und CATALOG kürzer als die committeten Dateien.
-- PR #1 (`cursor/werkatlas-v2-repo-reconciliation-e194`) nicht mergen und nicht als Basis verwenden. Der Diff ist für Review zu groß. Diesen Plan von `main` (`1f04367`) aus umsetzen.
+- PR #1 (Instagram-GitHub-Reconciliation, 48 neue Einträge) ist am 2026-10-29 auf `main` gemergt (`1516` Einträge). Weitere Katalogänderungen weiterhin nur über kleine Review-PRs.
 
 ---
 
