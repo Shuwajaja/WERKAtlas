@@ -8,6 +8,7 @@ def test_validate_workflow_has_no_multiline_inline_python():
     assert 'run: python -c "' not in text
 
 
-def test_validate_workflow_runs_pytest():
+def test_validate_workflow_lists_audit_and_tests():
     text = Path(".github/workflows/validate.yml").read_text(encoding="utf-8")
+    assert "Audit catalog invariants" in text
     assert "python -m pytest tests/" in text
