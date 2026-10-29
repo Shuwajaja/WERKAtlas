@@ -201,22 +201,22 @@ def test_main_catalog_has_no_hard_errors_and_records_unknowns():
     report = audit_catalog(catalog, schema, taxonomy, as_of=AS_OF, stale_days=90)
     assert report["passed"] is True
     assert report["hard_errors"] == []
-    assert report["entry_count"] == 1468
-    assert report["declared_count"] == 1468
+    assert report["entry_count"] == 1516
+    assert report["declared_count"] == 1516
     assert report["soft_findings"] == {
-        "license_missing": 1428,
-        "maintenance_unclear": 1466,
+        "license_missing": 1400,
+        "maintenance_unclear": 1511,
         "description_under_12_words": 585,
         "description_over_30_words": 65,
         "checked_at_stale": 1468,
         "source_urls_missing": 0,
         "discovered_from_missing": 0,
-        "unknown_agent_type": 1468,
-        "unknown_unique_features": 1468,
-        "unknown_cost": 1468,
-        "unknown_integration_type": 1468,
-        "unknown_system_fit": 1468,
-        "unknown_verification": 1468,
+        "unknown_agent_type": 1516,
+        "unknown_unique_features": 1516,
+        "unknown_cost": 1516,
+        "unknown_integration_type": 1516,
+        "unknown_system_fit": 1516,
+        "unknown_verification": 1516,
     }
 
 
@@ -247,4 +247,4 @@ def test_cli_does_not_modify_the_catalog(tmp_path):
     assert before == after
     report = json.loads((tmp_path / "audit.json").read_text(encoding="utf-8"))
     assert report["passed"] is True
-    assert report["entry_count"] == 1468
+    assert report["entry_count"] == 1516

@@ -34,20 +34,20 @@ lobehub/lobehub,lobehub,lobehub,lobehub/lobehub,https://github.com/lobehub/lobeh
 D4Vinci/Scrapling,Scrapling,D4Vinci,D4Vinci/Scrapling,https://github.com/D4Vinci/Scrapling,,D.20,MCP server,community,73.0,68527,6786,0,Python,,2026-07-07T18:45:29.195112+00:00
 koala73/worldmonitor,worldmonitor,koala73,koala73/worldmonitor,https://github.com/koala73/worldmonitor,,D.20,MCP server,community,73.0,61514,9574,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 sansan0/TrendRadar,TrendRadar,sansan0,sansan0/TrendRadar,https://github.com/sansan0/TrendRadar,,D.20,MCP server,community,73.0,60331,24759,0,Python,,2026-07-07T18:45:29.195112+00:00
-ruvnet/ruflo,ruflo,ruvnet,ruvnet/ruflo,https://github.com/ruvnet/ruflo,,D.20,MCP server,community,72.9,63413,7465,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+ruvnet/ruflo,ruflo,ruvnet,ruvnet/ruflo,https://github.com/ruvnet/ruflo,,D.20,MCP server,community,72.9,63413,7465,0,TypeScript,MIT,2026-07-07T18:45:29.195112+00:00
 zhayujie/CowAgent,CowAgent,zhayujie,zhayujie/CowAgent,https://github.com/zhayujie/CowAgent,,B.9,framework,community,72.8,45850,10258,0,Python,,2026-07-07T18:45:29.195112+00:00
 danny-avila/LibreChat,LibreChat,danny-avila,danny-avila/LibreChat,https://github.com/danny-avila/LibreChat,,E.29,framework,community,72.6,40403,8277,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
-Panniantong/Agent-Reach,Agent-Reach,Panniantong,Panniantong/Agent-Reach,https://github.com/Panniantong/Agent-Reach,,J.75,framework,community,72.5,52556,4221,0,Python,,2026-07-07T18:45:29.195112+00:00
+Panniantong/Agent-Reach,Agent-Reach,Panniantong,Panniantong/Agent-Reach,https://github.com/Panniantong/Agent-Reach,,J.75,framework,community,72.5,52556,4221,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 Snailclimb/JavaGuide,JavaGuide,Snailclimb,Snailclimb/JavaGuide,https://github.com/Snailclimb/JavaGuide,,E.29,framework,community,72.5,156863,46163,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
 AstrBotDevs/AstrBot,AstrBot,AstrBotDevs,AstrBotDevs/AstrBot,https://github.com/AstrBotDevs/AstrBot,,C.15,framework,community,72.4,35960,2492,0,Python,,2026-07-07T18:45:29.195112+00:00
 wshobson/agents,agents,wshobson,wshobson/agents,https://github.com/wshobson/agents,,B.9,framework,community,72.2,37637,4037,0,Python,,2026-07-07T18:45:29.195112+00:00
 NirDiamant/agents-towards-production,agents-towards-production,NirDiamant,NirDiamant/agents-towards-production,https://github.com/NirDiamant/agents-towards-production,,B.6,framework,community,72.0,20929,2784,0,Jupyter Notebook,,2026-07-07T18:45:29.195112+00:00
 microsoft/autogen,autogen,microsoft,microsoft/autogen,https://github.com/microsoft/autogen,https://microsoft.github.io/autogen/,B.6,framework,unclear,72.0,59557,8966,927,Python,CC-BY-4.0,2026-07-07T17:39:42.376291+00:00
-activepieces/activepieces,activepieces,activepieces,activepieces/activepieces,https://github.com/activepieces/activepieces,,D.20,MCP server,community,71.7,23160,3901,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+activepieces/activepieces,activepieces,activepieces,activepieces/activepieces,https://github.com/activepieces/activepieces,,D.20,MCP server,community,71.7,23160,3901,0,TypeScript,NOASSERTION,2026-07-07T18:45:29.195112+00:00
 NirDiamant/GenAI_Agents,GenAI_Agents,NirDiamant,NirDiamant/GenAI_Agents,https://github.com/NirDiamant/GenAI_Agents,,B.9,framework,community,71.7,23029,3865,0,Jupyter Notebook,,2026-07-07T18:45:29.195112+00:00
 aaif-goose/goose,goose,aaif-goose,aaif-goose/goose,https://github.com/aaif-goose/goose,,H.55,framework,community,71.6,50773,5470,0,Rust,,2026-07-07T18:45:29.195112+00:00
 DeusData/codebase-memory-mcp,codebase-memory-mcp,DeusData,DeusData/codebase-memory-mcp,https://github.com/DeusData/codebase-memory-mcp,,D.20,MCP server,community,71.6,27853,2069,0,C,,2026-07-07T18:45:29.195112+00:00
-mukul975/Anthropic-Cybersecurity-Skills,Anthropic-Cybersecurity-Skills,mukul975,mukul975/Anthropic-Cybersecurity-Skills,https://github.com/mukul975/Anthropic-Cybersecurity-Skills,,H.57,framework,community,71.6,24852,2841,0,Python,,2026-07-07T18:45:29.195112+00:00
+mukul975/Anthropic-Cybersecurity-Skills,Anthropic-Cybersecurity-Skills,mukul975,mukul975/Anthropic-Cybersecurity-Skills,https://github.com/mukul975/Anthropic-Cybersecurity-Skills,,H.57,framework,community,71.6,24852,2841,0,Python,Apache-2.0,2026-07-07T18:45:29.195112+00:00
 oraios/serena,serena,oraios,oraios/serena,https://github.com/oraios/serena,,D.20,MCP server,community,71.5,26179,1743,0,Python,,2026-07-07T18:45:29.195112+00:00
 microsoft/mcp-for-beginners,mcp-for-beginners,microsoft,microsoft/mcp-for-beginners,https://github.com/microsoft/mcp-for-beginners,,D.20,MCP server,community,71.5,16704,5452,0,Jupyter Notebook,,2026-07-07T18:45:29.195112+00:00
 bytedance/deer-flow,deer-flow,bytedance,bytedance/deer-flow,https://github.com/bytedance/deer-flow,,B.9,framework,community,71.2,76360,10354,0,Python,,2026-07-07T18:45:29.195112+00:00
@@ -72,7 +72,7 @@ FoundationAgents/MetaGPT,MetaGPT,FoundationAgents,FoundationAgents/MetaGPT,https
 google-gemini/gemini-cli,gemini-cli,google-gemini,google-gemini/gemini-cli,https://github.com/google-gemini/gemini-cli,,D.20,MCP server,community,70.5,105823,14226,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 PrefectHQ/fastmcp,fastmcp,PrefectHQ,PrefectHQ/fastmcp,https://github.com/PrefectHQ/fastmcp,,D.20,MCP server,community,70.5,26017,2116,0,Python,,2026-07-07T18:45:29.195112+00:00
 sickn33/antigravity-awesome-skills,antigravity-awesome-skills,sickn33,sickn33/antigravity-awesome-skills,https://github.com/sickn33/antigravity-awesome-skills,,E.35,library,community,70.5,42542,6774,0,Python,,2026-07-07T18:45:29.195112+00:00
-upstash/context7,context7,upstash,upstash/context7,https://github.com/upstash/context7,,D.20,MCP server,community,70.4,58718,2757,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+upstash/context7,context7,upstash,upstash/context7,https://github.com/upstash/context7,,D.20,MCP server,community,70.4,58718,2757,0,TypeScript,MIT,2026-07-07T18:45:29.195112+00:00
 NevaMind-AI/memU,memU,NevaMind-AI,NevaMind-AI/memU,https://github.com/NevaMind-AI/memU,,G.49,sandbox,community,70.1,13995,1039,0,Python,,2026-07-07T18:45:29.195112+00:00
 hugohe3/ppt-master,ppt-master,hugohe3,hugohe3/ppt-master,https://github.com/hugohe3/ppt-master,,G.52,framework,community,70.1,37469,3125,0,Python,,2026-07-07T18:45:29.195112+00:00
 ComposioHQ/awesome-claude-skills,awesome-claude-skills,ComposioHQ,ComposioHQ/awesome-claude-skills,https://github.com/ComposioHQ/awesome-claude-skills,,E.35,library,community,70.0,67079,7511,0,Python,,2026-07-07T18:45:29.195112+00:00
@@ -80,7 +80,7 @@ thedaviddias/Front-End-Checklist,Front-End-Checklist,thedaviddias,thedaviddias/F
 nukeop/nuclear,nuclear,nukeop,nukeop/nuclear,https://github.com/nukeop/nuclear,,D.20,MCP server,community,70.0,18001,1299,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 ComposioHQ/composio,composio,ComposioHQ,ComposioHQ/composio,https://github.com/ComposioHQ/composio,,E.35,library,community,70.0,29124,4646,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 google/adk-python,adk-python,google,google/adk-python,https://github.com/google/adk-python,,B.9,framework,community,70.0,20508,3658,0,Python,,2026-07-07T18:45:29.195112+00:00
-triggerdotdev/trigger.dev,trigger.dev,triggerdotdev,triggerdotdev/trigger.dev,https://github.com/triggerdotdev/trigger.dev,,D.20,MCP server,community,69.9,15594,1345,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+triggerdotdev/trigger.dev,trigger.dev,triggerdotdev,triggerdotdev/trigger.dev,https://github.com/triggerdotdev/trigger.dev,,D.20,MCP server,community,69.9,15594,1345,0,TypeScript,Apache-2.0,2026-07-07T18:45:29.195112+00:00
 anthropics/claude-plugins-official,claude-plugins-official,anthropics,anthropics/claude-plugins-official,https://github.com/anthropics/claude-plugins-official,,J.81,framework,community,69.9,31740,3495,0,Python,,2026-07-07T18:45:29.195112+00:00
 zylon-ai/private-gpt,private-gpt,zylon-ai,zylon-ai/private-gpt,https://github.com/zylon-ai/private-gpt,,D.20,framework,community,69.8,57313,7598,0,Python,,2026-07-07T18:45:29.195112+00:00
 iOfficeAI/AionUi,AionUi,iOfficeAI,iOfficeAI/AionUi,https://github.com/iOfficeAI/AionUi,,E.29,framework,community,69.8,29444,2943,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
@@ -115,33 +115,33 @@ JoeanAmier/XHS-Downloader,XHS-Downloader,JoeanAmier,JoeanAmier/XHS-Downloader,ht
 kubeshark/kubeshark,kubeshark,kubeshark,kubeshark/kubeshark,https://github.com/kubeshark/kubeshark,,J.75,framework,community,68.7,11991,543,0,Go,,2026-07-07T18:45:29.195112+00:00
 jackwener/OpenCLI,OpenCLI,jackwener,jackwener/OpenCLI,https://github.com/jackwener/OpenCLI,,B.6,framework,community,68.6,26225,2592,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
 microsoft/qlib,qlib,microsoft,microsoft/qlib,https://github.com/microsoft/qlib,,J.74,framework,community,68.6,45914,7311,0,Python,,2026-07-07T18:45:29.195112+00:00
-mvanhorn/last30days-skill,last30days-skill,mvanhorn,mvanhorn/last30days-skill,https://github.com/mvanhorn/last30days-skill,,E.29,framework,community,68.5,50236,4184,0,Python,,2026-07-07T18:45:29.195112+00:00
+mvanhorn/last30days-skill,last30days-skill,mvanhorn,mvanhorn/last30days-skill,https://github.com/mvanhorn/last30days-skill,,E.29,framework,community,68.5,50236,4184,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 nocobase/nocobase,nocobase,nocobase,nocobase/nocobase,https://github.com/nocobase/nocobase,,J.79,application,community,68.5,23266,2739,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 OthmanAdi/planning-with-files,planning-with-files,OthmanAdi,OthmanAdi/planning-with-files,https://github.com/OthmanAdi/planning-with-files,,C.13,application,community,68.5,24995,2120,0,Python,,2026-07-07T18:45:29.195112+00:00
-NousResearch/hermes-agent,hermes-agent,NousResearch,NousResearch/hermes-agent,https://github.com/NousResearch/hermes-agent,,B.6,framework,community,68.5,210868,38696,0,Python,,2026-07-07T18:45:29.195112+00:00
+NousResearch/hermes-agent,hermes-agent,NousResearch,NousResearch/hermes-agent,https://github.com/NousResearch/hermes-agent,,B.6,framework,community,68.5,210868,38696,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 1Panel-dev/MaxKB,MaxKB,1Panel-dev,1Panel-dev/MaxKB,https://github.com/1Panel-dev/MaxKB,,D.20,MCP server,community,68.5,21962,2974,0,Python,,2026-07-07T18:45:29.195112+00:00
 micro/go-micro,go-micro,micro,micro/go-micro,https://github.com/micro/go-micro,,B.6,framework,community,68.5,22947,2410,0,Go,,2026-07-07T18:45:29.195112+00:00
-obra/superpowers,superpowers,obra,obra/superpowers,https://github.com/obra/superpowers,,C.13,framework,community,68.5,248555,22062,0,Shell,,2026-07-07T18:45:29.195112+00:00
-langflow-ai/langflow,langflow,langflow-ai,langflow-ai/langflow,https://github.com/langflow-ai/langflow,,J.75,framework,community,68.5,151298,9458,0,Python,,2026-07-07T18:45:29.195112+00:00
+obra/superpowers,superpowers,obra,obra/superpowers,https://github.com/obra/superpowers,,C.13,framework,community,68.5,248555,22062,0,Shell,MIT,2026-07-07T18:45:29.195112+00:00
+langflow-ai/langflow,langflow,langflow-ai,langflow-ai/langflow,https://github.com/langflow-ai/langflow,,J.75,framework,community,68.5,151298,9458,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 CherryHQ/cherry-studio,cherry-studio,CherryHQ,CherryHQ/cherry-studio,https://github.com/CherryHQ/cherry-studio,,E.35,library,community,68.5,48272,4589,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 mlflow/mlflow,mlflow,mlflow,mlflow/mlflow,https://github.com/mlflow/mlflow,,H.55,evaluation framework,community,68.5,26922,5961,0,Python,,2026-07-07T18:45:29.195112+00:00
 Aider-AI/aider,aider,Aider-AI,Aider-AI/aider,https://github.com/Aider-AI/aider,https://aider.chat/,C.13,application,unclear,68.5,47147,4708,1718,Python,Apache-2.0,2026-07-07T17:40:06.481004+00:00
 esengine/DeepSeek-Reasonix,DeepSeek-Reasonix,esengine,esengine/DeepSeek-Reasonix,https://github.com/esengine/DeepSeek-Reasonix,,C.13,application,community,68.4,26318,1636,0,Go,,2026-07-07T18:45:29.195112+00:00
 Mintplex-Labs/anything-llm,anything-llm,Mintplex-Labs,Mintplex-Labs/anything-llm,https://github.com/Mintplex-Labs/anything-llm,,G.44,application,community,68.4,62756,6859,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
-HKUDS/Vibe-Trading,Vibe-Trading,HKUDS,HKUDS/Vibe-Trading,https://github.com/HKUDS/Vibe-Trading,,B.9,framework,community,68.4,18435,3057,0,Python,,2026-07-07T18:45:29.195112+00:00
+HKUDS/Vibe-Trading,Vibe-Trading,HKUDS,HKUDS/Vibe-Trading,https://github.com/HKUDS/Vibe-Trading,,B.9,framework,community,68.4,18435,3057,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 pingcap/tidb,tidb,pingcap,pingcap/tidb,https://github.com/pingcap/tidb,,F.37,library,community,68.4,40263,6219,0,Go,,2026-07-07T18:45:29.195112+00:00
 tldraw/tldraw,tldraw,tldraw,tldraw/tldraw,https://github.com/tldraw/tldraw,,J.77,framework,community,68.3,48608,3361,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 huggingface/pytorch-image-models,pytorch-image-models,huggingface,huggingface/pytorch-image-models,https://github.com/huggingface/pytorch-image-models,,I.67,framework,community,68.3,36961,5168,0,Python,,2026-07-07T18:45:29.195112+00:00
 RightNow-AI/openfang,openfang,RightNow-AI,RightNow-AI/openfang,https://github.com/RightNow-AI/openfang,,B.6,framework,community,68.2,17979,2277,0,Rust,,2026-07-07T18:45:29.195112+00:00
 CopilotKit/CopilotKit,CopilotKit,CopilotKit,CopilotKit/CopilotKit,https://github.com/CopilotKit/CopilotKit,,C.15,IDE extension,community,68.2,35824,4438,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
-addyosmani/agent-skills,agent-skills,addyosmani,addyosmani/agent-skills,https://github.com/addyosmani/agent-skills,,E.35,library,community,68.1,71845,7782,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
+addyosmani/agent-skills,agent-skills,addyosmani,addyosmani/agent-skills,https://github.com/addyosmani/agent-skills,,E.35,library,community,68.1,71845,7782,0,JavaScript,MIT,2026-07-07T18:45:29.195112+00:00
 666ghj/MiroFish,MiroFish,666ghj,666ghj/MiroFish,https://github.com/666ghj/MiroFish,,F.39,library,community,68.1,68064,10607,0,Python,,2026-07-07T18:45:29.195112+00:00
 trycua/cua,cua,trycua,trycua/cua,https://github.com/trycua/cua,,G.44,application,community,68.0,19431,1277,0,HTML,,2026-07-07T18:45:29.195112+00:00
 OpenBB-finance/OpenBB,OpenBB,OpenBB-finance,OpenBB-finance/OpenBB,https://github.com/OpenBB-finance/OpenBB,,B.6,framework,community,68.0,70260,7110,0,Python,,2026-07-07T18:45:29.195112+00:00
 github/github-mcp-server,github-mcp-server,github,github/github-mcp-server,https://github.com/github/github-mcp-server,,D.20,MCP server,community,68.0,31270,4520,0,Go,,2026-07-07T18:45:29.195112+00:00
 tadata-org/fastapi_mcp,fastapi_mcp,tadata-org,tadata-org/fastapi_mcp,https://github.com/tadata-org/fastapi_mcp,,D.20,MCP server,community,67.9,11937,952,0,Python,,2026-07-07T18:45:29.195112+00:00
 openai/swarm,swarm,openai,openai/swarm,https://github.com/openai/swarm,,J.81,framework,community,67.9,21770,2319,0,Python,,2026-07-07T18:45:29.195112+00:00
-gsd-build/get-shit-done,get-shit-done,gsd-build,gsd-build/get-shit-done,https://github.com/gsd-build/get-shit-done,,C.13,framework,community,67.8,64697,5477,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
+gsd-build/get-shit-done,get-shit-done,gsd-build,gsd-build/get-shit-done,https://github.com/gsd-build/get-shit-done,,C.13,framework,community,67.8,64697,5477,0,JavaScript,MIT,2026-07-07T18:45:29.195112+00:00
 K-Dense-AI/scientific-agent-skills,scientific-agent-skills,K-Dense-AI,K-Dense-AI/scientific-agent-skills,https://github.com/K-Dense-AI/scientific-agent-skills,,E.35,library,community,67.8,30397,3060,0,Python,,2026-07-07T18:45:29.195112+00:00
 open-multi-agent/open-multi-agent,open-multi-agent,open-multi-agent,open-multi-agent/open-multi-agent,https://github.com/open-multi-agent/open-multi-agent,,B.6,framework,community,67.8,6530,2409,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 airbytehq/airbyte,airbyte,airbytehq,airbytehq/airbyte,https://github.com/airbytehq/airbyte,,F.43,framework,community,67.8,21589,5249,0,Python,,2026-07-07T18:45:29.195112+00:00
@@ -154,13 +154,13 @@ googleworkspace/cli,cli,googleworkspace,googleworkspace/cli,https://github.com/g
 huggingface/datasets,datasets,huggingface,huggingface/datasets,https://github.com/huggingface/datasets,,J.81,framework,community,67.6,21692,3287,0,Python,,2026-07-07T18:45:29.195112+00:00
 firerpa/lamda,lamda,firerpa,firerpa/lamda,https://github.com/firerpa/lamda,,D.20,MCP server,community,67.6,7858,1045,0,Python,,2026-07-07T18:45:29.195112+00:00
 The-Pocket/PocketFlow,PocketFlow,The-Pocket,The-Pocket/PocketFlow,https://github.com/The-Pocket/PocketFlow,,B.6,framework,community,67.5,10941,1183,0,Python,,2026-07-07T18:45:29.195112+00:00
-x1xhlol/system-prompts-and-models-of-ai-tools,system-prompts-and-models-of-ai-tools,x1xhlol,x1xhlol/system-prompts-and-models-of-ai-tools,https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools,,E.31,template,community,67.5,141649,34799,0,,,2026-07-07T18:45:29.195112+00:00
+x1xhlol/system-prompts-and-models-of-ai-tools,system-prompts-and-models-of-ai-tools,x1xhlol,x1xhlol/system-prompts-and-models-of-ai-tools,https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools,,E.31,template,community,67.5,141649,34799,0,,GPL-3.0,2026-07-07T18:45:29.195112+00:00
 VoltAgent/awesome-design-md,awesome-design-md,VoltAgent,VoltAgent/awesome-design-md,https://github.com/VoltAgent/awesome-design-md,,C.13,template,community,67.5,96634,11342,0,,,2026-07-07T18:45:29.195112+00:00
 coze-dev/coze-studio,coze-studio,coze-dev,coze-dev/coze-studio,https://github.com/coze-dev/coze-studio,,B.8,framework,community,67.5,21124,3071,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 ultraworkers/claw-code,claw-code,ultraworkers,ultraworkers/claw-code,https://github.com/ultraworkers/claw-code,,J.77,framework,community,67.5,194644,109804,0,Rust,,2026-07-07T18:45:29.195112+00:00
 msitarzewski/agency-agents,agency-agents,msitarzewski,msitarzewski/agency-agents,https://github.com/msitarzewski/agency-agents,,B.6,framework,community,67.5,128670,20906,0,Shell,,2026-07-07T18:45:29.195112+00:00
 reworkd/AgentGPT,AgentGPT,reworkd,reworkd/AgentGPT,https://github.com/reworkd/AgentGPT,,J.75,framework,community,67.5,36256,9305,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
-manaflow-ai/cmux,cmux,manaflow-ai,manaflow-ai/cmux,https://github.com/manaflow-ai/cmux,,C.13,framework,community,67.4,23838,1900,0,Swift,,2026-07-07T18:45:29.195112+00:00
+manaflow-ai/cmux,cmux,manaflow-ai,manaflow-ai/cmux,https://github.com/manaflow-ai/cmux,,C.13,framework,community,67.4,23838,1900,0,Swift,NOASSERTION,2026-07-07T18:45:29.195112+00:00
 mindsdb/minds,minds,mindsdb,mindsdb/minds,https://github.com/mindsdb/minds,,F.38,library,community,67.4,39381,6220,0,Makefile,,2026-07-07T18:45:29.195112+00:00
 Kong/kong,kong,Kong,Kong/kong,https://github.com/Kong/kong,,D.24,gateway,community,67.4,43753,5169,0,Lua,,2026-07-07T18:45:29.195112+00:00
 pathwaycom/pathway,pathway,pathwaycom,pathwaycom/pathway,https://github.com/pathwaycom/pathway,,E.36,framework,community,67.3,62715,1671,0,Python,,2026-07-07T18:45:29.195112+00:00
@@ -173,14 +173,14 @@ winfunc/opcode,opcode,winfunc,winfunc/opcode,https://github.com/winfunc/opcode,,
 camel-ai/owl,owl,camel-ai,camel-ai/owl,https://github.com/camel-ai/owl,,A.1,tutorial,community,67.3,19926,2300,0,Python,,2026-07-07T18:45:29.195112+00:00
 ToolJet/ToolJet,ToolJet,ToolJet,ToolJet/ToolJet,https://github.com/ToolJet/ToolJet,,J.79,application,community,67.3,38158,5157,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
 Gitlawb/openclaude,openclaude,Gitlawb,Gitlawb/openclaude,https://github.com/Gitlawb/openclaude,,C.13,framework,community,67.3,29844,8863,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
-coreyhaines31/marketingskills,marketingskills,coreyhaines31,coreyhaines31/marketingskills,https://github.com/coreyhaines31/marketingskills,,E.29,framework,community,67.3,37049,5962,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
+coreyhaines31/marketingskills,marketingskills,coreyhaines31,coreyhaines31/marketingskills,https://github.com/coreyhaines31/marketingskills,,E.29,framework,community,67.3,37049,5962,0,JavaScript,MIT,2026-07-07T18:45:29.195112+00:00
 lm-sys/FastChat,FastChat,lm-sys,lm-sys/FastChat,https://github.com/lm-sys/FastChat,,H.55,framework,unclear,67.3,39490,4787,1025,Python,Apache-2.0,2026-07-07T18:40:53.523415+00:00
 dair-ai/Prompt-Engineering-Guide,Prompt-Engineering-Guide,dair-ai,dair-ai/Prompt-Engineering-Guide,https://github.com/dair-ai/Prompt-Engineering-Guide,,F.38,library,community,67.2,76273,8350,0,MDX,,2026-07-07T18:45:29.195112+00:00
-thedotmack/claude-mem,claude-mem,thedotmack,thedotmack/claude-mem,https://github.com/thedotmack/claude-mem,,F.38,library,community,67.2,86303,7465,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
+thedotmack/claude-mem,claude-mem,thedotmack,thedotmack/claude-mem,https://github.com/thedotmack/claude-mem,,F.38,library,community,67.2,86303,7465,0,JavaScript,Apache-2.0,2026-07-07T18:45:29.195112+00:00
 Graphify-Labs/graphify,graphify,Graphify-Labs,Graphify-Labs/graphify,https://github.com/Graphify-Labs/graphify,,F.38,library,community,67.2,79363,7822,0,Python,,2026-07-07T18:45:29.195112+00:00
 MemoriLabs/Memori,Memori,MemoriLabs,MemoriLabs/Memori,https://github.com/MemoriLabs/Memori,,F.38,library,community,67.2,15542,2779,0,Python,,2026-07-07T18:45:29.195112+00:00
 ansible/ansible,ansible,ansible,ansible/ansible,https://github.com/ansible/ansible,,J.75,framework,community,67.2,69343,24116,0,Python,,2026-07-07T18:45:29.195112+00:00
-teng-lin/notebooklm-py,notebooklm-py,teng-lin,teng-lin/notebooklm-py,https://github.com/teng-lin/notebooklm-py,,E.29,framework,community,67.2,17303,2351,0,Python,,2026-07-07T18:45:29.195112+00:00
+teng-lin/notebooklm-py,notebooklm-py,teng-lin,teng-lin/notebooklm-py,https://github.com/teng-lin/notebooklm-py,,E.29,framework,community,67.2,17303,2351,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 2noise/ChatTTS,ChatTTS,2noise,2noise/ChatTTS,https://github.com/2noise/ChatTTS,,G.52,framework,community,67.2,39576,4249,0,Python,,2026-07-07T18:45:29.195112+00:00
 novuhq/novu,novu,novuhq,novuhq/novu,https://github.com/novuhq/novu,,B.6,framework,community,67.2,39265,4347,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 gitroomhq/postiz-app,postiz-app,gitroomhq,gitroomhq/postiz-app,https://github.com/gitroomhq/postiz-app,,B.6,framework,community,67.2,32811,6132,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
@@ -195,14 +195,14 @@ dataelement/bisheng,bisheng,dataelement,dataelement/bisheng,https://github.com/d
 BloopAI/vibe-kanban,vibe-kanban,BloopAI,BloopAI/vibe-kanban,https://github.com/BloopAI/vibe-kanban,,C.13,framework,community,66.7,27294,2895,0,Rust,,2026-07-07T18:45:29.195112+00:00
 VoltAgent/awesome-openclaw-skills,awesome-openclaw-skills,VoltAgent,VoltAgent/awesome-openclaw-skills,https://github.com/VoltAgent/awesome-openclaw-skills,,E.35,library,community,66.6,51007,4938,0,,,2026-07-07T18:45:29.195112+00:00
 future-architect/vuls,vuls,future-architect,future-architect/vuls,https://github.com/future-architect/vuls,,C.13,framework,community,66.6,12206,1237,0,Go,,2026-07-07T18:45:29.195112+00:00
-AgriciDaniel/claude-seo,claude-seo,AgriciDaniel,AgriciDaniel/claude-seo,https://github.com/AgriciDaniel/claude-seo,,E.29,framework,community,66.6,10727,1562,0,Python,,2026-07-07T18:45:29.195112+00:00
+AgriciDaniel/claude-seo,claude-seo,AgriciDaniel,AgriciDaniel/claude-seo,https://github.com/AgriciDaniel/claude-seo,,E.29,framework,community,66.6,10727,1562,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 microsoft/onnxruntime,onnxruntime,microsoft,microsoft/onnxruntime,https://github.com/microsoft/onnxruntime,,I.65,framework,community,66.6,21032,4037,0,C++,,2026-07-07T18:45:29.195112+00:00
 Unity-Technologies/ml-agents,ml-agents,Unity-Technologies,Unity-Technologies/ml-agents,https://github.com/Unity-Technologies/ml-agents,,A.1,tutorial,community,66.6,19541,4470,0,C#,,2026-07-07T18:45:29.195112+00:00
 InsForge/InsForge,InsForge,InsForge,InsForge/InsForge,https://github.com/InsForge/InsForge,,F.43,framework,community,66.5,12062,1040,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 colbymchenry/codegraph,codegraph,colbymchenry,colbymchenry/codegraph,https://github.com/colbymchenry/codegraph,,C.15,framework,community,66.5,58296,3602,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
-volcengine/OpenViking,OpenViking,volcengine,volcengine/OpenViking,https://github.com/volcengine/OpenViking,,E.35,library,community,66.5,26396,2055,0,Python,,2026-07-07T18:45:29.195112+00:00
+volcengine/OpenViking,OpenViking,volcengine,volcengine/OpenViking,https://github.com/volcengine/OpenViking,,E.35,library,community,66.5,26396,2055,0,Python,AGPL-3.0,2026-07-07T18:45:29.195112+00:00
 opensandbox-group/OpenSandbox,OpenSandbox,opensandbox-group,opensandbox-group/OpenSandbox,https://github.com/opensandbox-group/OpenSandbox,,G.49,sandbox,community,66.5,11876,992,0,Python,,2026-07-07T18:45:29.195112+00:00
-THU-MAIC/OpenMAIC,OpenMAIC,THU-MAIC,THU-MAIC/OpenMAIC,https://github.com/THU-MAIC/OpenMAIC,,A.1,tutorial,community,66.5,19421,3817,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+THU-MAIC/OpenMAIC,OpenMAIC,THU-MAIC,THU-MAIC/OpenMAIC,https://github.com/THU-MAIC/OpenMAIC,,A.1,tutorial,community,66.5,19421,3817,0,TypeScript,MIT,2026-07-07T18:45:29.195112+00:00
 google/adk-go,adk-go,google,google/adk-go,https://github.com/google/adk-go,,H.55,framework,community,66.5,8409,734,0,Go,,2026-07-07T18:45:29.195112+00:00
 tinyhumansai/openhuman,openhuman,tinyhumansai,tinyhumansai/openhuman,https://github.com/tinyhumansai/openhuman,,J.77,framework,community,66.5,34368,3358,0,Rust,,2026-07-07T18:45:29.195112+00:00
 karpathy/autoresearch,autoresearch,karpathy,karpathy/autoresearch,https://github.com/karpathy/autoresearch,,J.77,framework,community,66.4,90227,13018,0,Python,,2026-07-07T18:45:29.195112+00:00
@@ -217,7 +217,7 @@ pydantic/pydantic-ai,pydantic-ai,pydantic,pydantic/pydantic-ai,https://github.co
 HKUDS/DeepCode,DeepCode,HKUDS,HKUDS/DeepCode,https://github.com/HKUDS/DeepCode,,C.13,framework,community,66.1,15961,2095,0,Python,,2026-07-07T18:45:29.195112+00:00
 aden-hive/hive,hive,aden-hive,aden-hive/hive,https://github.com/aden-hive/hive,,B.6,framework,community,66.1,10644,5647,0,Python,,2026-07-07T18:45:29.195112+00:00
 llmware-ai/llmware,llmware,llmware-ai,llmware-ai/llmware,https://github.com/llmware-ai/llmware,,E.36,framework,community,66.1,14817,2912,0,Python,,2026-07-07T18:45:29.195112+00:00
-earendil-works/pi,pi,earendil-works,earendil-works/pi,https://github.com/earendil-works/pi,,C.13,framework,community,66.1,68380,8404,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+earendil-works/pi,pi,earendil-works,earendil-works/pi,https://github.com/earendil-works/pi,,C.13,framework,community,66.1,68380,8404,0,TypeScript,MIT,2026-07-07T18:45:29.195112+00:00
 EvoMap/evolver,evolver,EvoMap,EvoMap/evolver,https://github.com/EvoMap/evolver,,B.6,framework,community,66.1,8866,819,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
 iflytek/astron-agent,astron-agent,iflytek,iflytek/astron-agent,https://github.com/iflytek/astron-agent,,B.9,framework,community,66.1,8611,860,0,Java,,2026-07-07T18:45:29.195112+00:00
 openai/CLIP,CLIP,openai,openai/CLIP,https://github.com/openai/CLIP,,I.67,framework,community,66.1,33930,4028,0,Jupyter Notebook,,2026-07-07T18:45:29.195112+00:00
@@ -279,14 +279,14 @@ moltis-org/moltis,moltis,moltis-org,moltis-org/moltis,https://github.com/moltis-
 jundot/omlx,omlx,jundot,jundot/omlx,https://github.com/jundot/omlx,,I.64,gateway,community,65.0,17606,1484,0,Python,,2026-07-07T18:45:29.195112+00:00
 e2b-dev/E2B,E2B,e2b-dev,e2b-dev/E2B,https://github.com/e2b-dev/E2B,,C.13,application,community,65.0,12882,960,0,Python,,2026-07-07T18:45:29.195112+00:00
 GreyDGL/PentestGPT,PentestGPT,GreyDGL,GreyDGL/PentestGPT,https://github.com/GreyDGL/PentestGPT,,H.55,framework,community,65.0,14134,2456,0,Python,,2026-07-07T18:45:29.195112+00:00
-stablyai/orca,orca,stablyai,stablyai/orca,https://github.com/stablyai/orca,,C.13,framework,community,65.0,13341,895,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+stablyai/orca,orca,stablyai,stablyai/orca,https://github.com/stablyai/orca,,C.13,framework,community,65.0,13341,895,0,TypeScript,MIT,2026-07-07T18:45:29.195112+00:00
 microsoft/graphrag,graphrag,microsoft,microsoft/graphrag,https://github.com/microsoft/graphrag,,F.38,library,community,65.0,34240,3621,0,Python,,2026-07-07T18:45:29.195112+00:00
 onyx-dot-app/onyx,onyx,onyx-dot-app,onyx-dot-app/onyx,https://github.com/onyx-dot-app/onyx,,F.38,library,community,65.0,30763,4219,0,Python,,2026-07-07T18:45:29.195112+00:00
 awslabs/mcp,mcp,awslabs,awslabs/mcp,https://github.com/awslabs/mcp,,D.20,MCP server,community,65.0,9402,1625,0,Python,,2026-07-07T18:45:29.195112+00:00
 langchain4j/langchain4j,langchain4j,langchain4j,langchain4j/langchain4j,https://github.com/langchain4j/langchain4j,,I.64,gateway,community,64.9,12543,2358,0,Java,,2026-07-07T18:45:29.195112+00:00
 memvid/memvid,memvid,memvid,memvid/memvid,https://github.com/memvid/memvid,,F.38,library,community,64.9,15733,1359,0,Rust,,2026-07-07T18:45:29.195112+00:00
 muratcankoylan/Agent-Skills-for-Context-Engineering,Agent-Skills-for-Context-Engineering,muratcankoylan,muratcankoylan/Agent-Skills-for-Context-Engineering,https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering,,E.35,library,community,64.9,16913,1385,0,Python,,2026-07-07T18:45:29.195112+00:00
-VectifyAI/PageIndex,PageIndex,VectifyAI,VectifyAI/PageIndex,https://github.com/VectifyAI/PageIndex,,F.38,library,community,64.9,33856,2961,0,Python,,2026-07-07T18:45:29.195112+00:00
+VectifyAI/PageIndex,PageIndex,VectifyAI,VectifyAI/PageIndex,https://github.com/VectifyAI/PageIndex,,F.38,library,community,64.9,33856,2961,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 ag-ui-protocol/ag-ui,ag-ui,ag-ui-protocol,ag-ui-protocol/ag-ui,https://github.com/ag-ui-protocol/ag-ui,,J.77,application,community,64.8,14606,1317,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 zai-org/Open-AutoGLM,Open-AutoGLM,zai-org,zai-org/Open-AutoGLM,https://github.com/zai-org/Open-AutoGLM,,G.52,framework,community,64.8,25716,4003,0,Python,,2026-07-07T18:45:29.195112+00:00
 langchain-ai/deepagents,deepagents,langchain-ai,langchain-ai/deepagents,https://github.com/langchain-ai/deepagents,,B.8,framework,community,64.8,25867,3632,0,Python,,2026-07-07T18:45:29.195112+00:00
@@ -307,7 +307,7 @@ neomjs/neo,neo,neomjs,neomjs/neo,https://github.com/neomjs/neo,,D.20,MCP server,
 ai-boost/awesome-harness-engineering,awesome-harness-engineering,ai-boost,ai-boost/awesome-harness-engineering,https://github.com/ai-boost/awesome-harness-engineering,,B.8,framework,community,64.6,2863,294,0,Python,,2026-07-07T18:45:29.195112+00:00
 dograh-hq/dograh,dograh,dograh-hq,dograh-hq/dograh,https://github.com/dograh-hq/dograh,,J.79,application,community,64.6,4796,1087,0,Python,,2026-07-07T18:45:29.195112+00:00
 NVIDIA/SkillSpector,SkillSpector,NVIDIA,NVIDIA/SkillSpector,https://github.com/NVIDIA/SkillSpector,,H.57,framework,community,64.5,12267,1011,0,Python,,2026-07-07T18:45:29.195112+00:00
-openai/codex,codex,openai,openai/codex,https://github.com/openai/codex,,C.15,IDE extension,community,64.5,96047,14252,0,Rust,,2026-07-07T18:45:29.195112+00:00
+openai/codex,codex,openai,openai/codex,https://github.com/openai/codex,,C.15,IDE extension,community,64.5,96047,14252,0,Rust,Apache-2.0,2026-07-07T18:45:29.195112+00:00
 vanna-ai/vanna,vanna,vanna-ai,vanna-ai/vanna,https://github.com/vanna-ai/vanna,,F.38,library,community,64.5,23745,2445,0,Python,,2026-07-07T18:45:29.195112+00:00
 rohitg00/agentmemory,agentmemory,rohitg00,rohitg00/agentmemory,https://github.com/rohitg00/agentmemory,,F.37,library,community,64.5,24777,2044,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 anomalyco/opencode,opencode,anomalyco,anomalyco/opencode,https://github.com/anomalyco/opencode,,C.13,framework,community,64.5,183308,22738,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
@@ -365,7 +365,7 @@ ItzCrazyKns/Vane,Vane,ItzCrazyKns,ItzCrazyKns/Vane,https://github.com/ItzCrazyKn
 openai/openai-python,openai-python,openai,openai/openai-python,https://github.com/openai/openai-python,,E.35,framework,community,63.1,31101,4867,0,Python,,2026-07-07T18:45:29.195112+00:00
 iflytek/skillhub,skillhub,iflytek,iflytek/skillhub,https://github.com/iflytek/skillhub,,B.6,framework,community,63.1,3792,553,0,Java,,2026-07-07T18:45:29.195112+00:00
 datawhalechina/hello-agents,hello-agents,datawhalechina,datawhalechina/hello-agents,https://github.com/datawhalechina/hello-agents,,F.38,library,community,63.0,64659,8023,0,Python,,2026-07-07T18:45:29.195112+00:00
-vercel-labs/agent-browser,agent-browser,vercel-labs,vercel-labs/agent-browser,https://github.com/vercel-labs/agent-browser,,J.75,framework,community,63.0,38015,2445,0,Rust,,2026-07-07T18:45:29.195112+00:00
+vercel-labs/agent-browser,agent-browser,vercel-labs,vercel-labs/agent-browser,https://github.com/vercel-labs/agent-browser,,J.75,framework,community,63.0,38015,2445,0,Rust,Apache-2.0,2026-07-07T18:45:29.195112+00:00
 OpenCoworkAI/open-cowork,open-cowork,OpenCoworkAI,OpenCoworkAI/open-cowork,https://github.com/OpenCoworkAI/open-cowork,,C.13,application,community,63.0,1787,239,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 golutra/golutra,golutra,golutra,golutra/golutra,https://github.com/golutra/golutra,,B.9,framework,community,63.0,3748,431,0,Rust,,2026-07-07T18:45:29.195112+00:00
 Upsonic/Upsonic,Upsonic,Upsonic,Upsonic/Upsonic,https://github.com/Upsonic/Upsonic,,D.20,MCP server,community,62.9,7903,737,0,Python,,2026-07-07T18:45:29.195112+00:00
@@ -474,7 +474,7 @@ he-yufeng/CoreCoder,CoreCoder,he-yufeng,he-yufeng/CoreCoder,https://github.com/h
 ArcReel/ArcReel,ArcReel,ArcReel,ArcReel/ArcReel,https://github.com/ArcReel/ArcReel,,J.77,template,community,61.0,3172,635,0,Python,,2026-07-07T18:45:29.195112+00:00
 Mouseww/anything-analyzer,anything-analyzer,Mouseww,Mouseww/anything-analyzer,https://github.com/Mouseww/anything-analyzer,,E.34,template,community,61.0,3237,582,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 shroominic/codeinterpreter-api,codeinterpreter-api,shroominic,shroominic/codeinterpreter-api,https://github.com/shroominic/codeinterpreter-api,,C.13,application,community,61.0,3846,387,0,Python,,2026-07-07T18:45:29.195112+00:00
-vectorize-io/hindsight,hindsight,vectorize-io,vectorize-io/hindsight,https://github.com/vectorize-io/hindsight,,F.37,library,community,60.9,18085,1101,0,Python,,2026-07-07T18:45:29.195112+00:00
+vectorize-io/hindsight,hindsight,vectorize-io,vectorize-io/hindsight,https://github.com/vectorize-io/hindsight,,F.37,library,community,60.9,18085,1101,0,Python,MIT,2026-07-07T18:45:29.195112+00:00
 2FastLabs/agent-squad,agent-squad,2FastLabs,2FastLabs/agent-squad,https://github.com/2FastLabs/agent-squad,,B.6,framework,community,60.9,7685,726,0,Swift,,2026-07-07T18:45:29.195112+00:00
 Giskard-AI/giskard-oss,giskard-oss,Giskard-AI,Giskard-AI/giskard-oss,https://github.com/Giskard-AI/giskard-oss,,H.55,evaluation framework,community,60.9,5498,481,0,Python,,2026-07-07T18:45:29.195112+00:00
 codeaholicguy/ai-devkit,ai-devkit,codeaholicguy,codeaholicguy/ai-devkit,https://github.com/codeaholicguy/ai-devkit,,B.6,framework,community,60.9,1548,242,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
@@ -580,7 +580,7 @@ platonai/Browser4,Browser4,platonai,platonai/Browser4,https://github.com/platona
 liaohch3/claude-tap,claude-tap,liaohch3,liaohch3/claude-tap,https://github.com/liaohch3/claude-tap,,H.53,observability platform,community,58.8,2396,222,0,Python,,2026-07-07T18:45:29.195112+00:00
 openai/openai-quickstart-node,openai-quickstart-node,openai,openai/openai-quickstart-node,https://github.com/openai/openai-quickstart-node,,A.1,tutorial,community,58.8,2642,1957,0,JavaScript,,2026-07-07T18:45:29.195112+00:00
 mattpocock/sandcastle,sandcastle,mattpocock,mattpocock/sandcastle,https://github.com/mattpocock/sandcastle,,F.43,framework,community,58.7,6678,670,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
-cloudflare/agentic-inbox,agentic-inbox,cloudflare,cloudflare/agentic-inbox,https://github.com/cloudflare/agentic-inbox,,B.6,framework,community,58.7,5994,760,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+cloudflare/agentic-inbox,agentic-inbox,cloudflare,cloudflare/agentic-inbox,https://github.com/cloudflare/agentic-inbox,,B.6,framework,community,58.7,5994,760,0,TypeScript,Apache-2.0,2026-07-07T18:45:29.195112+00:00
 deta/surf,surf,deta,deta/surf,https://github.com/deta/surf,,I.64,gateway,community,58.7,3475,255,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 PleasePrompto/notebooklm-mcp,notebooklm-mcp,PleasePrompto,PleasePrompto/notebooklm-mcp,https://github.com/PleasePrompto/notebooklm-mcp,,E.35,template,community,58.7,2952,409,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 agents-flex/agents-flex,agents-flex,agents-flex,agents-flex/agents-flex,https://github.com/agents-flex/agents-flex,,I.64,gateway,community,58.7,1022,133,0,Java,,2026-07-07T18:45:29.195112+00:00
@@ -619,7 +619,7 @@ vercel-labs/deepsec,deepsec,vercel-labs,vercel-labs/deepsec,https://github.com/v
 Prismer-AI/PrismerCloud,PrismerCloud,Prismer-AI,Prismer-AI/PrismerCloud,https://github.com/Prismer-AI/PrismerCloud,,D.20,MCP server,community,58.1,1457,13,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 fastclaw-ai/fastclaw,fastclaw,fastclaw-ai,fastclaw-ai/fastclaw,https://github.com/fastclaw-ai/fastclaw,,B.6,framework,community,58.1,1209,194,0,Go,,2026-07-07T18:45:29.195112+00:00
 APIParkLab/APIPark,APIPark,APIParkLab,APIParkLab/APIPark,https://github.com/APIParkLab/APIPark,,I.64,gateway,community,58.0,1773,237,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
-superagent-ai/vibekit,vibekit,superagent-ai,superagent-ai/vibekit,https://github.com/superagent-ai/vibekit,,F.43,template,community,58.0,1812,239,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
+superagent-ai/vibekit,vibekit,superagent-ai,superagent-ai/vibekit,https://github.com/superagent-ai/vibekit,,F.43,template,community,58.0,1812,239,0,TypeScript,MIT,2026-07-07T18:45:29.195112+00:00
 facebookresearch/habitat-lab,habitat-lab,facebookresearch,facebookresearch/habitat-lab,https://github.com/facebookresearch/habitat-lab,,G.51,template,community,58.0,3047,680,0,Python,,2026-07-07T18:45:29.195112+00:00
 lmnr-ai/lmnr,lmnr,lmnr-ai,lmnr-ai/lmnr,https://github.com/lmnr-ai/lmnr,,H.53,observability platform,community,58.0,3071,216,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
 robustmq/robustmq,robustmq,robustmq,robustmq/robustmq,https://github.com/robustmq/robustmq,,E.34,template,community,57.9,1633,235,0,Rust,,2026-07-07T18:45:29.195112+00:00
@@ -691,7 +691,7 @@ langchain-ai/social-media-agent,social-media-agent,langchain-ai,langchain-ai/soc
 aws/amazon-ecs-agent,amazon-ecs-agent,aws,aws/amazon-ecs-agent,https://github.com/aws/amazon-ecs-agent,,B.6,template,community,55.7,2166,658,0,Go,,2026-07-07T18:45:29.195112+00:00
 sweepai/sweep,sweep,sweepai,sweepai/sweep,https://github.com/sweepai/sweep,https://sweep.dev,C.13,framework,unclear,55.7,7701,463,752,Jupyter Notebook,NOASSERTION,2026-07-07T17:40:30.586995+00:00
 anthropics/claude-agent-sdk-demos,claude-agent-sdk-demos,anthropics,anthropics/claude-agent-sdk-demos,https://github.com/anthropics/claude-agent-sdk-demos,,E.35,template,community,55.6,2609,389,0,TypeScript,,2026-07-07T18:45:29.195112+00:00
-google-gemini/deprecated-generative-ai-python,deprecated-generative-ai-python,google-gemini,google-gemini/deprecated-generative-ai-python,https://github.com/google-gemini/deprecated-generative-ai-python,,E.35,template,community,55.6,2323,523,0,Python,,2026-07-07T18:45:29.195112+00:00
+google-gemini/deprecated-generative-ai-python,deprecated-generative-ai-python,google-gemini,google-gemini/deprecated-generative-ai-python,https://github.com/google-gemini/deprecated-generative-ai-python,,E.35,template,community,55.6,2323,523,0,Python,Apache-2.0,2026-07-07T18:45:29.195112+00:00
 huggingface/OpenEnv,OpenEnv,huggingface,huggingface/OpenEnv,https://github.com/huggingface/OpenEnv,,J.81,template,community,55.6,2401,409,0,Python,,2026-07-07T18:45:29.195112+00:00
 AGI-Edgerunners/LLM-Agents-Papers,LLM-Agents-Papers,AGI-Edgerunners,AGI-Edgerunners/LLM-Agents-Papers,https://github.com/AGI-Edgerunners/LLM-Agents-Papers,,B.6,template,community,55.6,2325,151,0,Python,,2026-07-07T18:45:29.195112+00:00
 evilsocket/cake,cake,evilsocket,evilsocket/cake,https://github.com/evilsocket/cake,,J.77,template,community,55.5,3092,201,0,Rust,,2026-07-07T18:45:29.195112+00:00
@@ -1467,3 +1467,51 @@ fixie-ai/openclaw,openclaw,fixie-ai,fixie-ai/openclaw,https://github.com/fixie-a
 fixie-ai/aiewf-eval-taubench,aiewf-eval-taubench,fixie-ai,fixie-ai/aiewf-eval-taubench,https://github.com/fixie-ai/aiewf-eval-taubench,,H.55,template,community,29.5,0,0,0,Python,,2026-07-07T18:45:29.195112+00:00
 fixie-ai/aiewf-eval,aiewf-eval,fixie-ai,fixie-ai/aiewf-eval,https://github.com/fixie-ai/aiewf-eval,,H.55,template,community,29.5,0,0,0,,,2026-07-07T18:45:29.195112+00:00
 fixie-ai/onnxruntime-build,onnxruntime-build,fixie-ai,fixie-ai/onnxruntime-build,https://github.com/fixie-ai/onnxruntime-build,,I.65,template,community,29.5,0,0,0,CMake,,2026-07-07T18:45:29.195112+00:00
+microsoft/markitdown,MarkItDown,microsoft,microsoft/markitdown,https://github.com/microsoft/markitdown,,F.41,library,official,77.5,192657,14403,311,Python,MIT,2026-10-28T12:40:00+00:00
+paperclipai/paperclip,Paperclip,paperclipai,paperclipai/paperclip,https://github.com/paperclipai/paperclip,https://paperclip.ing,I.72,application,community,86.0,108168,17921,3413,TypeScript,MIT,2026-10-28T12:40:00+00:00
+yamadashy/repomix,Repomix,yamadashy,yamadashy/repomix,https://github.com/yamadashy/repomix,https://repomix.com,C.18,CLI tool,community,75.0,29054,1603,113,TypeScript,MIT,2026-10-28T12:40:00+00:00
+ace-agent/ace,ACE,ace-agent,ace-agent/ace,https://github.com/ace-agent/ace,https://ace-agent.github.io/,B.6,framework,community,52.7,1404,173,13,Python,Apache-2.0,2026-10-28T12:40:00+00:00
+luoyuctl/agenttrace,AgentTrace,luoyuctl,luoyuctl/agenttrace,https://github.com/luoyuctl/agenttrace,https://github.com/luoyuctl/agenttrace,H.54,CLI tool,community,63.3,152,8,4,Rust,MIT,2026-10-28T12:40:00+00:00
+microsoft/AI-Engineering-Coach,AI Engineering Coach,microsoft,microsoft/AI-Engineering-Coach,https://github.com/microsoft/AI-Engineering-Coach,,C.16,IDE extension,community,61.3,4352,606,37,TypeScript,MIT,2026-10-28T12:40:00+00:00
+unclecode/crawl4ai,Crawl4AI,unclecode,unclecode/crawl4ai,https://github.com/unclecode/crawl4ai,https://crawl4ai.com,G.47,library,community,82.3,86441,8996,47,Python,Apache-2.0,2026-10-28T12:40:00+00:00
+blader/humanizer,Humanizer,blader,blader/humanizer,https://github.com/blader/humanizer,https://skills.sh/blader/humanizer,E.29,collection,community,73.7,61744,4888,3,Python,MIT,2026-10-28T12:40:00+00:00
+pbakaus/impeccable,Impeccable,pbakaus,pbakaus/impeccable,https://github.com/pbakaus/impeccable,https://impeccable.style,E.29,collection,community,78.2,91321,5403,26,Rust,Apache-2.0,2026-10-28T12:40:00+00:00
+Leonxlnx/taste-skill,Taste Skill,Leonxlnx,Leonxlnx/taste-skill,https://github.com/Leonxlnx/taste-skill,https://tasteskill.dev,E.29,collection,community,78.1,104020,7029,4,JavaScript,MIT,2026-10-28T12:40:00+00:00
+lingzhi227/agent-research-skills,Agent Research Skills,lingzhi227,lingzhi227/agent-research-skills,https://github.com/lingzhi227/agent-research-skills,,E.29,collection,community,37.0,440,46,3,Python,,2026-10-28T12:40:00+00:00
+agenthatch/agenthatch,AgentHatch,agenthatch,agenthatch/agenthatch,https://github.com/agenthatch/agenthatch,,B.6,application,community,68.6,74,8,2,Python,MIT,2026-10-28T12:40:00+00:00
+anthropics/claude-cookbooks,Anthropic Cookbook,anthropics,anthropics/claude-cookbooks,https://github.com/anthropics/claude-cookbooks,,A.3,tutorial,official,66.7,53865,6497,90,Jupyter Notebook,MIT,2026-10-28T12:40:00+00:00
+punkpeye/awesome-mcp-servers,Awesome MCP Servers,punkpeye,punkpeye/awesome-mcp-servers,https://github.com/punkpeye/awesome-mcp-servers,https://glama.ai/mcp/servers,D.28,collection,community,71.0,96977,18675,0,,MIT,2026-10-28T12:40:00+00:00
+filipecalegario/awesome-vibe-coding,Awesome Vibe Coding,filipecalegario,filipecalegario/awesome-vibe-coding,https://github.com/filipecalegario/awesome-vibe-coding,,A.3,collection,community,45.6,5376,810,11,,CC0-1.0,2026-10-28T12:40:00+00:00
+spinabot/brigade,Brigade,spinabot,spinabot/brigade,https://github.com/spinabot/brigade,https://www.brigade.spinabot.com,I.72,application,community,72.8,11362,79,1,TypeScript,MIT,2026-10-28T12:40:00+00:00
+jo-inc/camofox-browser,Camofox Browser,jo-inc,jo-inc/camofox-browser,https://github.com/jo-inc/camofox-browser,https://github.com/jo-inc/camofox-browser#readme,G.44,application,community,76.6,12023,1213,54,JavaScript,MIT,2026-10-28T12:40:00+00:00
+JuliusBrussee/caveman,Caveman,JuliusBrussee,JuliusBrussee/caveman,https://github.com/JuliusBrussee/caveman,https://docs.caveman.so/caveman,H.61,developer tool,community,81.3,115672,6678,57,Go,Apache-2.0,2026-10-28T12:40:00+00:00
+AgriciDaniel/claude-ads,Claude Ads,AgriciDaniel,AgriciDaniel/claude-ads,https://github.com/AgriciDaniel/claude-ads,,E.29,collection,community,67.5,10514,1527,1,Python,MIT,2026-10-28T12:40:00+00:00
+feiskyer/claude-code-settings,Claude Code Settings,feiskyer,feiskyer/claude-code-settings,https://github.com/feiskyer/claude-code-settings,https://feisky.xyz/claude-code-settings/,E.33,template,community,51.5,1665,241,0,Python,MIT,2026-10-28T12:40:00+00:00
+eyaltoledano/claude-task-master,Claude Task Master,eyaltoledano,eyaltoledano/claude-task-master,https://github.com/eyaltoledano/claude-task-master,https://tryhamster.com,I.69,application,community,58.7,28274,2615,163,JavaScript,NOASSERTION,2026-10-28T12:40:00+00:00
+HKUDS/CLI-Anything,CLI Anything,HKUDS,HKUDS/CLI-Anything,https://github.com/HKUDS/CLI-Anything,https://clianything.cc/,E.35,developer tool,community,63.7,57538,5177,89,Python,Apache-2.0,2026-10-28T12:40:00+00:00
+JustVugg/colibri,Colibri,JustVugg,JustVugg/colibri,https://github.com/JustVugg/colibri,https://justvugg.github.io/colibri,I.65,runtime,community,80.4,44532,5054,76,C,Apache-2.0,2026-10-28T12:40:00+00:00
+coleam00/context-engineering-intro,Context Engineering Intro,coleam00,coleam00/context-engineering-intro,https://github.com/coleam00/context-engineering-intro,,A.1,tutorial,community,47.0,13896,2709,20,Python,MIT,2026-10-28T12:40:00+00:00
+langgenius/dify,Dify,langgenius,langgenius/dify,https://github.com/langgenius/dify,https://dify.ai,B.8,application,community,85.0,159799,25248,517,Python,NOASSERTION,2026-10-28T12:40:00+00:00
+firecrawl/firecrawl,Firecrawl,firecrawl,firecrawl/firecrawl,https://github.com/firecrawl/firecrawl,https://firecrawl.dev,G.47,library,community,75.5,196246,10361,108,TypeScript,AGPL-3.0,2026-10-28T12:40:00+00:00
+tashfeenahmed/freellmapi,FreeLLMAPI,tashfeenahmed,tashfeenahmed/freellmapi,https://github.com/tashfeenahmed/freellmapi,https://freellmapi.co,I.64,gateway,community,74.0,43017,5807,17,TypeScript,MIT,2026-10-28T12:40:00+00:00
+gamedev-skills/awesome-gamedev-agent-skills,GameDev Agent Skills,gamedev-skills,gamedev-skills/awesome-gamedev-agent-skills,https://github.com/gamedev-skills/awesome-gamedev-agent-skills,,E.29,collection,community,63.9,5303,510,0,Python,Apache-2.0,2026-10-28T12:40:00+00:00
+ahmedkhaleel2004/gitdiagram,GitDiagram,ahmedkhaleel2004,ahmedkhaleel2004/gitdiagram,https://github.com/ahmedkhaleel2004/gitdiagram,https://gitdiagram.com,C.18,application,community,70.5,18557,1426,31,TypeScript,MIT,2026-10-28T12:40:00+00:00
+garrytan/gstack,Gstack,garrytan,garrytan/gstack,https://github.com/garrytan/gstack,,E.29,collection,community,73.5,138016,20468,148,TypeScript,MIT,2026-10-28T12:40:00+00:00
+alchaincyf/huashu-design,Huashu Design,alchaincyf,alchaincyf/huashu-design,https://github.com/alchaincyf/huashu-design,,E.29,collection,community,73.3,27909,3024,2,HTML,MIT,2026-10-28T12:40:00+00:00
+hyperfx-ai/marketing-skills,Hyper Marketing Skills,hyperfx-ai,hyperfx-ai/marketing-skills,https://github.com/hyperfx-ai/marketing-skills,https://www.hyperfx.ai/mcp,E.29,collection,community,67.3,107,21,0,Python,MIT,2026-10-28T12:40:00+00:00
+heygen-com/hyperframes,Hyperframes,heygen-com,heygen-com/hyperframes,https://github.com/heygen-com/hyperframes,https://hyperframes.heygen.com,J.80,developer tool,official,83.5,74368,6753,74,TypeScript,Apache-2.0,2026-10-28T12:40:00+00:00
+anthropics/knowledge-work-plugins,Knowledge Work Plugins,anthropics,anthropics/knowledge-work-plugins,https://github.com/anthropics/knowledge-work-plugins,,E.30,collection,official,65.0,33544,3685,90,Python,Apache-2.0,2026-10-28T12:40:00+00:00
+magnitudedev/magnitude,Magnitude,magnitudedev,magnitudedev/magnitude,https://github.com/magnitudedev/magnitude,https://magnitude.dev,I.65,runtime,community,73.7,7368,520,30,Rust,Apache-2.0,2026-10-28T12:40:00+00:00
+yetone/magpie,Magpie,yetone,yetone/magpie,https://github.com/yetone/magpie,https://usemagpie.ai,I.64,gateway,community,74.5,24370,1978,2081,Go,MIT,2026-10-28T12:40:00+00:00
+getmaxun/maxun,Maxun,getmaxun,getmaxun/maxun,https://github.com/getmaxun/maxun,https://www.maxun.dev,G.47,application,community,77.6,18070,1565,53,TypeScript,AGPL-3.0,2026-10-28T12:40:00+00:00
+code-yeongyu/oh-my-openagent,Oh My OpenAgent,code-yeongyu,code-yeongyu/oh-my-openagent,https://github.com/code-yeongyu/oh-my-openagent,https://omo.dev,C.13,application,community,80.9,70427,5809,1285,TypeScript,NOASSERTION,2026-10-28T12:40:00+00:00
+cheaper-inference/OmniRoute,OmniRoute,cheaper-inference,cheaper-inference/OmniRoute,https://github.com/cheaper-inference/OmniRoute,https://omniroute.online,I.64,gateway,community,79.3,82055,12089,152,TypeScript,MIT,2026-10-28T12:40:00+00:00
+openai/openai-cookbook,OpenAI Cookbook,openai,openai/openai-cookbook,https://github.com/openai/openai-cookbook,https://cookbook.openai.com,A.3,tutorial,official,68.2,76843,13008,73,Jupyter Notebook,MIT,2026-10-28T12:40:00+00:00
+openai/evals,OpenAI Evals,openai,openai/evals,https://github.com/openai/evals,,H.55,evaluation framework,official,52.4,19666,3123,180,Python,NOASSERTION,2026-10-28T12:40:00+00:00
+calesthio/OpenMontage,OpenMontage,calesthio,calesthio/OpenMontage,https://github.com/calesthio/OpenMontage,https://www.openmontage.video/,J.80,application,community,73.2,72606,9477,114,Python,AGPL-3.0,2026-10-28T12:40:00+00:00
+remotion-dev/skills,Remotion Skills,remotion-dev,remotion-dev/skills,https://github.com/remotion-dev/skills,,E.29,collection,community,55.6,5813,644,11,TypeScript,,2026-10-28T12:40:00+00:00
+RyanCodrai/turbovec,Turbovec,RyanCodrai,RyanCodrai/turbovec,https://github.com/RyanCodrai/turbovec,https://pypi.org/project/turbovec/,F.38,library,community,64.5,17433,1486,22,Rust,MIT,2026-10-28T12:40:00+00:00
+nextlevelbuilder/ui-ux-pro-max-skill,UI UX Pro Max,nextlevelbuilder,nextlevelbuilder/ui-ux-pro-max-skill,https://github.com/nextlevelbuilder/ui-ux-pro-max-skill,https://www.uupm.cc/,E.29,collection,community,75.5,141855,15022,40,Python,MIT,2026-10-28T12:40:00+00:00
+KhazP/vibe-coding-prompt-template,Vibe Coding Prompt Template,KhazP,KhazP/vibe-coding-prompt-template,https://github.com/KhazP/vibe-coding-prompt-template,https://vibeworkflow.app/,E.31,template,community,63.0,3196,389,0,TypeScript,MIT,2026-10-28T12:40:00+00:00
+Imbad0202/academic-research-skills,Academic Research Skills,Imbad0202,Imbad0202/academic-research-skills,https://github.com/Imbad0202/academic-research-skills,https://buymeacoffee.com/crucify020v,E.29,collection,community,76.5,54286,4146,36,Python,NOASSERTION,2026-10-28T12:40:00+00:00
+lfnovo/open-notebook,Open Notebook,lfnovo,lfnovo/open-notebook,https://github.com/lfnovo/open-notebook,https://www.open-notebook.ai,J.76,application,community,80.3,40655,4671,134,TypeScript,MIT,2026-10-28T12:40:00+00:00
