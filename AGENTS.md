@@ -73,3 +73,13 @@ Each loop produces a `research/LOOP-N.md` report and the quality gate must pass 
 ## Snapshot date
 
 2026-07-07
+
+## Cursor Cloud specific instructions
+
+Catalog scripts are Python standard library. The website is the Astro app in `web/`, configured with `base: '/WERKAtlas/'`.
+
+- Python tests: `python3 -m pytest tests/`
+- Catalog schema check: `python scripts/validate.py --catalog data/catalog.json --schema data/catalog.schema.json`
+- Dev server (also started on agent boot): from `web/`, `npm run dev -- --host 0.0.0.0 --port 4321`. The site is `http://127.0.0.1:4321/WERKAtlas/`.
+- Static build: `npm run build` in `web/` (output in `web/dist`).
+- Playwright specs are in `tests/e2e` and use `http://localhost:4321/WERKAtlas/` as `baseURL`. Run `npx playwright test` from `tests/e2e` only while that dev server is up.
