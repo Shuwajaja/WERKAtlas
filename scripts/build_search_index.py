@@ -49,7 +49,7 @@ INDEX_FIELDS = {
 def slim_entry(entry: dict) -> dict:
     """Extract only index-relevant fields."""
     result = {}
-    for field in INDEX_FIELDS:
+    for field in sorted(INDEX_FIELDS):
         value = entry.get(field)
         result[field] = value
     # Derive a URL-safe slug from the repository field
