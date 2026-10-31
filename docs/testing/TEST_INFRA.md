@@ -1,5 +1,7 @@
 # WERKAtlas E2E Test Infrastructure (TEST_INFRA)
 
+> Kanonischer Pfad seit 2026-10-31: `docs/testing/TEST_INFRA.md`. Der Text darunter ist der bisherige Inhalt aus dem Hauptordner. Die operative Kurzanleitung für Agents steht in `AGENTS.md`.
+
 This document provides a comprehensive technical overview of the dual-layer E2E testing framework designed for the modernized WERKAtlas project.
 
 ---

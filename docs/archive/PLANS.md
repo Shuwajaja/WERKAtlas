@@ -1,5 +1,7 @@
 # Execution Plan
 
+> Kanonischer Pfad seit 2026-10-31: `docs/archive/PLANS.md`. Der Text darunter ist der bisherige Inhalt aus dem Hauptordner. Der laufende v2-Plan liegt unter `docs/superpowers/plans/`.
+
 ## Overview
 
 Build the Agentic Engineering Compendium — a comprehensive, evidence-backed, reproducible knowledge base of the AI-agent ecosystem.
