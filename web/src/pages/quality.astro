@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { catalogEntries, catalogSnapshotDate } from '../utils/dataLoader';
+import githubVerified from '../../../data/verified-github.json';
+
+const total = catalogEntries.length;
+const licenseUnknown = catalogEntries.filter(e => !e.license || ['NOASSERTION','NONE'].includes(e.license.toUpperCase())).length;
+const maintenanceUnknown = catalogEntries.filter(e => !e.maintenance_status || e.maintenance_status === 'unclear').length;
+const time = Date.now();
+const stale = catalogEntries.filter(e => {
+  const check = Date.parse(e.checked_at || '');
+  return !Number.isFinite(check) || check > time || time - check > 90 * 86400000;
+}).length;
+const archived = catalogEntries.filter(e => e.archived).length;
+const noEvidence = catalogEntries.filter(e => !e.official_evidence?.length).length;
+const metrics = [
+  {title:'Unbekannte Lizenzen',value:licenseUnknown,why:'NOASSERTION ist keine verifizierte freie Lizenz.'},
+  {title:'Wartung unklar',value:maintenanceUnknown,why:'Ohne aktuellen GitHub-Abgleich keine Wartungszusage.'},
+  {title:'Prüfung älter als 90 Tage',value:stale,why:'Alter der Daten, nicht automatisch Alter der Software.'},
+  {title:'Offizielle Quellen unvollständig',value:noEvidence,why:'Verifizierbare Herstellerzuordnung fehlt.'},
+];
+---
+<BaseLayout title="Datenqualität und Grenzen">
+  <section class="space-y-grid-xl">
+    <header class="border border-steel-border bg-graphite-900 p-grid-xl space-y-grid-md">
+      <p class="font-mono text-xs uppercase text-caution-yellow">Transparenz statt Scheingenauigkeit</p>
+      <h2 class="text-graphite-50 text-2xl font-bold">Datenqualität im WERKAtlas</h2>
+      <p class="text-sm text-graphite-400 max-w-4xl">Katalog-Snapshot: <strong class="text-graphite-100">{catalogSnapshotDate}</strong>.
+        Die folgenden Zähler werden beim Website-Build aus dem lokalen Katalog berechnet, nicht live von GitHub geladen.</p>
+      <div class="flex flex-wrap gap-3 text-xs font-mono">
+        <span class="border border-steel-border px-3 py-2">Projekte: {total}</span>
+        <span class="border border-steel-border px-3 py-2">Archiviert (alter Katalog): {archived}</span>
+        <span class="border border-steel-border px-3 py-2">GitHub geprüft: {githubVerified.verified_count} / {total}</span>
+        <span class="border border-steel-border px-3 py-2">SPDX aus GitHub: {githubVerified.license_spdx_count}</span>
+        <span class="border border-steel-border px-3 py-2">GitHub ungeklärt: {githubVerified.unverified_ids.length}</span>
+      </div>
+    </header>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-grid-lg">
+      {metrics.map(metric => (
+        <article class="p-grid-xl border border-steel-border bg-graphite-900">
+          <p class="font-mono text-xs uppercase text-graphite-400">{metric.title}</p>
+          <p class="font-mono text-3xl text-caution-yellow font-bold my-grid-md">{metric.value.toLocaleString('de-DE')} <span class="text-sm text-graphite-600">/ {total}</span></p>
+          <p class="text-xs text-graphite-400">{metric.why}</p>
+        </article>
+      ))}
+    </div>
+    <article class="border border-steel-border bg-graphite-900 p-grid-xl space-y-grid-sm">
+      <h3 class="text-graphite-100 font-bold">Was sagen Bewertungen aus?</h3>
+      <p class="text-sm text-graphite-400">Der zusätzlich geprüfte GitHub-Metadatensatz stammt vom
+      <strong class="text-graphite-100">{githubVerified.generated_at.slice(0,10)}</strong>.
+      Er enthält aktuelle Stars, Forks, Push-Zeitpunkte und erkannte SPDX-Werte.
+      Diese Felder sind eine separate Quellenebene und ersetzen keine Sicherheits- oder Lizenzprüfung.</p>
+      <p class="text-sm text-graphite-400">Der bestehende generische Score ist ein historischer Katalogwert, keine aktuelle Sicherheits-, Lizenz- oder Kompatibilitätszertifizierung.
+      Das lokale Tool <code>scripts/explain_quality.py</code> erstellt getrennte, ausdrücklich vorläufige Aussagen zu beobachtbaren Qualitätsmerkmalen und zur Übereinstimmung mit Suchwörtern.</p>
+      <p class="text-sm text-graphite-400">Der lokale GitHub-Metadatenabgleich erstellt ausschließlich Review-Vorschläge. Unbekannte Fakten bleiben unbekannt; der Katalog wird dadurch nicht automatisch umgeschrieben.</p>
+      <a class="text-caution-yellow text-sm underline" href="/WERKAtlas/explorer/">Zum Projekt-Explorer</a>
+    </article>
+  </section>
+</BaseLayout>

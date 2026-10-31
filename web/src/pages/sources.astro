@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import news from "../../public/news/latest.json";
+import sourcesConfig from "../../../data/news-sources.json";
+const kinds:Record<string,string>={official:"Offizielle Quelle",research:"Forschungsfeed",press:"Presse",release:"GitHub Releases",independent:"Unabhängige Analyse"};
+const statuses=new Map(news.sources.map(source=>[source.id,source]));
+const sources=sourcesConfig.sources.map(source=>({...source,result:statuses.get(source.id)}));
+---
+<BaseLayout title="Quellenverzeichnis">
+  <section class="sources-page">
+    <div class="sources-eyebrow">WERKATLAS / TRANSPARENT SOURCING</div>
+    <h1>Woher kommen die <span>Informationen?</span></h1>
+    <p class="sources-intro">Alle eingebundenen RSS-/Atom-Feeds sind hier offen gelegt, inklusive Herkunft und letztem Abrufstatus. Ein erreichbarer Feed bedeutet nicht, dass jede Meldung redaktionell oder technisch bestätigt ist.</p>
+    <div class="sources-summary">
+      <div><strong>{sources.length}</strong><span>Konfigurierte Quellen</span></div>
+      <div><strong>{news.successful_sources}</strong><span>Beim letzten Abruf erreichbar</span></div>
+      <div><strong>{news.failed_sources}</strong><span>Fehlgeschlagen</span></div>
+      <div><strong>{news.count}</strong><span>Gespeicherte Meldungen</span></div>
+    </div>
+    <div class="sources-back"><a href="/WERKAtlas/news/">← Zur News-Übersicht</a><span>Letzter Feedabruf: {news.generated_at.replace("T"," ").slice(0,16)} UTC</span></div>
+    <div class="sources-grid">
+      {sources.map(source=>(
+        <article class="sources-card">
+          <div class="sources-head">
+            <span class:list={["sources-status",source.result?.status === "ok"?"up":"down"]}>
+              {source.result?.status==="ok"?"● Aktiv":"● Fehler"}
+            </span>
+            <span class="sources-kind">{kinds[source.kind]||source.kind}</span>
+          </div>
+          <h2>{source.name}</h2>
+          <p>{source.category} · {source.result?.status==="ok" ? source.result.count+" Meldungen im Prüfzeitraum":source.result?.error_type||"Kein Status"}</p>
+          <a href={source.url} target="_blank" rel="noopener noreferrer">Original-Feed ansehen ↗</a>
+        </article>
+      ))}
+    </div>
+    <div class="sources-note"><strong>Quellenbewertung:</strong> Herstellerquellen belegen, was ein Anbieter angekündigt hat, nicht die tatsächliche Qualität. ArXiv ist Forschung/Preprint, keine automatische Begutachtung. Presseartikel sind externe Berichte, keine Garantie. GitHub-Release-Feeds sind Projektveröffentlichungen. WERKAtlas übernimmt keine Meldungen ungeprüft als Katalogfakten.</div>
+  </section>
+</BaseLayout>
+<style is:global>
+.sources-page{max-width:1380px;margin:auto;padding:25px 0 60px;font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#e8f4f0}
+.sources-eyebrow{font-size:10px;color:#74dec1;font-weight:800;letter-spacing:.18em}
+.sources-page h1{font-size:clamp(31px,4vw,52px);font-weight:780;letter-spacing:-.055em;margin:18px 0}
+.sources-page h1 span{color:#74dec1}
+.sources-intro{font-size:14px;color:#92acb3;line-height:1.8;max-width:800px}
+.sources-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:29px 0}.sources-summary div{background:#15232c;border:1px solid #28414b;border-radius:12px;padding:22px}.sources-summary strong{display:block;font-size:29px;font-weight:750}.sources-summary span{display:block;margin-top:5px;font-size:11px;color:#9ab1b6}
+.sources-back{display:flex;gap:10px;justify-content:space-between;align-items:center;border-bottom:1px solid #284149;margin-bottom:20px;padding-bottom:18px}.sources-back a{color:#79e5bf;text-decoration:none;font-size:12px}.sources-back span{font-size:11px;color:#91a9ae}
+.sources-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.sources-card{background:#15232c;border:1px solid #2e4650;border-radius:13px;padding:20px;min-width:0}
+.sources-head{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.sources-status{font-size:10px;color:#f6bb91}.sources-status.up{color:#8ee4c3}
+.sources-kind{font-size:10px;color:#91b6b3;background:#1b3933;padding:4px 8px;border:1px solid #31594c;border-radius:99px}
+.sources-card h2{font-size:18px;font-weight:750;margin:17px 0 9px;color:#e8f4f1}.sources-card p{font-size:12px;color:#9bb4bc;min-height:40px}.sources-card a{display:inline-block;color:#88e2c3;font-size:12px;margin-top:12px}
+.sources-note{padding:18px;border:1px solid #31534a;background:#162d27;color:#aec6c0;font-size:12px;line-height:1.75;border-radius:12px;margin-top:25px}.sources-note strong{color:#c7f4e2}
+@media(max-width:1150px){.sources-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:670px){.sources-summary{grid-template-columns:repeat(2,1fr)}.sources-grid{grid-template-columns:1fr}.sources-back{display:block}.sources-back span{display:block;margin-top:10px}}
+</style>

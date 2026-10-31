@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import latest from "../../public/news/latest.json";
+---
+
+<BaseLayout title="KI News & Tech Radar">
+  <section class="radar-page">
+    <div class="radar-top">
+      <div class="radar-label"><span class="radar-pulse"></span> RESEARCH DESK / LIVE SOURCE MONITOR</div>
+      <div class="radar-header">
+        <div>
+          <h1>KI &amp; Tech <span>Radar.</span></h1>
+          <p>Hersteller-News, Open-Source-Releases, Forschungsarbeiten und unabhängige Berichte. Nach Quelle, Datum und Relevanz sortierbar.</p>
+        </div>
+        <div class="radar-stats">
+          <div><strong>{latest.successful_sources}</strong><span>aktive Quellen</span></div>
+          <div><strong>{latest.count}</strong><span>Meldungen</span></div>
+        </div>
+      </div>
+      <nav class="radar-tabs" aria-label="Research Navigation">
+        <a href="/WERKAtlas/explorer/">GitHub-Projekte</a>
+        <a class="selected" href="/WERKAtlas/news/">News &amp; Releases</a>
+        <a href="/WERKAtlas/quality/">Datenqualität</a>
+      </nav>
+    </div>
+
+    <div class="radar-grid">
+      <aside class="radar-side">
+        <div class="radar-side-title">QUELLENSTATUS <span class="radar-online">● FEEDS</span></div>
+        <p class="radar-side-desc">Letzter Abruf: <span id="news-updated">{latest.generated_at.slice(0,16).replace("T"," ")} UTC</span></p>
+        <div class="radar-source-stats"><span class="ok">✓ {latest.successful_sources} erreichbar</span><span class="warn">! {latest.failed_sources} Fehler</span></div>
+        <div class="radar-divider"></div>
+        <div class="radar-side-title">THEMEN</div>
+        <div id="news-topics" class="radar-topic-list" role="group" aria-label="News-Themen">
+          <button class="active" data-topic="all" type="button"><span>◈</span> Alle Meldungen</button>
+          {["Modelle & Produkte","Agenten & Tools","GitHub Releases","Open Source","Forschung","Paper","Sicherheit","Infrastruktur","Branche"].map((topic,i)=>
+            <button data-topic={topic} type="button"><span>{["✦","⌘","⌁","◫","◉","▤","◇","▥","◎"][i]}</span>{topic}</button>
+          )}
+        </div>
+        <div class="radar-divider"></div>
+        <div class="radar-side-title">QUELLENPRÜFUNG</div>
+        <p class="radar-side-desc">Herstellerbeiträge sind Ankündigungen. Forschungspapiere sind nicht automatisch begutachtet. Pressetexte sind unabhängige Berichte, aber kein Funktionsnachweis.</p>
+        <a class="radar-about" href="/WERKAtlas/sources/">Alle Newsquellen und Fehler ansehen ↗</a>
+        <p class="radar-side-desc"><a class="radar-about" href="/WERKAtlas/quality/">Datenqualität des Projektkatalogs ↗</a></p>
+      </aside>
+      <main class="radar-main">
+        <div class="radar-controls">
+          <label class="radar-search"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="news-search" type="search" placeholder="News, Anbieter, Modelle suchen …" aria-label="Nachrichten suchen"/></label>
+          <div class="radar-selects">
+            <label>Zeitraum<select id="news-days"><option value="all">Alle 21 Tage</option><option value="1">Letzte 24h</option><option value="3">Letzte 3 Tage</option><option value="7">Letzte 7 Tage</option></select></label>
+            <label>Quelle<select id="news-kind"><option value="all">Alle Quellen</option><option value="official">Hersteller</option><option value="research">Forschung</option><option value="release">GitHub Release</option><option value="press">Presse</option><option value="independent">Unabhängig</option></select></label>
+          </div>
+        </div>
+        <div class="radar-headline-row">
+          <div><h2>Neueste Entwicklungen</h2><span id="news-count">Meldungen werden geladen …</span></div>
+          <span class="radar-date-note">Links zur Originalquelle · keine KI-generierten Behauptungen</span>
+        </div>
+        <div id="news-loading" class="radar-loading" role="status">Quellenberichte laden …</div>
+        <div id="news-items" class="radar-article-grid" aria-live="polite"></div>
+        <div id="news-empty" class="radar-loading" hidden>Keine Meldungen für diese Filter gefunden.</div>
+        <div class="radar-more"><button id="news-more" hidden type="button">Weitere Meldungen anzeigen ↓</button></div>
+      </main>
+    </div>
+    <footer class="radar-footer">
+      <strong>Quellen statt Schlagzeilen-Magie.</strong> Feeds werden lokal abgefragt. Der Katalog wird dadurch nicht verändert. Die Website zeigt den letzten gespeicherten Abruf, nicht garantiert Echtzeit. Für eine Veröffentlichung muss der News-Datensatz neu bereitgestellt werden.
+    </footer>
+  </section>
+</BaseLayout>
+
+<script>import "../scripts/news-client";</script>
+
+<style is:global>
+.radar-page{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#e9f3f3;max-width:1480px;margin:auto;--mint:#74dec1;--muted:#95aeb5;--line:#2b3e47}
+.radar-page *{box-sizing:border-box}
+.radar-top{border-bottom:1px solid var(--line);padding:15px 0 0}
+.radar-label{display:flex;align-items:center;gap:10px;color:var(--mint);font-size:10px;font-weight:800;letter-spacing:.16em}
+.radar-pulse{height:7px;width:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px #74dec183}
+.radar-header{display:flex;justify-content:space-between;align-items:end;gap:24px;padding:15px 0 30px}
+.radar-header h1{font-size:clamp(34px,4vw,56px);letter-spacing:-.06em;line-height:1.1;margin:0 0 12px;font-weight:800}
+.radar-header h1 span{color:var(--mint)}.radar-header p{font-size:13px;color:#9aafb7;line-height:1.75;max-width:680px}
+.radar-stats{display:flex;gap:28px;white-space:nowrap}.radar-stats div{display:grid;gap:4px}.radar-stats strong{font-size:29px}.radar-stats span{font-size:11px;color:#95aab3}
+.radar-tabs{display:flex;gap:27px;overflow-x:auto}.radar-tabs a{font-size:12px;color:#91a9b1;padding:0 2px 16px;text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}.radar-tabs a.selected,.radar-tabs a:hover{border-bottom-color:var(--mint);color:var(--mint)}
+.radar-grid{display:grid;grid-template-columns:235px minmax(0,1fr);gap:28px;padding-top:30px}
+.radar-side{background:#131f28;border:1px solid #29414a;border-radius:14px;padding:20px;align-self:start}
+.radar-side-title{font-size:10px;color:#8cadb0;font-weight:800;letter-spacing:.14em;display:flex;justify-content:space-between;align-items:center}
+.radar-online{font-size:9px;color:#90e7c7}.radar-side-desc{font-size:11px;line-height:1.75;color:#819ca5;margin:10px 0 14px}.radar-source-stats{font-size:10px;display:flex;gap:10px;flex-wrap:wrap}.radar-source-stats .ok{color:#9be8c9}.radar-source-stats .warn{color:#ffd196}
+.radar-divider{height:1px;background:var(--line);margin:22px 0}
+.radar-topic-list{display:grid;gap:4px;margin-top:15px}.radar-topic-list button{border:1px solid transparent;border-radius:9px;background:transparent;color:#9bb4bb;text-align:left;padding:11px 9px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:12px}.radar-topic-list button span{font-size:16px;color:#7b9c99}.radar-topic-list button:hover,.radar-topic-list button.active{border-color:#3b6759;background:#1c3a33;color:#bbf9db}.radar-topic-list button.active span{color:var(--mint)}
+.radar-about{font-size:11px;color:var(--mint);line-height:1.5;text-decoration:none}
+.radar-main{min-width:0}.radar-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.radar-search{flex:1;min-width:240px;border:1px solid #35515a;background:#111f29;border-radius:10px;display:flex;align-items:center;gap:12px;height:50px;padding:0 14px;color:var(--mint)}.radar-search:focus-within{border-color:var(--mint)}.radar-search input{background:none;border:0;outline:0;color:#edf7f6;width:100%;font-size:12px}.radar-search input::placeholder{color:#7a98a1}
+.radar-selects{display:flex;gap:9px;flex-wrap:wrap}.radar-selects label{display:flex;align-items:center;gap:7px;border:1px solid #30454e;background:#182833;padding:9px 11px;border-radius:9px;font-size:10px;color:#96abb3}.radar-selects select{border:0;background:transparent;color:#e2eeee;font-size:11px;cursor:pointer;max-width:130px}.radar-selects option{background:#172731}
+.radar-headline-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:30px 0 16px}.radar-headline-row h2{font-size:22px;letter-spacing:-.03em;font-weight:750;margin:0 0 6px}.radar-headline-row span{font-size:11px;color:#90a9b1}.radar-date-note{text-align:right}
+.radar-article-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.radar-article{background:#131f29;border:1px solid #2b414c;border-radius:13px;padding:20px;display:flex;flex-direction:column;gap:13px;min-width:0}
+.radar-article:hover{border-color:#5b9b85}
+.radar-article-top{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.radar-kind{background:#21453b;color:#b1eed4;border:1px solid #326955;border-radius:6px;padding:4px 7px;font-size:9px;font-weight:750}.radar-kind.press{background:#243445;border-color:#39536d;color:#a7c8e5}.radar-kind.research{background:#392f45;border-color:#685577;color:#dac1ed}.radar-kind.release{background:#3c3427;border-color:#715c3c;color:#f3d3a0}.radar-article-date{margin-left:auto;font-size:10px;color:#8ea5ae}
+.radar-article h3{font-size:16px;line-height:1.45;letter-spacing:-.016em;font-weight:750;margin:0}.radar-article h3 a{color:#e9f3f3;text-decoration:none}.radar-article h3 a:hover{color:var(--mint)}
+.radar-article p{font-size:12px;color:#9ab1b8;line-height:1.65;margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;min-height:55px}
+.radar-article-bottom{margin-top:auto;border-top:1px solid #29414a;padding-top:12px;display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:10px;color:#97b4b5}.radar-article-bottom a{color:var(--mint);font-weight:650;text-decoration:none;white-space:nowrap}
+.radar-loading{text-align:center;background:#17262d;border:1px dashed #38515a;border-radius:13px;padding:40px 15px;color:#9fb8c0;font-size:13px}
+.radar-more{text-align:center;padding:25px}.radar-more button{background:#22493d;border:1px solid #65af93;border-radius:9px;color:#c6f7da;padding:11px 22px;font-weight:750;cursor:pointer;font-size:12px}
+.radar-footer{margin:28px 0 40px;border:1px solid #2b5347;background:#152b27;padding:18px 21px;border-radius:12px;font-size:11px;color:#a4bdba;line-height:1.7}.radar-footer strong{color:#c3f2dd}
+@media(max-width:1130px){.radar-grid{grid-template-columns:200px 1fr}.radar-article-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.radar-header{display:block}.radar-header h1{font-size:36px}.radar-stats{margin-top:16px}.radar-grid{display:block}.radar-side{margin-bottom:20px}.radar-topic-list{display:flex;flex-wrap:nowrap;overflow-x:auto}.radar-topic-list button{white-space:nowrap;flex:none}.radar-controls{display:block}.radar-search{margin-bottom:10px}.radar-selects>*{flex:1}.radar-headline-row{display:block}.radar-date-note{display:none}.radar-top{padding-top:5px}}
+</style>

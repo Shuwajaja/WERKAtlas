@@ -1,0 +1,282 @@
+{
+  "query": "voice sip",
+  "generated_at": "2026-10-31T12:25:42.207734+00:00",
+  "results": [
+    {
+      "id": "calesthio/OpenMontage",
+      "legacy_score": 73.2,
+      "quality_observed_score": 99.4,
+      "quality_coverage_percent": 95,
+      "quality_label": "provisional",
+      "quality_signals": [
+        {
+          "name": "not_archived",
+          "weight": 25,
+          "value": 1,
+          "evidence": "archived"
+        },
+        {
+          "name": "maintenance_activity",
+          "weight": 30,
+          "value": 0.9808219178082191,
+          "evidence": "pushed_at"
+        },
+        {
+          "name": "license_identified",
+          "weight": 20,
+          "value": 1,
+          "evidence": "license; obligations need review"
+        },
+        {
+          "name": "homepage_declared",
+          "weight": 10,
+          "value": 1,
+          "evidence": "homepage_url"
+        },
+        {
+          "name": "source_link",
+          "weight": 10,
+          "value": 1,
+          "evidence": "source_urls"
+        },
+        {
+          "name": "security_review",
+          "weight": 5,
+          "value": null,
+          "evidence": "security_notes; not a vulnerability audit"
+        }
+      ],
+      "task_fit_keyword_percent": 50.0,
+      "task_fit_matched": [
+        "voice"
+      ],
+      "task_fit_unmatched": [
+        "sip"
+      ],
+      "task_fit_warning": "Keyword match, not verified functional compatibility.",
+      "as_of": "2026-10-31T12:25:42.207734+00:00",
+      "license_verification": "not_verified"
+    },
+    {
+      "id": "2noise/ChatTTS",
+      "legacy_score": 62.2,
+      "quality_observed_score": 84.6,
+      "quality_coverage_percent": 65,
+      "quality_label": "insufficient_evidence",
+      "quality_signals": [
+        {
+          "name": "not_archived",
+          "weight": 25,
+          "value": 1,
+          "evidence": "archived"
+        },
+        {
+          "name": "maintenance_activity",
+          "weight": 30,
+          "value": 0.6657534246575343,
+          "evidence": "pushed_at"
+        },
+        {
+          "name": "license_identified",
+          "weight": 20,
+          "value": null,
+          "evidence": "license; obligations need review"
+        },
+        {
+          "name": "homepage_declared",
+          "weight": 10,
+          "value": null,
+          "evidence": "homepage_url"
+        },
+        {
+          "name": "source_link",
+          "weight": 10,
+          "value": 1,
+          "evidence": "source_urls"
+        },
+        {
+          "name": "security_review",
+          "weight": 5,
+          "value": null,
+          "evidence": "security_notes; not a vulnerability audit"
+        }
+      ],
+      "task_fit_keyword_percent": 50.0,
+      "task_fit_matched": [
+        "voice"
+      ],
+      "task_fit_unmatched": [
+        "sip"
+      ],
+      "task_fit_warning": "Keyword match, not verified functional compatibility.",
+      "as_of": "2026-10-31T12:25:42.207734+00:00",
+      "license_verification": "not_verified"
+    },
+    {
+      "id": "Fosowl/agenticSeek",
+      "legacy_score": 63.7,
+      "quality_observed_score": 84.6,
+      "quality_coverage_percent": 65,
+      "quality_label": "insufficient_evidence",
+      "quality_signals": [
+        {
+          "name": "not_archived",
+          "weight": 25,
+          "value": 1,
+          "evidence": "archived"
+        },
+        {
+          "name": "maintenance_activity",
+          "weight": 30,
+          "value": 0.6657534246575343,
+          "evidence": "pushed_at"
+        },
+        {
+          "name": "license_identified",
+          "weight": 20,
+          "value": null,
+          "evidence": "license; obligations need review"
+        },
+        {
+          "name": "homepage_declared",
+          "weight": 10,
+          "value": null,
+          "evidence": "homepage_url"
+        },
+        {
+          "name": "source_link",
+          "weight": 10,
+          "value": 1,
+          "evidence": "source_urls"
+        },
+        {
+          "name": "security_review",
+          "weight": 5,
+          "value": null,
+          "evidence": "security_notes; not a vulnerability audit"
+        }
+      ],
+      "task_fit_keyword_percent": 50.0,
+      "task_fit_matched": [
+        "voice"
+      ],
+      "task_fit_unmatched": [
+        "sip"
+      ],
+      "task_fit_warning": "Keyword match, not verified functional compatibility.",
+      "as_of": "2026-10-31T12:25:42.207734+00:00",
+      "license_verification": "not_verified"
+    },
+    {
+      "id": "GetStream/Vision-Agents",
+      "legacy_score": 58.9,
+      "quality_observed_score": 84.6,
+      "quality_coverage_percent": 65,
+      "quality_label": "insufficient_evidence",
+      "quality_signals": [
+        {
+          "name": "not_archived",
+          "weight": 25,
+          "value": 1,
+          "evidence": "archived"
+        },
+        {
+          "name": "maintenance_activity",
+          "weight": 30,
+          "value": 0.6657534246575343,
+          "evidence": "pushed_at"
+        },
+        {
+          "name": "license_identified",
+          "weight": 20,
+          "value": null,
+          "evidence": "license; obligations need review"
+        },
+        {
+          "name": "homepage_declared",
+          "weight": 10,
+          "value": null,
+          "evidence": "homepage_url"
+        },
+        {
+          "name": "source_link",
+          "weight": 10,
+          "value": 1,
+          "evidence": "source_urls"
+        },
+        {
+          "name": "security_review",
+          "weight": 5,
+          "value": null,
+          "evidence": "security_notes; not a vulnerability audit"
+        }
+      ],
+      "task_fit_keyword_percent": 50.0,
+      "task_fit_matched": [
+        "voice"
+      ],
+      "task_fit_unmatched": [
+        "sip"
+      ],
+      "task_fit_warning": "Keyword match, not verified functional compatibility.",
+      "as_of": "2026-10-31T12:25:42.207734+00:00",
+      "license_verification": "not_verified"
+    },
+    {
+      "id": "PeonPing/peon-ping",
+      "legacy_score": 52.7,
+      "quality_observed_score": 84.6,
+      "quality_coverage_percent": 65,
+      "quality_label": "insufficient_evidence",
+      "quality_signals": [
+        {
+          "name": "not_archived",
+          "weight": 25,
+          "value": 1,
+          "evidence": "archived"
+        },
+        {
+          "name": "maintenance_activity",
+          "weight": 30,
+          "value": 0.6657534246575343,
+          "evidence": "pushed_at"
+        },
+        {
+          "name": "license_identified",
+          "weight": 20,
+          "value": null,
+          "evidence": "license; obligations need review"
+        },
+        {
+          "name": "homepage_declared",
+          "weight": 10,
+          "value": null,
+          "evidence": "homepage_url"
+        },
+        {
+          "name": "source_link",
+          "weight": 10,
+          "value": 1,
+          "evidence": "source_urls"
+        },
+        {
+          "name": "security_review",
+          "weight": 5,
+          "value": null,
+          "evidence": "security_notes; not a vulnerability audit"
+        }
+      ],
+      "task_fit_keyword_percent": 50.0,
+      "task_fit_matched": [
+        "voice"
+      ],
+      "task_fit_unmatched": [
+        "sip"
+      ],
+      "task_fit_warning": "Keyword match, not verified functional compatibility.",
+      "as_of": "2026-10-31T12:25:42.207734+00:00",
+      "license_verification": "not_verified"
+    }
+  ],
+  "warning": "Analysis of catalog snapshot only; source and license not independently verified."
+}
