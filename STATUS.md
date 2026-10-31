@@ -17,7 +17,9 @@ Es gibt acht Remote-Branches, deren Commits nicht in der Historie von `main` lie
 | `feat/six-phase-local-atlas-20261031` | Offline P0–P5: lokale Workflows plus Metadaten-Snapshots und Qualitätsskripte. Commits `606cc6e`, `6c5bf5a`. | Nein. | Bündeln. Ancestor des News-Hub-Branches. Kein eigenes PR. |
 | `feat/news-hub-readable-catalog-20261031` | Die beiden vorigen Commits plus lesbarer Katalog, News-Radar und Handoff. Vier Commits, 50 Dateien gegenüber dem Merge-Base. | Nein. | PR, gemeinsam mit den zwei Ancestors. |
 
-Das Bündel liegt auf `cursor/bundle-local-atlas-news-b5e7` (Merge von `feat/news-hub-readable-catalog-20261031` auf aktuelles `main`, ohne die Ursprungsbranches zu verändern).
+Das Bündel liegt auf `cursor/bundle-local-atlas-news-b5e7` (Merge von `feat/news-hub-readable-catalog-20261031` auf aktuelles `main`, ohne die Ursprungsbranches zu verändern): https://github.com/Shuwajaja/WERKAtlas/pull/18
+
+Diese Statusdatei und die Dokumentenverschiebung: https://github.com/Shuwajaja/WERKAtlas/pull/19
 
 ## Weitere Remote-Branches
 
@@ -64,7 +66,7 @@ Auf dem Bündel-Branch, vor dem Öffnen des PR:
 
 ## Offenes
 
-- Das Bündel-PR ist ein Vorschlag und ist nicht gemergt.
+- PR #18 und PR #19 sind Vorschläge und sind nicht gemergt.
 - Ob die großen Snapshot-Dateien (`data/verified-github.json`, `research/metadata/2026-10-31-graphql-all1516.json`, `web/public/news/latest.json`) noch dem Live-Stand von GitHub entsprechen: UNKNOWN. Sie wurden hier nicht neu abgefragt.
 - Ob die neuen Astro-Seiten im Browser die Katalognavigation und den News-Hub korrekt zeigen: UNKNOWN. Kein Playwright-Lauf und kein Browser-Check in diesem Arbeitsgang.
 - Ob GitHub die alten Branches nach dem Merge des Bündels noch anzeigt: sie bleiben absichtlich liegen.
