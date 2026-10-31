@@ -1,5 +1,7 @@
 # WERKAtlas E2E Test Suite Readiness Report (TEST_READY)
 
+> Kanonischer Pfad seit 2026-10-31: `docs/archive/TEST_READY.md`. Der Text darunter ist der bisherige Inhalt aus dem Hauptordner. Die Attestierung beschreibt einen früheren Meilenstein.
+
 This document shows the breakdown of the dual-layer E2E test cases mapped across the 9 features of the modernized WERKAtlas project.
 
 ## Summary of Total Test Cases

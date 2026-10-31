@@ -1,5 +1,7 @@
 # Original User Request
 
+> Kanonischer Pfad seit 2026-10-31: `docs/archive/ORIGINAL_REQUEST.md`. Der Text darunter ist der bisherige Inhalt aus dem Hauptordner.
+
 ## Initial Request — 2026-07-08T12:58:08Z
 
 Modernize and restructure WERKAtlas (currently located at C:\Workplace\agentic-engineering-compendium) into a high-quality, reproducible, static-site-based map of the agentic engineering ecosystem.

@@ -1,5 +1,7 @@
 # Agentic Engineering Compendium — Agent Instructions
 
+Aktueller Stand, Branch-Inventar und Dokumentenkarte: [`STATUS.md`](STATUS.md).
+
 ## Purpose
 
 This repository is an evidence-backed, reproducible open-source knowledge base mapping the entire modern AI-agent ecosystem. It is structured like `build-your-own-x` but covers the full agent stack.
@@ -8,6 +10,7 @@ This repository is an evidence-backed, reproducible open-source knowledge base m
 
 ```
 agentic-engineering-compendium/
+├── STATUS.md              # Führende Statusdatei
 ├── README.md              # Landing page
 ├── BUILD-YOUR-OWN.md      # Build-from-scratch tutorials
 ├── CATALOG.md             # Full human-readable catalog
@@ -19,6 +22,7 @@ agentic-engineering-compendium/
 ├── METHODOLOGY.md         # Scoring, evidence rules
 ├── CONTRIBUTING.md        # How to contribute
 ├── SECURITY.md            # Security policy
+├── docs/                  # Operative Notizen, Tests, Archiv
 ├── data/                  # Machine-readable catalog
 │   ├── catalog.json
 │   ├── catalog.csv
