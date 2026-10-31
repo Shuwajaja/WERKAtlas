@@ -1,9 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { catalogEntries, taxonomy } from '../utils/dataLoader';
+import githubVerified from '../../../data/verified-github.json';
 
 // Wir laden die Einträge, absteigend nach Score sortiert
-const entries = [...catalogEntries].sort((a, b) => b.score - a.score);
+const githubFacts = githubVerified.entries as Record<string, {
+  id: string; stars: number; forks: number | null; archived: boolean | null;
+  license: string | null; pushed_at: string | null; verified_at: string; source: string;
+}>;
+const entries = catalogEntries.map(entry => {
+  const github = githubFacts[entry.id.toLowerCase()] || null;
+  return {...entry, freshGithub: github,
+    stars: github?.stars ?? entry.stars, forks: github?.forks ?? entry.forks };
+}).sort((a, b) => b.score - a.score);
 
 // Alle verfügbaren Kategorien flach klopfen für Filter-Optionen
 const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat]) => {
@@ -37,7 +46,7 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
         
         <!-- Search Input -->
         <div class="space-y-grid-xs">
-          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Suche (Name/Repo/Desc)</label>
+          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Alle Suchwörter müssen vorkommen (Name/Repo/Funktionen/Protokolle)</label>
           <input 
             type="text" 
             id="explorer-search" 
@@ -97,7 +106,7 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
             class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
           >
             <option value="ALL">Alle Lizenzen</option>
-            <option value="present">Lizenz vorhanden</option>
+            <option value="present">SPDX im Katalog vorhanden (nicht rechtlich geprüft)</option>
             <option value="missing">Lizenz unbekannt</option>
           </select>
         </div>
@@ -157,15 +166,19 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
               data-name={entry.name}
               data-repo={entry.repository}
               data-desc={entry.description}
+              data-topics={entry.topics.join(" ")}
+              data-protocols={entry.protocols.join(" ")}
+              data-capabilities={entry.capabilities.join(" ")}
               data-cat={entry.primary_category}
               data-tier={entry.score_label || 'minimal'}
               data-score={entry.score}
               data-stars={entry.stars}
               data-forks={entry.forks}
               data-type={entry.project_type}
-              data-license={entry.license ? 'present' : 'missing'}
+              data-license={entry.freshGithub?.license ? 'present' : 'missing'}
               data-maintenance={entry.maintenance_status || 'unclear'}
               data-checked={entry.checked_at || ''}
+              data-githubchecked={entry.freshGithub?.verified_at || ''}
             >
               <div>
                 <!-- Top Header: Type & Score -->
@@ -197,6 +210,11 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
                 <!-- Description -->
                 <p class="text-xs text-graphite-400 line-clamp-3 leading-relaxed mb-grid-md">
                   {entry.description}
+                </p>
+                <p class="font-mono text-[10px] text-graphite-600 mb-grid-md">
+                  {entry.freshGithub
+                    ? `GitHub-Stand: ${entry.freshGithub.verified_at.slice(0,10)} · SPDX: ${entry.freshGithub.license || 'unbekannt'}`
+                    : 'GitHub-Stand: nicht bestätigt'}
                 </p>
               </div>
 
@@ -257,7 +275,10 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
         const freshnessValue = !Number.isFinite(age) || age < 0
           ? 'unknown' : age <= NINETY_DAYS ? 'fresh' : 'stale';
 
-        const matchesQuery = !q || name.includes(q) || repo.includes(q) || desc.includes(q) || kind.includes(q);
+        const keywords = q.split(/\s+/).filter(Boolean);
+        const searchable = [name, repo, desc, kind,
+          card.dataset.topics || '', card.dataset.protocols || '', card.dataset.capabilities || ''].join(' ');
+        const matchesQuery = keywords.every(term => searchable.includes(term));
         const matchesCat = cat === 'ALL' || pcat === cat;
         const matchesTier = tier === 'ALL' || ptier === tier;
         const matchesLicense = license === 'ALL' || (card.dataset.license || 'missing') === license;

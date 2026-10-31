@@ -37,3 +37,13 @@ site/dist/
 web/.astro/
 site/.astro/
 package-lock.json
+
+# Local review artifacts and build logs. Commit source-backed reports deliberately.
+research/local-daily/
+research/website-*.log
+research/metadata/*-github-proposals.json
+research/metadata/*-github-observations.json
+research/metadata/*-graphql-first*.json
+research/metadata/*-observed-stars.json
+research/metadata/*-trend-sanity.json
+research/metadata/*.partial

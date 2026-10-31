@@ -3,14 +3,16 @@
 > A searchable, evidence-oriented map of the AI-agent engineering ecosystem.
 
 ![Snapshot](https://img.shields.io/badge/snapshot-2026--07--07-111111)
-![Projects](https://img.shields.io/badge/projects-1468-2563eb)
-![Accepted](https://img.shields.io/badge/accepted-742-16a34a)
+![Projects](https://img.shields.io/badge/projects-1516-2563eb)
+![Accepted](https://img.shields.io/badge/accepted-723-16a34a)
 ![Categories](https://img.shields.io/badge/categories-81-7c3aed)
 ![Format](https://img.shields.io/badge/format-GitHub%20Markdown-0f172a)
 
 | Projects | Accepted | Excluded | Top-level categories | Subcategories | Snapshot |
 |---:|---:|---:|---:|---:|---|
-| 1468 | 742 | 726 | 10 | 81 | 2026-07-07 |
+| 1516 | 723 | 793 | 10 | 81 | Historischer Katalog-Snapshot |
+
+> **Datenhinweis (31.10.2026):** Die Kennzahlen oben sind aus `data/catalog.json` neu gezählt. Einige lange README-Projektlisten sind historische Ausschnitte, keine aktuellen Ranglisten. Aktuelle GitHub-Metadaten und ihre Grenzen stehen im lokalen `data/verified-github.json` und unter `/WERKAtlas/quality/`. Der alte Score ist kein aktuelles Sicherheits- oder Lizenzgutachten.
 
 ## Start Here
 
@@ -63,11 +65,11 @@ flowchart LR
 
 | Rating | Score range | Projects |
 |---|---:|---:|
-| Essential | 85+ | 11 |
-| Strong | 75-84 | 169 |
-| Emerging | 65-74 | 340 |
-| Watchlist | 50-64 | 222 |
-| Excluded | <50 | 726 |
+| Essential | 85+ | 3 |
+| Strong | 75-84 | 37 |
+| Emerging | 65-74 | 72 |
+| Watchlist | 50-64 | 611 |
+| Excluded | <50 | 793 |
 
 ---
 

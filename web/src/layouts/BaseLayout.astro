@@ -1,5 +1,5 @@
 ---
-import { catalogEntries, taxonomy } from '../utils/dataLoader';
+import { catalogEntries, taxonomy, catalogSnapshotDate } from '../utils/dataLoader';
 
 interface Props {
   title: string;
@@ -10,7 +10,7 @@ const { title } = Astro.props;
 // Compute totals
 const totalProjects = catalogEntries.length;
 const totalDomains = Object.keys(taxonomy.categories).length;
-const currentDate = '2026-07-08';
+const currentDate = catalogSnapshotDate || 'unbekannt';
 ---
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ const currentDate = '2026-07-08';
       <!-- Totals & Metadata Bar -->
       <div class="flex items-center gap-grid-lg font-mono text-xs text-graphite-600">
         <div>
-          SNAPSHOT: <span class="text-graphite-100">{currentDate}</span>
+          KATALOG-SNAPSHOT: <span class="text-graphite-100">{currentDate}</span>
         </div>
         <div class="hidden sm:block border-l border-steel-border h-4"></div>
         <div>
@@ -78,6 +78,12 @@ const currentDate = '2026-07-08';
             class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-none border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
           >
             <span class="text-caution-yellow">▪</span> Trending
+          </a>
+          <a
+            href="/WERKAtlas/quality/"
+            class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-none border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
+          >
+            <span class="text-caution-yellow">◈</span> Datenqualität
           </a>
           <a
             href="/WERKAtlas/watchlist/"

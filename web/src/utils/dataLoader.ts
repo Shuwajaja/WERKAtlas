@@ -98,3 +98,4 @@ export interface Taxonomy {
 }
 
 export const taxonomy = taxonomyRaw as unknown as Taxonomy;
+export const catalogSnapshotDate = catalogRaw.snapshot_date;
