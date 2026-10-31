@@ -1,0 +1,117 @@
+{
+  "query": "voice agent sip",
+  "checked_at": "2026-10-31T12:25:41.995723+00:00",
+  "count": 10,
+  "candidates": [
+    {
+      "id": "JacobStephens2/voice-agent-scheduling",
+      "repository_url": "https://github.com/JacobStephens2/voice-agent-scheduling",
+      "description_unverified": "Telephone scheduling agent: callers hear real Google Calendar availability and book a confirmed 30-minute phone appointment. Telnyx SIP + xAI Grok voice, TypeScript/Node.",
+      "stars_snapshot": 0,
+      "license_github": "MIT",
+      "archived": false,
+      "pushed_at": "2026-10-31T12:25:34Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "revocx35/telerouter",
+      "repository_url": "https://github.com/revocx35/telerouter",
+      "description_unverified": "Agentic smart-speaker manager and voice router: wake word + Whisper + Piper speakers for Linux/macOS, Claude Code/Hermes in tmux over SSH, SIP/WhatsApp/camera calls, MCP server",
+      "stars_snapshot": 1,
+      "license_github": "MIT",
+      "archived": false,
+      "pushed_at": "2026-10-31T11:07:30Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "api-evangelist/mirrorfly-messages-api",
+      "repository_url": "https://github.com/api-evangelist/mirrorfly-messages-api",
+      "description_unverified": "MirrorFly Messages API — independent third-party profile of a public API surface, by API Evangelist. Self-hosted CPaaS by CONTUS TECH providing REST/HTTP Chat Platform APIs and SDKs for chat, messaging, voice, video, and SIP/VoIP, plus AI agent and contact-center tooling. Deployable as cloud or on-premise.",
+      "stars_snapshot": 0,
+      "license_github": null,
+      "archived": false,
+      "pushed_at": "2026-10-30T19:58:48Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "sparkcyf/android-voice-sip-agent",
+      "repository_url": "https://github.com/sparkcyf/android-voice-sip-agent",
+      "description_unverified": "Turn an unrooted Android 11+ phone into a single-line cellular <-> SIP gateway. The phone registers to your PBX (Asterisk / FreePBX / IssabelPBX) as a SIP trunk.",
+      "stars_snapshot": 19,
+      "license_github": "GPL-2.0",
+      "archived": false,
+      "pushed_at": "2026-10-30T18:48:08Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "shridarpatil/tring",
+      "repository_url": "https://github.com/shridarpatil/tring",
+      "description_unverified": "Open-source, API-first voice CPaaS for browser + telecom calling. Drop in a <script> and a button - your agents place and receive real phone calls from the browser over FreeSWITCH. Multi-tenant, India-primary, Apache-2.0.",
+      "stars_snapshot": 5,
+      "license_github": "Apache-2.0",
+      "archived": false,
+      "pushed_at": "2026-10-30T17:55:02Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "api-evangelist/livekit",
+      "repository_url": "https://github.com/api-evangelist/livekit",
+      "description_unverified": "LiveKit — independent third-party profile of a public API surface, by API Evangelist. LiveKit is an open-source WebRTC platform with a managed Cloud offering. APIs cover Rooms, Participants, Tracks, Egress (recording, RTMP), Ingress (RTMP/SRT), SIP (telephony), and Agents (LLM voice agents). The server APIs use Twirp (HTTP+Protobuf); SDKs are avail",
+      "stars_snapshot": 0,
+      "license_github": null,
+      "archived": false,
+      "pushed_at": "2026-10-30T15:56:02Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "didww/ai",
+      "repository_url": "https://github.com/didww/ai",
+      "description_unverified": "AI at DIDWW: Claude Code agent skills that put an AI voice agent on a DIDWW phone number (ElevenLabs, Vapi, Retell, Ultravox, Vogent, OpenAI Realtime, xAI, LiveKit), npx-installable",
+      "stars_snapshot": 7,
+      "license_github": "MIT",
+      "archived": false,
+      "pushed_at": "2026-10-30T15:11:49Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "SIPRAL/sipral",
+      "repository_url": "https://github.com/SIPRAL/sipral",
+      "description_unverified": "Sipral (Session Initiation Protocol Rust Audio Layer): a memory-safe SIP client stack in Rust for softphones, mobile apps and voice agents. One C ABI, bindings for Swift, Kotlin, .NET, Python, Dart, Node.js and React Native. AGPL-3.0 or commercial.",
+      "stars_snapshot": 3,
+      "license_github": "AGPL-3.0",
+      "archived": false,
+      "pushed_at": "2026-10-30T14:03:12Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "NilsFreund/usestraw",
+      "repository_url": "https://github.com/NilsFreund/usestraw",
+      "description_unverified": "SIP without the hangover. A modern SIP stack for voice apps and AI agents",
+      "stars_snapshot": 1,
+      "license_github": "MIT",
+      "archived": false,
+      "pushed_at": "2026-10-30T14:07:45Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    },
+    {
+      "id": "api-evangelist/fixie",
+      "repository_url": "https://github.com/api-evangelist/fixie",
+      "description_unverified": "Fixie — independent third-party profile of a public API surface, by API Evangelist. Fixie is the company behind Ultravox Realtime, a speech-native voice AI platform for building natural, low-latency conversational voice agents. Rather than transcribing speech to text first, Ultravox processes audio directly to preserve tone, cadence, and pitch whil",
+      "stars_snapshot": 0,
+      "license_github": null,
+      "archived": false,
+      "pushed_at": "2026-10-30T02:06:02Z",
+      "status": "review_required",
+      "note": "Verify official repo, LICENSE and suitability; do not import automatically."
+    }
+  ]
+}
