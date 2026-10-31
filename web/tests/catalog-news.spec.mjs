@@ -10,6 +10,11 @@ test("Explorer loads just 18 real project cards and filters without errors",asyn
  await expect(page.locator("#catalog-count")).toContainText("1.516");
  await expect(page.locator('[data-testid="catalog-card"]')).toHaveCount(18);
  await expect(page.locator("#catalog-more")).toBeVisible();
+ await expect(page.getByRole("button",{name:"Coding-Agenten"})).toBeVisible();
+ await page.getByRole("button",{name:"Wissen & Memory"}).click();
+ await expect(page.locator("#catalog-count")).not.toContainText("1.516");
+ await page.getByRole("button",{name:"Alle Projekte"}).click();
+ await expect(page.locator("#catalog-count")).toContainText("1.516");
  await page.locator("#catalog-search").fill("n8n");
  await expect(page.locator('[data-testid="catalog-card"]').first()).toBeVisible();
  await expect(page.locator("#catalog-count")).not.toContainText("1.516");

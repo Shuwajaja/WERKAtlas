@@ -3,7 +3,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { catalogEntries, taxonomy, catalogSnapshotDate } from "../utils/dataLoader";
 import githubVerified from "../../../data/verified-github.json";
 
-const groups=Object.entries(taxonomy.categories).map(([id,info])=>({id,name:info.name}));
+const categoryNames: Record<string,string> = {
+  A:"Grundlagen & Lernen",
+  B:"Frameworks & Laufzeiten",
+  C:"Coding-Agenten",
+  D:"MCP & Integrationen",
+  E:"Skills & Erweiterungen",
+  F:"Wissen & Memory",
+  G:"Ausführung & Browser",
+  H:"Monitoring & Qualität",
+  I:"Modelle & Infrastruktur",
+  J:"Apps & Oberflächen",
+};
+const groups=Object.entries(taxonomy.categories).map(([id,info])=>({id,name:categoryNames[id] || info.name}));
 ---
 
 <BaseLayout title="GitHub-Projektkatalog">
