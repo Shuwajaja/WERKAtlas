@@ -30,7 +30,7 @@ jobs:
       - name: Audit catalog invariants when the gate is present
         run: |
           if [ -f scripts/audit_catalog.py ]; then
-            python scripts/audit_catalog.py --catalog data/catalog.json --schema data/catalog.schema.json --taxonomy data/taxonomy.json --as-of 2026-10-28
+            python scripts/audit_catalog.py --catalog data/catalog.json --schema data/catalog.schema.json --taxonomy data/taxonomy.json --as-of "$(date -u +%F)"
           else
             echo "audit_catalog.py is not on this ref yet; validate.py already ran."
           fi
