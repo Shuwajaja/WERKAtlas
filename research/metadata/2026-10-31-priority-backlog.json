@@ -1,0 +1,188 @@
+{
+  "as_of": "2026-10-31T00:00:00+00:00",
+  "stale_days": 90,
+  "counts": {
+    "total": 1516,
+    "license_missing": 1400,
+    "maintenance_unclear": 1511,
+    "checked_at_stale_or_unknown": 1468,
+    "pushed_at_missing": 725,
+    "official_evidence_missing": 1510
+  },
+  "total_needing_review": 1516,
+  "selected": [
+    {
+      "id": "n8n-io/n8n",
+      "repository_url": "https://github.com/n8n-io/n8n",
+      "existing_score_stale_possible": 86.5,
+      "stars_snapshot": 195550,
+      "checked_at": "2026-07-07T18:41:11.613161+00:00",
+      "missing_or_stale": [
+        "maintenance_status",
+        "checked_at"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "paperclipai/paperclip",
+      "repository_url": "https://github.com/paperclipai/paperclip",
+      "existing_score_stale_possible": 86.0,
+      "stars_snapshot": 108168,
+      "checked_at": "2026-10-28T12:40:00+00:00",
+      "missing_or_stale": [
+        "maintenance_status"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "langgenius/dify",
+      "repository_url": "https://github.com/langgenius/dify",
+      "existing_score_stale_possible": 85.0,
+      "stars_snapshot": 159799,
+      "checked_at": "2026-10-28T12:40:00+00:00",
+      "missing_or_stale": [
+        "maintenance_status"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "heygen-com/hyperframes",
+      "repository_url": "https://github.com/heygen-com/hyperframes",
+      "existing_score_stale_possible": 83.5,
+      "stars_snapshot": 74368,
+      "checked_at": "2026-10-28T12:40:00+00:00",
+      "missing_or_stale": [
+        "maintenance_status"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "unclecode/crawl4ai",
+      "repository_url": "https://github.com/unclecode/crawl4ai",
+      "existing_score_stale_possible": 82.3,
+      "stars_snapshot": 86441,
+      "checked_at": "2026-10-28T12:40:00+00:00",
+      "missing_or_stale": [
+        "maintenance_status"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "browser-use/browser-use",
+      "repository_url": "https://github.com/browser-use/browser-use",
+      "existing_score_stale_possible": 82.0,
+      "stars_snapshot": 103321,
+      "checked_at": "2026-07-07T18:39:59.378131+00:00",
+      "missing_or_stale": [
+        "maintenance_status",
+        "checked_at"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "JuliusBrussee/caveman",
+      "repository_url": "https://github.com/JuliusBrussee/caveman",
+      "existing_score_stale_possible": 81.3,
+      "stars_snapshot": 115672,
+      "checked_at": "2026-10-28T12:40:00+00:00",
+      "missing_or_stale": [
+        "maintenance_status"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "microsoft/semantic-kernel",
+      "repository_url": "https://github.com/microsoft/semantic-kernel",
+      "existing_score_stale_possible": 81.0,
+      "stars_snapshot": 28280,
+      "checked_at": "2026-07-07T17:39:48.385643+00:00",
+      "missing_or_stale": [
+        "maintenance_status",
+        "checked_at"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "code-yeongyu/oh-my-openagent",
+      "repository_url": "https://github.com/code-yeongyu/oh-my-openagent",
+      "existing_score_stale_possible": 80.9,
+      "stars_snapshot": 70427,
+      "checked_at": "2026-10-28T12:40:00+00:00",
+      "missing_or_stale": [
+        "maintenance_status"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "openinterpreter/openinterpreter",
+      "repository_url": "https://github.com/openinterpreter/openinterpreter",
+      "existing_score_stale_possible": 80.8,
+      "stars_snapshot": 64297,
+      "checked_at": "2026-07-07T17:40:12.538631+00:00",
+      "missing_or_stale": [
+        "maintenance_status",
+        "checked_at"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "langchain-ai/langchain",
+      "repository_url": "https://github.com/langchain-ai/langchain",
+      "existing_score_stale_possible": 80.5,
+      "stars_snapshot": 141208,
+      "checked_at": "2026-07-07T17:39:30.343690+00:00",
+      "missing_or_stale": [
+        "maintenance_status",
+        "checked_at"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "JustVugg/colibri",
+      "repository_url": "https://github.com/JustVugg/colibri",
+      "existing_score_stale_possible": 80.4,
+      "stars_snapshot": 44532,
+      "checked_at": "2026-10-28T12:40:00+00:00",
+      "missing_or_stale": [
+        "maintenance_status"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "weaviate/weaviate",
+      "repository_url": "https://github.com/weaviate/weaviate",
+      "existing_score_stale_possible": 80.4,
+      "stars_snapshot": 16534,
+      "checked_at": "2026-07-07T18:39:47.398831+00:00",
+      "missing_or_stale": [
+        "maintenance_status",
+        "checked_at"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "lfnovo/open-notebook",
+      "repository_url": "https://github.com/lfnovo/open-notebook",
+      "existing_score_stale_possible": 80.3,
+      "stars_snapshot": 40655,
+      "checked_at": "2026-10-28T12:40:00+00:00",
+      "missing_or_stale": [
+        "maintenance_status"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    },
+    {
+      "id": "qdrant/qdrant",
+      "repository_url": "https://github.com/qdrant/qdrant",
+      "existing_score_stale_possible": 79.8,
+      "stars_snapshot": 33008,
+      "checked_at": "2026-07-07T18:39:53.404611+00:00",
+      "missing_or_stale": [
+        "maintenance_status",
+        "checked_at"
+      ],
+      "action": "Verify current facts from official repository and attach source evidence in a review PR"
+    }
+  ],
+  "note": "Backlog only; existing scores/stars may be stale. License, maintenance and suitability remain unverified until independently sourced."
+}
