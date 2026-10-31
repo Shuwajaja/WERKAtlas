@@ -14,3 +14,10 @@ def test_scheduled_update_does_not_push_main():
     assert "contents: read" in text
     assert "audit_catalog.py" in text
     assert "validate.py" in text
+
+
+def test_scheduled_audit_uses_the_current_utc_date():
+    """An audit must not keep evaluating freshness against a frozen date."""
+    text = Path(".github/workflows/scheduled-update.yml").read_text(encoding="utf-8")
+    assert '--as-of "$(date -u +%F)"' in text
+    assert "--as-of 2026-10-28" not in text
