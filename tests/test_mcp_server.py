@@ -117,7 +117,7 @@ def test_tools_call_search_returns_catalog_text():
         TAXONOMY,
     )
     names = [tool["name"] for tool in listed["result"]["tools"]]
-    assert names == ["search", "get_project", "list_categories"]
+    assert names == ["search", "recommend", "get_project", "list_categories"]
 
 
 def test_framing_is_one_json_line_without_content_length():

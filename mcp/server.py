@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Read-only WERKAtlas MCP server.
 
-Tools: search, get_project, list_categories.
+Tools: search, recommend, get_project, list_categories.
 Transport: newline-delimited JSON-RPC on stdin/stdout (MCP stdio spec).
 The process does not write the catalog, open a shell, or install anything.
 
@@ -15,6 +15,8 @@ import argparse
 import json
 import sys
 from pathlib import Path
+
+from recommend import recommend_projects
 
 PROTOCOL_VERSION = "2025-06-18"
 SERVER_NAME = "werkatlas"
@@ -89,6 +91,21 @@ def handle_message(message: dict, entries: list, taxonomy: dict) -> dict | None:
                 arguments.get("category"),
                 arguments.get("limit", 10),
             )
+            return _tool_result(msg_id, payload)
+        if name == "recommend":
+            try:
+                score = arguments.get("min_score")
+                payload = recommend_projects(
+                    entries, str(arguments.get("query") or ""),
+                    limit=arguments.get("limit", 10),
+                    license=arguments.get("license"),
+                    language=arguments.get("language"),
+                    project_type=arguments.get("project_type"),
+                    min_score=float(score) if score is not None else None,
+                    include_archived=arguments.get("include_archived") is True,
+                )
+            except (TypeError, ValueError):
+                return _error(msg_id, -32602, "invalid filters")
             return _tool_result(msg_id, payload)
         if name == "get_project":
             project = get_project(entries, str(arguments.get("id") or ""))
@@ -180,6 +197,23 @@ def _tool_definitions() -> list[dict]:
                     "category": {"type": "string"},
                     "limit": {"type": "integer", "minimum": 1, "maximum": MAX_LIMIT},
                 },
+            },
+        },
+        {
+            "name": "recommend",
+            "description": "Rank catalog matches by lexical evidence; not a quality or suitability guarantee. Read-only.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string"},
+                    "limit": {"type": "integer", "minimum": 1, "maximum": MAX_LIMIT},
+                    "license": {"type": "string"},
+                    "language": {"type": "string"},
+                    "project_type": {"type": "string"},
+                    "min_score": {"type": "number", "minimum": 0, "maximum": 100},
+                    "include_archived": {"type": "boolean"},
+                },
+                "required": ["query"],
             },
         },
         {
