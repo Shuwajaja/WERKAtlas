@@ -124,8 +124,9 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
             class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
           >
             <option value="ALL">Alle Prüfdaten</option>
-            <option value="fresh">Geprüft in 90 Tagen vor 2026-10-28</option>
-            <option value="stale">Älter als 90 Tage vor 2026-10-28</option>
+            <option value="fresh">In den letzten 90 Tagen geprüft</option>
+            <option value="stale">Prüfung älter als 90 Tage</option>
+            <option value="unknown">Prüfdatum unbekannt/ungültig</option>
           </select>
         </div>
 
@@ -226,7 +227,7 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
     const maintenanceSelect = document.getElementById('explorer-maintenance') as HTMLSelectElement;
     const freshnessSelect = document.getElementById('explorer-freshness') as HTMLSelectElement;
     const clearBtn = document.getElementById('explorer-clear') as HTMLButtonElement;
-    const AS_OF = Date.parse('2026-10-28T00:00:00Z');
+    const AS_OF = Date.now();
     const NINETY_DAYS = 90 * 24 * 60 * 60 * 1000;
     const countEl = document.getElementById('explorer-count') as HTMLElement;
     const grid = document.getElementById('explorer-grid') as HTMLElement;
@@ -252,8 +253,9 @@ const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat])
         const pcat = card.dataset.cat || '';
         const ptier = card.dataset.tier || '';
         const checked = Date.parse(card.dataset.checked || '');
-        const age = Number.isNaN(checked) ? Number.POSITIVE_INFINITY : AS_OF - checked;
-        const freshnessValue = age <= NINETY_DAYS ? 'fresh' : 'stale';
+        const age = AS_OF - checked;
+        const freshnessValue = !Number.isFinite(age) || age < 0
+          ? 'unknown' : age <= NINETY_DAYS ? 'fresh' : 'stale';
 
         const matchesQuery = !q || name.includes(q) || repo.includes(q) || desc.includes(q) || kind.includes(q);
         const matchesCat = cat === 'ALL' || pcat === cat;
