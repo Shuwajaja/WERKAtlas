@@ -91,9 +91,11 @@ def test_site_exposes_real_snapshot_and_unknown_metadata():
     quality=(ROOT/"web/src/pages/quality.astro").read_text(encoding="utf-8")
     assert "catalogSnapshotDate" in layout
     assert "KATALOG-SNAPSHOT" in layout
-    assert "keywords.every" in explorer
-    assert "data-topics" in explorer
-    assert "entry.freshGithub?.license" in explorer
+    client=(ROOT/"web/src/scripts/explorer-client.ts").read_text(encoding="utf-8")
+    data_index=(ROOT/"web/src/pages/catalog-index.json.ts").read_text(encoding="utf-8")
+    assert "terms.every" in client
+    assert "item.topics" in data_index
+    assert "git?.license ?? null" in data_index
     assert "githubVerified" in quality
     assert "Datenqualität im WERKAtlas" in quality
 

@@ -7,18 +7,20 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:ui": "playwright test --config playwright.config.mjs"
   },
   "dependencies": {
-    "astro": "^4.11.0",
-    "tailwindcss": "^3.4.4",
     "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.11.0",
+    "fuse.js": "^7.0.0",
     "lucide-astro": "^0.399.0",
-    "zod": "^3.23.8",
-    "fuse.js": "^7.0.0"
+    "tailwindcss": "^3.4.4",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5.5.2",
-    "@types/node": "^20.14.9"
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^20.14.9",
+    "typescript": "^5.5.2"
   }
 }

@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "openai",
+      "name": "OpenAI News",
+      "url": "https://openai.com/news/rss.xml",
+      "kind": "official",
+      "category": "Modelle & Produkte",
+      "max_items": 35
+    },
+    {
+      "id": "deepmind",
+      "name": "Google DeepMind",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "kind": "official",
+      "category": "Forschung",
+      "max_items": 35
+    },
+    {
+      "id": "google-research",
+      "name": "Google Research",
+      "url": "https://research.google/blog/rss/",
+      "kind": "official",
+      "category": "Forschung",
+      "max_items": 30
+    },
+    {
+      "id": "google-ai",
+      "name": "Google AI",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/rss/",
+      "kind": "official",
+      "category": "Modelle & Produkte",
+      "max_items": 25
+    },
+    {
+      "id": "huggingface",
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "kind": "official",
+      "category": "Open Source",
+      "max_items": 35
+    },
+    {
+      "id": "qwen",
+      "name": "Qwen Blog",
+      "url": "https://qwenlm.github.io/blog/index.xml",
+      "kind": "official",
+      "category": "Modelle & Produkte",
+      "max_items": 25
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "url": "https://mistral.ai/news/rss",
+      "kind": "official",
+      "category": "Modelle & Produkte",
+      "max_items": 20
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/feed/",
+      "kind": "official",
+      "category": "Infrastruktur",
+      "max_items": 35
+    },
+    {
+      "id": "aws-ml",
+      "name": "AWS ML",
+      "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
+      "kind": "official",
+      "category": "Infrastruktur",
+      "max_items": 20
+    },
+    {
+      "id": "ms-research",
+      "name": "Microsoft Research",
+      "url": "https://www.microsoft.com/en-us/research/feed/",
+      "kind": "official",
+      "category": "Forschung",
+      "max_items": 25
+    },
+    {
+      "id": "arxiv-ai",
+      "name": "arXiv cs.AI",
+      "url": "https://rss.arxiv.org/rss/cs.AI",
+      "kind": "research",
+      "category": "Paper",
+      "max_items": 55
+    },
+    {
+      "id": "arxiv-ml",
+      "name": "arXiv cs.LG",
+      "url": "https://rss.arxiv.org/rss/cs.LG",
+      "kind": "research",
+      "category": "Paper",
+      "max_items": 40
+    },
+    {
+      "id": "techcrunch",
+      "name": "TechCrunch AI",
+      "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "kind": "press",
+      "category": "Branche",
+      "max_items": 25
+    },
+    {
+      "id": "ars",
+      "name": "Ars Technica AI",
+      "url": "https://arstechnica.com/ai/feed/",
+      "kind": "press",
+      "category": "Branche",
+      "max_items": 25
+    },
+    {
+      "id": "mit-tr",
+      "name": "MIT Technology Review AI",
+      "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
+      "kind": "press",
+      "category": "Branche",
+      "max_items": 20
+    },
+    {
+      "id": "decoder",
+      "name": "The Decoder",
+      "url": "https://the-decoder.com/feed/",
+      "kind": "press",
+      "category": "Branche",
+      "max_items": 25
+    },
+    {
+      "id": "simon",
+      "name": "Simon Willison",
+      "url": "https://simonwillison.net/atom/everything/",
+      "kind": "independent",
+      "category": "Agenten & Tools",
+      "max_items": 30
+    },
+    {
+      "id": "ollama-release",
+      "name": "Ollama Releases",
+      "url": "https://github.com/ollama/ollama/releases.atom",
+      "kind": "release",
+      "category": "GitHub Releases",
+      "max_items": 20
+    },
+    {
+      "id": "pipecat-release",
+      "name": "Pipecat Releases",
+      "url": "https://github.com/pipecat-ai/pipecat/releases.atom",
+      "kind": "release",
+      "category": "GitHub Releases",
+      "max_items": 15
+    },
+    {
+      "id": "livekit-release",
+      "name": "LiveKit Agents Releases",
+      "url": "https://github.com/livekit/agents/releases.atom",
+      "kind": "release",
+      "category": "GitHub Releases",
+      "max_items": 15
+    },
+    {
+      "id": "langgraph-release",
+      "name": "LangGraph Releases",
+      "url": "https://github.com/langchain-ai/langgraph/releases.atom",
+      "kind": "release",
+      "category": "GitHub Releases",
+      "max_items": 15
+    }
+  ]
+}

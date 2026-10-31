@@ -1,337 +1,155 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { catalogEntries, taxonomy } from '../utils/dataLoader';
-import githubVerified from '../../../data/verified-github.json';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { catalogEntries, taxonomy, catalogSnapshotDate } from "../utils/dataLoader";
+import githubVerified from "../../../data/verified-github.json";
 
-// Wir laden die Einträge, absteigend nach Score sortiert
-const githubFacts = githubVerified.entries as Record<string, {
-  id: string; stars: number; forks: number | null; archived: boolean | null;
-  license: string | null; pushed_at: string | null; verified_at: string; source: string;
-}>;
-const entries = catalogEntries.map(entry => {
-  const github = githubFacts[entry.id.toLowerCase()] || null;
-  return {...entry, freshGithub: github,
-    stars: github?.stars ?? entry.stars, forks: github?.forks ?? entry.forks };
-}).sort((a, b) => b.score - a.score);
-
-// Alle verfügbaren Kategorien flach klopfen für Filter-Optionen
-const subcategories = Object.entries(taxonomy.categories).flatMap(([catId, cat]) => {
-  return Object.entries(cat.subcategories).map(([subId, sub]) => ({
-    id: subId,
-    name: `${subId} - ${sub.name}`,
-    group: cat.name
-  }));
-});
+const groups=Object.entries(taxonomy.categories).map(([id,info])=>({id,name:info.name}));
 ---
 
-<BaseLayout title="Atlas Explorer">
-  <div class="space-y-grid-xl">
-    <!-- Header Block -->
-    <div class="border-2 border-steel-border bg-graphite-900 p-grid-xl relative overflow-hidden shadow-flat-md">
-      <h2 class="text-graphite-50 font-mono text-xl font-bold mb-grid-sm uppercase">
-        Atlas Explorer
-      </h2>
-      <p class="text-graphite-400 max-w-3xl text-sm leading-relaxed">
-        Suche, filtere und vergleiche alle erfassten Agentic Engineering Projekte interaktiv im Live-Grid.
-      </p>
+<BaseLayout title="GitHub-Projektkatalog">
+  <section class="atlas-page">
+    <div class="atlas-hero">
+      <div>
+        <div class="atlas-eyebrow"><span class="atlas-led"></span> WERKATLAS / PROJECT INTELLIGENCE</div>
+        <h1>Entdecke, was <span>wirklich passt.</span></h1>
+        <p class="atlas-subhead">Open-Source-Projekte übersichtlich erkunden, passende Lösungen finden und Entscheidungen anhand nachvollziehbarer Quellen treffen.</p>
+      </div>
+      <div class="atlas-hero-stats">
+        <div><strong>{catalogEntries.length.toLocaleString("de-DE")}</strong><span>Projekte katalogisiert</span></div>
+        <div><strong>{githubVerified.verified_count.toLocaleString("de-DE")}</strong><span>GitHub-Fakten geprüft</span></div>
+      </div>
     </div>
 
-    <!-- Live Explorer Interface -->
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-grid-xl items-start">
-      <!-- Sidebar Filters -->
-      <div class="border border-steel-border bg-graphite-900 p-grid-lg space-y-grid-lg">
-        <h3 class="text-graphite-100 font-mono text-xs font-bold uppercase tracking-widest border-b border-steel-border pb-grid-sm">
-          Filter & Sortierung
-        </h3>
-        
-        <!-- Search Input -->
-        <div class="space-y-grid-xs">
-          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Alle Suchwörter müssen vorkommen (Name/Repo/Funktionen/Protokolle)</label>
-          <input 
-            type="text" 
-            id="explorer-search" 
-            placeholder="z.B. MCP, langgraph..."
-            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
-          />
-        </div>
+    <nav class="atlas-section-nav" aria-label="Research Bereiche">
+      <a class="active" href="/WERKAtlas/explorer/">Projektkatalog</a>
+      <a href="/WERKAtlas/news/">News &amp; Releases <span class="atlas-news-pill">Neu</span></a>
+      <a href="/WERKAtlas/quality/">Datenqualität</a>
+    </nav>
 
-        <!-- Category Select -->
-        <div class="space-y-grid-xs">
-          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Kategorie</label>
-          <select 
-            id="explorer-category" 
-            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
-          >
-            <option value="ALL">Alle Kategorien</option>
-            {subcategories.map(sub => (
-              <option value={sub.id}>{sub.name}</option>
-            ))}
-          </select>
-        </div>
-
-        <!-- Score Label Select -->
-        <div class="space-y-grid-xs">
-          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Scoring Tier</label>
-          <select 
-            id="explorer-tier" 
-            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
-          >
-            <option value="ALL">Alle Ränge</option>
-            <option value="essential">Essential (≥85)</option>
-            <option value="strong">Strong (75-84)</option>
-            <option value="emerging">Emerging (65-74)</option>
-            <option value="watchlist">Watchlist (50-64)</option>
-            <option value="minimal">Minimal (<50)</option>
-          </select>
-        </div>
-
-        <!-- Sort Select -->
-        <div class="space-y-grid-xs">
-          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Sortierung</label>
-          <select 
-            id="explorer-sort" 
-            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
-          >
-            <option value="score-desc">Score (absteigend)</option>
-            <option value="stars-desc">Sterne (absteigend)</option>
-            <option value="forks-desc">Forks (absteigend)</option>
-            <option value="name-asc">Name (A-Z)</option>
-          </select>
-        </div>
-
-        <div class="space-y-grid-xs">
-          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Lizenz</label>
-          <select
-            id="explorer-license"
-            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
-          >
-            <option value="ALL">Alle Lizenzen</option>
-            <option value="present">SPDX im Katalog vorhanden (nicht rechtlich geprüft)</option>
-            <option value="missing">Lizenz unbekannt</option>
-          </select>
-        </div>
-
-        <div class="space-y-grid-xs">
-          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Wartung</label>
-          <select
-            id="explorer-maintenance"
-            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
-          >
-            <option value="ALL">Alle Wartungsstände</option>
-            <option value="active">active</option>
-            <option value="slow">slow</option>
-            <option value="stale">stale</option>
-            <option value="archived">archived</option>
-            <option value="unclear">unclear</option>
-          </select>
-        </div>
-
-        <div class="space-y-grid-xs">
-          <label class="font-mono text-[10px] text-graphite-600 uppercase block">Aktualität</label>
-          <select
-            id="explorer-freshness"
-            class="w-full bg-graphite-950 border border-steel-border text-graphite-100 font-mono text-sm px-grid-sm py-grid-xs focus:outline-none focus:border-caution-yellow rounded-none"
-          >
-            <option value="ALL">Alle Prüfdaten</option>
-            <option value="fresh">In den letzten 90 Tagen geprüft</option>
-            <option value="stale">Prüfung älter als 90 Tage</option>
-            <option value="unknown">Prüfdatum unbekannt/ungültig</option>
-          </select>
-        </div>
-
-        <!-- Clear Filters -->
-        <button 
-          id="explorer-clear"
-          class="w-full border border-steel-border text-graphite-400 font-mono text-xs py-grid-xs hover:border-caution-yellow hover:text-caution-yellow transition-colors"
-        >
-          FILTER ZURÜCKSETZEN
-        </button>
+    <div class="atlas-tools">
+      <div class="atlas-search">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+        <input id="catalog-search" type="search" placeholder="Suche nach Projekten, Technologien, Funktionen …" aria-label="GitHub-Projekte durchsuchen" autocomplete="off"/>
+        <kbd>⌕</kbd>
       </div>
+      <div class="atlas-filters">
+        <label>Sortieren
+          <select id="catalog-sort">
+            <option value="relevance">Relevanz &amp; Qualität</option>
+            <option value="stars">Meiste Sterne</option>
+            <option value="name">A–Z</option>
+            <option value="active">Letzte Aktivität</option>
+          </select>
+        </label>
+        <label>Lizenz
+          <select id="catalog-license">
+            <option value="all">Alle</option>
+            <option value="known">SPDX bekannt</option>
+            <option value="unknown">Nicht geklärt</option>
+          </select>
+        </label>
+        <label>Wartung
+          <select id="catalog-maintenance">
+            <option value="all">Alle</option><option value="active">Aktiv</option><option value="slow">Langsam</option><option value="stale">Veraltet</option><option value="archived">Archiviert</option><option value="unclear">Unbekannt</option>
+          </select>
+        </label>
+        <label>Prüfdatum
+          <select id="catalog-freshness">
+            <option value="all">Alle</option><option value="fresh">Letzte 90 Tage</option><option value="stale">Älter als 90 Tage</option><option value="unknown">Unbekannt</option>
+          </select>
+        </label>
+        <label>Stand
+          <select id="catalog-verified">
+            <option value="all">Alle</option>
+            <option value="verified">Von GitHub geprüft</option>
+            <option value="unverified">Noch ungeklärt</option>
+          </select>
+        </label>
+      </div>
+      <div class="atlas-browse-label">THEMENBEREICHE <button type="button" id="catalog-reset">Filter zurücksetzen</button></div>
+      <div id="catalog-categories" class="atlas-chips" role="group" aria-label="Projektbereiche">
+        <button class="active" type="button" data-group="all">Alle Projekte</button>
+        {groups.map(group=><button type="button" data-group={group.id}>{group.name}</button>)}
+      </div>
+    </div>
 
-      <!-- Results Grid -->
-      <div class="lg:col-span-3 space-y-grid-md">
-        <!-- Results Counter & Info -->
-        <div class="flex items-center justify-between border border-steel-border bg-graphite-900 px-grid-lg py-grid-sm font-mono text-xs">
-          <div>
-            GEFUNDEN: <span id="explorer-count" class="text-graphite-50">{entries.length}</span> / {entries.length}
-          </div>
-        </div>
-
-        <!-- Grid Container -->
-        <div id="explorer-grid" class="grid grid-cols-1 md:grid-cols-2 gap-grid-lg">
-          {entries.map(entry => (
-            <div 
-              class="project-card border border-steel-border bg-graphite-900 hover:border-steel-glare p-grid-lg flex flex-col justify-between transition-colors shadow-flat-sm"
-              data-id={entry.id}
-              data-name={entry.name}
-              data-repo={entry.repository}
-              data-desc={entry.description}
-              data-topics={entry.topics.join(" ")}
-              data-protocols={entry.protocols.join(" ")}
-              data-capabilities={entry.capabilities.join(" ")}
-              data-cat={entry.primary_category}
-              data-tier={entry.score_label || 'minimal'}
-              data-score={entry.score}
-              data-stars={entry.stars}
-              data-forks={entry.forks}
-              data-type={entry.project_type}
-              data-license={entry.freshGithub?.license ? 'present' : 'missing'}
-              data-maintenance={entry.maintenance_status || 'unclear'}
-              data-checked={entry.checked_at || ''}
-              data-githubchecked={entry.freshGithub?.verified_at || ''}
-            >
-              <div>
-                <!-- Top Header: Type & Score -->
-                <div class="flex items-start justify-between gap-grid-md mb-grid-sm">
-                  <span class="font-mono text-[9px] text-graphite-600 bg-graphite-950 border border-steel-border px-1.5 py-0.5 select-none uppercase">
-                    {entry.project_type}
-                  </span>
-                  
-                  <div class="flex items-center gap-2">
-                    <span class={`font-mono text-[9px] px-1 py-0.5 rounded-sm uppercase ${
-                      entry.score_label === 'essential' ? 'bg-caution-orange/20 text-caution-orange border border-caution-orange/30' :
-                      entry.score_label === 'strong' ? 'bg-caution-yellow/20 text-caution-yellow border border-caution-yellow/30' :
-                      entry.score_label === 'emerging' ? 'bg-graphite-100/10 text-graphite-100 border border-steel-border' :
-                      'bg-graphite-950 text-graphite-600 border border-steel-border'
-                    }`}>
-                      {entry.score_label || 'minimal'}
-                    </span>
-                    <span class="font-mono font-bold text-graphite-50 text-sm">{entry.score}</span>
-                  </div>
-                </div>
-
-                <!-- Repo and Name -->
-                <h4 class="font-mono font-bold text-graphite-100 text-sm truncate mb-grid-xs">
-                  <a href={`/WERKAtlas/project/${entry.repository.replace('/', '-')}/`} class="hover:underline hover:text-caution-yellow">
-                    {entry.repository}
-                  </a>
-                </h4>
-
-                <!-- Description -->
-                <p class="text-xs text-graphite-400 line-clamp-3 leading-relaxed mb-grid-md">
-                  {entry.description}
-                </p>
-                <p class="font-mono text-[10px] text-graphite-600 mb-grid-md">
-                  {entry.freshGithub
-                    ? `GitHub-Stand: ${entry.freshGithub.verified_at.slice(0,10)} · SPDX: ${entry.freshGithub.license || 'unbekannt'}`
-                    : 'GitHub-Stand: nicht bestätigt'}
-                </p>
-              </div>
-
-              <!-- Meta Footer -->
-              <div class="border-t border-steel-border/50 pt-grid-sm mt-grid-sm flex items-center justify-between font-mono text-[10px] text-graphite-600">
-                <div class="flex items-center gap-grid-md">
-                  <span>★ {entry.stars.toLocaleString()}</span>
-                  <span>⑂ {entry.forks.toLocaleString()}</span>
-                </div>
-                <div>
-                  CAT: <span class="text-graphite-400">{entry.primary_category}</span>
-                </div>
-              </div>
-            </div>
-          ))}
+    <div class="atlas-results-bar">
+      <div>
+        <strong id="catalog-count">Lade Projekte …</strong>
+        <span id="catalog-context">Alle 10 Themenbereiche</span>
+      </div>
+      <div class="atlas-results-right">
+        <span class="atlas-legend"><span></span> Offizielle GitHub-Daten · {githubVerified.generated_at.slice(0,10)}</span>
+        <div class="atlas-view-switch" role="group" aria-label="Darstellung">
+          <button type="button" id="view-grid" aria-pressed="true" title="Kartenansicht">▦</button>
+          <button type="button" id="view-list" aria-pressed="false" title="Listenansicht">☰</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Interactive Search / Filter script -->
-  <script>
-    const searchInput = document.getElementById('explorer-search') as HTMLInputElement;
-    const categorySelect = document.getElementById('explorer-category') as HTMLSelectElement;
-    const tierSelect = document.getElementById('explorer-tier') as HTMLSelectElement;
-    const sortSelect = document.getElementById('explorer-sort') as HTMLSelectElement;
-    const licenseSelect = document.getElementById('explorer-license') as HTMLSelectElement;
-    const maintenanceSelect = document.getElementById('explorer-maintenance') as HTMLSelectElement;
-    const freshnessSelect = document.getElementById('explorer-freshness') as HTMLSelectElement;
-    const clearBtn = document.getElementById('explorer-clear') as HTMLButtonElement;
-    const AS_OF = Date.now();
-    const NINETY_DAYS = 90 * 24 * 60 * 60 * 1000;
-    const countEl = document.getElementById('explorer-count') as HTMLElement;
-    const grid = document.getElementById('explorer-grid') as HTMLElement;
-    const cards = Array.from(grid.querySelectorAll('.project-card')) as HTMLElement[];
-
-    function updateExplorer() {
-      const q = searchInput.value.toLowerCase().trim();
-      const cat = categorySelect.value;
-      const tier = tierSelect.value;
-      const sortBy = sortSelect.value;
-      const license = licenseSelect.value;
-      const maintenance = maintenanceSelect.value;
-      const freshness = freshnessSelect.value;
-
-      let visibleCount = 0;
-
-      // Filter
-      cards.forEach(card => {
-        const name = (card.dataset.name || '').toLowerCase();
-        const repo = (card.dataset.repo || '').toLowerCase();
-        const desc = (card.dataset.desc || '').toLowerCase();
-        const kind = (card.dataset.type || '').toLowerCase();
-        const pcat = card.dataset.cat || '';
-        const ptier = card.dataset.tier || '';
-        const checked = Date.parse(card.dataset.checked || '');
-        const age = AS_OF - checked;
-        const freshnessValue = !Number.isFinite(age) || age < 0
-          ? 'unknown' : age <= NINETY_DAYS ? 'fresh' : 'stale';
-
-        const keywords = q.split(/\s+/).filter(Boolean);
-        const searchable = [name, repo, desc, kind,
-          card.dataset.topics || '', card.dataset.protocols || '', card.dataset.capabilities || ''].join(' ');
-        const matchesQuery = keywords.every(term => searchable.includes(term));
-        const matchesCat = cat === 'ALL' || pcat === cat;
-        const matchesTier = tier === 'ALL' || ptier === tier;
-        const matchesLicense = license === 'ALL' || (card.dataset.license || 'missing') === license;
-        const matchesMaintenance = maintenance === 'ALL' || (card.dataset.maintenance || 'unclear') === maintenance;
-        const matchesFreshness = freshness === 'ALL' || freshnessValue === freshness;
-
-        if (matchesQuery && matchesCat && matchesTier && matchesLicense && matchesMaintenance && matchesFreshness) {
-          card.style.display = '';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      // Sort visible cards
-      const sorted = cards.slice().sort((a, b) => {
-        if (sortBy === 'score-desc') {
-          return parseFloat(b.dataset.score || '0') - parseFloat(a.dataset.score || '0');
-        } else if (sortBy === 'stars-desc') {
-          return parseInt(b.dataset.stars || '0') - parseInt(a.dataset.stars || '0');
-        } else if (sortBy === 'forks-desc') {
-          return parseInt(b.dataset.forks || '0') - parseInt(a.dataset.forks || '0');
-        } else if (sortBy === 'name-asc') {
-          return (a.dataset.name || '').localeCompare(b.dataset.name || '');
-        }
-        return 0;
-      });
-
-      sorted.forEach(card => grid.appendChild(card));
-      countEl.innerText = visibleCount.toString();
-    }
-
-    // Event listeners
-    searchInput?.addEventListener('input', updateExplorer);
-    categorySelect?.addEventListener('change', updateExplorer);
-    tierSelect?.addEventListener('change', updateExplorer);
-    sortSelect?.addEventListener('change', updateExplorer);
-    licenseSelect?.addEventListener('change', updateExplorer);
-    maintenanceSelect?.addEventListener('change', updateExplorer);
-    freshnessSelect?.addEventListener('change', updateExplorer);
-
-    clearBtn?.addEventListener('click', () => {
-      searchInput.value = '';
-      categorySelect.value = 'ALL';
-      tierSelect.value = 'ALL';
-      sortSelect.value = 'score-desc';
-      licenseSelect.value = 'ALL';
-      maintenanceSelect.value = 'ALL';
-      freshnessSelect.value = 'ALL';
-      updateExplorer();
-    });
-
-    // Run once at start
-    updateExplorer();
-  </script>
+    <div id="catalog-loading" class="atlas-state" role="status">Projektkatalog wird geladen …</div>
+    <div id="catalog-projects" class="atlas-project-grid" aria-live="polite"></div>
+    <div id="catalog-empty" class="atlas-state" hidden><strong>Keine passenden Projekte gefunden.</strong><p>Andere Suchbegriffe oder Filter ausprobieren.</p></div>
+    <div class="atlas-load-wrap"><button id="catalog-more" type="button" hidden>Weitere Projekte anzeigen <span>↓</span></button></div>
+    <div class="atlas-disclaimer">
+      <strong>Was bedeuten die Zahlen?</strong> Scores stammen aus dem historischen Katalog-Snapshot vom {catalogSnapshotDate}. Sterne und SPDX-Werte werden, soweit vorhanden, aus dem separaten GitHub-Abgleich ergänzt. Ein Treffer bedeutet keine geprüfte Lizenz- oder Software-Eignung.
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  import "../scripts/explorer-client";
+</script>
+
+<style is:global>
+.atlas-page{--mint:#74dec1;--muted:#92a7b0;--line:#273940;--surface:#131f28;color:#e7f1f3;max-width:1440px;margin:auto;padding:8px 0 64px;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+.atlas-page *{box-sizing:border-box}
+.atlas-hero{display:flex;align-items:end;justify-content:space-between;gap:35px;padding:28px 0 35px;border-bottom:1px solid var(--line)}
+.atlas-eyebrow{font-size:10px;letter-spacing:.18em;color:var(--mint);font-weight:800;display:flex;align-items:center;gap:9px}
+.atlas-led{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px #74dec17a}
+.atlas-hero h1{font-size:clamp(31px,3.8vw,55px);letter-spacing:-.058em;font-weight:760;line-height:1.12;margin:17px 0}
+.atlas-hero h1 span{color:var(--mint)}
+.atlas-subhead{color:#91a5ae;font-size:14px;max-width:610px;line-height:1.75}
+.atlas-hero-stats{display:flex;gap:30px;white-space:nowrap}.atlas-hero-stats>div{display:grid;gap:4px}.atlas-hero-stats strong{font-size:28px;font-weight:800;letter-spacing:-.05em}.atlas-hero-stats span{font-size:10px;color:#8499a4}
+.atlas-section-nav{display:flex;gap:23px;border-bottom:1px solid var(--line);margin-bottom:27px;overflow-x:auto}
+.atlas-section-nav a{color:#9babb2;font-size:12px;font-weight:650;white-space:nowrap;padding:19px 2px 16px;border-bottom:2px solid transparent;text-decoration:none}
+.atlas-section-nav a:hover,.atlas-section-nav a.active{color:var(--mint);border-bottom-color:var(--mint)}
+.atlas-news-pill{font-size:9px;background:#205b48;padding:4px 7px;border-radius:20px;margin-left:4px;color:#b0f5d9}
+.atlas-tools{background:var(--surface);border:1px solid #2c4249;border-radius:16px;padding:20px;margin-bottom:22px}
+.atlas-search{display:flex;align-items:center;gap:13px;padding:0 16px;height:57px;background:#0b151d;border:1px solid #3c595c;border-radius:12px;color:#77d6bf}
+.atlas-search:focus-within{border-color:var(--mint);box-shadow:0 0 0 2px #74dec11b}
+.atlas-search input{width:100%;height:100%;background:none;border:0;outline:0;color:#e8faf5;font-size:15px}
+.atlas-search input::placeholder{color:#758d98}.atlas-search kbd{color:#72908d;font-size:12px}
+.atlas-filters{display:flex;gap:12px;flex-wrap:wrap;margin:17px 0 22px}
+.atlas-filters label{display:flex;align-items:center;gap:11px;background:#192932;border:1px solid #30464e;border-radius:9px;padding:6px 12px;color:#8ba4ad;font-size:11px}
+.atlas-filters select{background:transparent;border:0;outline:0;color:#ecf7f4;font-size:12px;max-width:180px;cursor:pointer}
+.atlas-filters option{background:#172630}
+.atlas-browse-label{font-size:10px;font-weight:800;color:#7898a0;letter-spacing:.13em;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.atlas-browse-label button{background:none;border:0;color:var(--mint);font-size:11px;letter-spacing:normal;cursor:pointer}
+.atlas-chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;flex-wrap:wrap}
+.atlas-chips button{padding:9px 13px;background:#1c2e37;color:#b7cad0;border:1px solid #38515b;border-radius:9px;font-size:11px;cursor:pointer;transition:background .2s}
+.atlas-chips button:hover,.atlas-chips button.active{background:#1f493f;border-color:#64bda4;color:#c3ffe2}
+.atlas-results-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}.atlas-results-bar>div:first-child{display:grid;gap:5px}.atlas-results-bar strong{font-size:17px}.atlas-results-bar #catalog-context{font-size:11px;color:#8fa2a9}
+.atlas-results-right{display:flex;align-items:center;gap:18px}.atlas-legend{font-size:11px;color:#8ea6a8;white-space:nowrap}.atlas-legend span{display:inline-block;width:6px;height:6px;background:var(--mint);border-radius:50%;margin-right:7px}
+.atlas-view-switch{border:1px solid #31464f;border-radius:8px;padding:3px;display:flex;gap:2px}.atlas-view-switch button{border:0;background:transparent;color:#93adb3;border-radius:5px;padding:6px 11px;cursor:pointer}.atlas-view-switch button[aria-pressed=true]{background:#29473f;color:#b0f5d7}
+.atlas-project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.atlas-card{background:#131f29;border:1px solid #2c4249;border-radius:13px;padding:18px 19px;min-width:0;display:flex;flex-direction:column;gap:13px;transition:transform .18s,border .18s}
+.atlas-card:hover{transform:translateY(-2px);border-color:#649b8f}
+.atlas-card-top{display:flex;justify-content:space-between;align-items:start;gap:8px}
+.atlas-card-symbol{width:43px;height:43px;flex:none;display:grid;place-items:center;font-size:16px;font-weight:800;color:#99f0d5;background:#21463f;border:1px solid #3a7161;border-radius:10px}
+.atlas-card-head{display:flex;gap:11px;min-width:0;align-items:center}.atlas-card-name{font-size:16px;color:#ecfaf6;font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;display:block;text-decoration:none}
+.atlas-card-name:hover{color:var(--mint)}.atlas-card-repo{font-size:10px;color:#7798a2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.atlas-card-status{font-size:9px;border:1px solid #3e5b55;color:#9adfc8;background:#1b3a32;border-radius:99px;padding:4px 8px;white-space:nowrap}
+.atlas-card-status.unknown{border-color:#44515a;color:#b1c2ca;background:#28323c}
+.atlas-card-desc{font-size:12px;color:#a1b5bd;line-height:1.7;min-height:58px;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.atlas-card-tags{display:flex;gap:6px;flex-wrap:wrap;min-height:23px}.atlas-card-tags span{color:#8bc9b8;background:#203831;border:1px solid #2b4c41;padding:4px 7px;border-radius:5px;font-size:10px}
+.atlas-card-bottom{display:flex;gap:11px;align-items:center;border-top:1px solid #2a4049;margin-top:auto;padding-top:13px;flex-wrap:wrap}.atlas-card-bottom span{font-size:11px;color:#98b1b6}
+.atlas-card-bottom b{color:#e3ecee;font-weight:750}.atlas-card-bottom .score{margin-left:auto}.atlas-card-score{display:flex;align-items:center;gap:6px}.atlas-card-score strong{color:#8ff1d1}
+.atlas-card-verify{font-size:10px;color:#6c9593;margin-top:-5px}
+.atlas-project-grid.list{grid-template-columns:1fr}.atlas-project-grid.list .atlas-card{gap:8px}.atlas-project-grid.list .atlas-card-desc{min-height:0}
+.atlas-load-wrap{text-align:center;margin-top:25px}.atlas-load-wrap button{padding:12px 24px;border:1px solid #5dbaa3;background:#1e443c;color:#bcf8df;border-radius:10px;font-weight:700;font-size:12px;cursor:pointer}.atlas-load-wrap button span{margin-left:9px}
+.atlas-state{text-align:center;border:1px dashed #3c5659;border-radius:12px;padding:40px 20px;color:#a2b8be}.atlas-state p{font-size:12px;margin:8px 0 0}
+.atlas-disclaimer{margin-top:28px;background:#14252a;border:1px solid #2c4844;border-radius:12px;padding:16px 20px;font-size:11px;color:#95aaae;line-height:1.8}.atlas-disclaimer strong{color:#b6ead9}
+@media(max-width:1300px){.atlas-project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.atlas-hero-stats{gap:15px}}
+@media(max-width:730px){.atlas-page{padding:0 0 40px}.atlas-hero{display:block;padding:13px 0 25px}.atlas-hero-stats{margin-top:22px;gap:30px}.atlas-section-nav{gap:15px}.atlas-tools{padding:13px;border-radius:12px}.atlas-filters{gap:8px}.atlas-filters label{flex:1;min-width:150px;justify-content:space-between}.atlas-filters select{max-width:120px}.atlas-project-grid{grid-template-columns:1fr}.atlas-results-bar{align-items:start}.atlas-results-right{gap:8px}.atlas-legend{display:none}.atlas-hero h1{font-size:34px}.atlas-card-desc{min-height:0}}
+</style>

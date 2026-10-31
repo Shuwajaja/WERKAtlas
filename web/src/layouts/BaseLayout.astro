@@ -14,7 +14,7 @@ const currentDate = catalogSnapshotDate || 'unbekannt';
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-graphite-950 text-graphite-400 font-sans antialiased">
+<html lang="de" class="h-full bg-graphite-950 text-graphite-400 font-sans antialiased">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,10 +30,10 @@ const currentDate = catalogSnapshotDate || 'unbekannt';
     <header class="border-b-2 border-steel-border bg-graphite-900 px-grid-xl py-grid-md flex flex-wrap items-center justify-between gap-grid-md z-10">
       <div class="flex items-center gap-grid-md">
         <span class="text-caution-yellow font-mono text-xs select-none px-grid-sm py-0.5 border border-caution-yellow rounded-sm shadow-flat-caution">
-          SYS_READY
+          RESEARCH HUB
         </span>
         <h1 class="text-graphite-50 font-mono font-bold text-lg tracking-wider">
-          WERKAtlas <span class="text-graphite-600">//</span> Compendium
+          WERKAtlas <span class="text-graphite-600">/</span> Research Hub
         </h1>
       </div>
       
@@ -44,14 +44,22 @@ const currentDate = catalogSnapshotDate || 'unbekannt';
         </div>
         <div class="hidden sm:block border-l border-steel-border h-4"></div>
         <div>
-          PROJECTS: <span class="text-graphite-100">{totalProjects}</span>
+          PROJEKTE: <span class="text-graphite-100">{totalProjects.toLocaleString("de-DE")}</span>
         </div>
         <div class="hidden sm:block border-l border-steel-border h-4"></div>
         <div>
-          DOMAINS: <span class="text-graphite-100">{totalDomains}</span>
+          THEMEN: <span class="text-graphite-100">{totalDomains}</span>
         </div>
       </div>
     </header>
+
+    <nav class="md:hidden flex gap-4 items-center overflow-x-auto px-grid-xl py-3 bg-graphite-900 border-b border-steel-border text-xs font-sans whitespace-nowrap" aria-label="Mobile Navigation">
+      <a href="/WERKAtlas/" class="text-graphite-100">Start</a>
+      <a href="/WERKAtlas/explorer/" class="text-graphite-100">Projekte</a>
+      <a href="/WERKAtlas/news/" class="text-graphite-100">News</a>
+      <a href="/WERKAtlas/sources/" class="text-graphite-100">Quellen</a>
+      <a href="/WERKAtlas/quality/" class="text-graphite-100">Datenqualität</a>
+    </nav>
 
     <!-- App Body (Sidebar + Content) -->
     <div class="flex-1 flex overflow-hidden">
@@ -72,6 +80,18 @@ const currentDate = catalogSnapshotDate || 'unbekannt';
             class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-none border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
           >
             <span class="text-caution-yellow">▪</span> Atlas Explorer
+          </a>
+          <a
+            href="/WERKAtlas/news/"
+            class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-lg border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
+          >
+            <span class="text-caution-yellow">◉</span> KI & Tech News
+          </a>
+          <a
+            href="/WERKAtlas/sources/"
+            class="flex items-center gap-grid-md px-grid-sm py-grid-md rounded-lg border border-transparent hover:border-steel-border hover:bg-graphite-800 text-graphite-100 transition-colors"
+          >
+            <span class="text-caution-yellow">◷</span> Quellen & Status
           </a>
           <a
             href="/WERKAtlas/trending/"
@@ -101,7 +121,7 @@ const currentDate = catalogSnapshotDate || 'unbekannt';
 
         <!-- System Status Footer in Sidebar -->
         <div class="p-grid-lg border-t border-steel-border font-mono text-[10px] text-graphite-600 flex flex-col gap-1">
-          <div>LOC_ENV: C:\Workplace</div>
+          <div>WERKATLAS / SOURCE INTELLIGENCE</div>
           <div>BUILD: Astro (Static)</div>
           <div>DESIGN: Cool Graphite</div>
         </div>

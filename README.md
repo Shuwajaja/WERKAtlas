@@ -14,6 +14,16 @@
 
 > **Datenhinweis (31.10.2026):** Die Kennzahlen oben sind aus `data/catalog.json` neu gezählt. Einige lange README-Projektlisten sind historische Ausschnitte, keine aktuellen Ranglisten. Aktuelle GitHub-Metadaten und ihre Grenzen stehen im lokalen `data/verified-github.json` und unter `/WERKAtlas/quality/`. Der alte Score ist kein aktuelles Sicherheits- oder Lizenzgutachten.
 
+## Lokaler KI- & Tech-Research-Hub (Oktober 2026)
+
+Der neue [Projekt-Explorer](web/src/pages/explorer.astro) lädt nur die sichtbaren Karten und bietet Suche, Themenchips, Listenansicht und Filter. Der [KI-/Tech-News-Radar](web/src/pages/news.astro) vereint Hersteller-News, Fachmedien, Forschung und GitHub-Releases. Das [Quellenregister](web/src/pages/sources.astro) zeigt Herkunft, Status und Fehler der konfigurierten Feeds.
+
+**Lokal starten:** `cd web && npm ci --ignore-scripts && npm run dev`. Browser: `http://127.0.0.1:4321/WERKAtlas/explorer/` oder `/WERKAtlas/news/`.
+
+Anleitung: [News & Explorer](docs/NEWS-AND-EXPLORER-2026-10-31.md). Echte Playwright-Screenshots: [Katalog](docs/previews/explorer-desktop.png), [News Desktop](docs/previews/news-desktop.png), [News mobil](docs/previews/news-mobile.png).
+
+**Hinweis:** Der neue Research-Hub liegt auf einem separaten Entwicklungsbranch und ist noch nicht öffentlich deployed. Keine GitHub Actions. News aktualisieren sich lokal zu den eingerichteten Windows-Zeitpunkten.
+
 ## Start Here
 
 | Need | Start with |

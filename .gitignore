@@ -47,3 +47,12 @@ research/metadata/*-graphql-first*.json
 research/metadata/*-observed-stars.json
 research/metadata/*-trend-sanity.json
 research/metadata/*.partial
+
+# Local browser QA and news radar diagnostic runs
+web/screenshots/
+web/test-results/
+web/playwright-report/
+research/news-*.log
+research/voice-demo-usage-*.json
+scripts/_probe_news_sources.py
+scripts/_probe_large_feeds.py
